@@ -97,7 +97,10 @@ probe radii 10, 25 and 50 µm.
   readout list (`--readout base`), reaching 9.6-11.8 s and 11.9-13.7 s.
 - Pre-test pilot on R0, R4, R5 at scales 0.47-1.5 (2026-10-29, 8 brains, one draw): R4 and R5 near silent at
   0.47; R4 reaches 46-63% of R0's activity and 14-17 lateralised outputs at 1.5.
-- Pre-test on R1, R2, R3, R3.5 at 0.47 (2026-11-02, CPU, 8 brains, draw 1): see `site/data.json` when posted.
+- Pre-test on R1, R2, R3, R3.5 at 0.47 (2026-11-02, CPU, 8 brains, draw 1; `site/data.json`): network
+  spikes/s and lateralised outputs VS / haltere: R1 13,700, 15 / 16 (VS null max 24); R2 25,300, 23 / 28;
+  R3 15,900, 25 / 20; R3.5 890, 0 / 0. R3.5 is as silent as R4 and R5; R3 transmits. This was seen before the
+  tag, so prediction 2 is not a blind prediction for the pre-test; it remains one for riding.
 
 ## 10. Deviations
 
