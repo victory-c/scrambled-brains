@@ -144,9 +144,9 @@ footer a{color:var(--ink2)}
   <details><summary class="small" data-i18n="g_tbl">Table view</summary><div class="tbl"><table id="gateTable"></table></div></details>
 
   <h3 data-i18n="p_h">2. The transmission pre-test: do scrambled brains still carry a left-right signal?</h3>
-  <p data-i18n="p_p">Before any rung gets search compute, we hold the bike upright, drive every sense at cruise rate, and add 30 Hz to the left or the right vertical-system (VS) or haltere inputs in 8 brains. A rung passes when descending and motor neurons respond differently to left and right (|z| &gt; 3; chance under 1) at a network rate within 2× of the real brain's. The synapse scale multiplies Shiu's weight; 0.47 is the male CNS calibration.</p>
+  <p data-i18n="p_p">Before any rung gets search compute, we hold the bike upright, drive every sense at cruise rate, and add 30 Hz to the left or the right vertical-system (VS) or haltere inputs in 8 brains (30 for a confirmatory run). A rung passes when descending and motor neurons respond differently to left and right (|z| &gt; 3; chance under 1) at a network rate within 2× of the real brain's. The synapse scale multiplies Shiu's weight; 0.47 is the male CNS calibration.</p>
   <div class="tbl"><table id="pretestTable"></table></div>
-  <p class="caption" data-i18n="p_c">At the calibrated scale the two bottom rungs are almost silent, about 1% of the real network's activity, with at most one lateralised output. Degree-preserving wiring (R4) needs three times the synaptic weight to reach half the real activity and 14 to 17 lateralised outputs, spread over five times as many neurons. Random wiring (R5) stays at chance everywhere. The cause is convergence: neurons receiving 200 or more synapses from the bike's 789 sensory neurons fall from 417 to 26. The four new rungs (run 2 Nov on CPU) sharpen this: count jitter (R2) is indistinguishable from the real wiring, and cell-type-level wiring (R3) still carries the left-right channel at 74% of the real rate. But R3.5, which gives every neuron the right number of inputs, the right input strength and the right excitatory/inhibitory mix from the wrong partners, is as silent as R4. The transition lies between R3 and R3.5, and it is about partner identity, not input statistics. Transmitter errors (R1) halve the network rate and keep the haltere channel; the VS channel needs the 30-brain confirmatory run. One rewiring draw, 8 brains per cell; treat as a pilot.</p>
+  <p class="caption" data-i18n="p_c">At the calibrated scale the two bottom rungs are almost silent, about 1% of the real network's activity, with at most one lateralised output. Degree-preserving wiring (R4) needs three times the synaptic weight to reach half the real activity and 14 to 17 lateralised outputs, spread over five times as many neurons. Random wiring (R5) stays at chance everywhere. The cause is convergence: neurons receiving 200 or more synapses from the bike's 789 sensory neurons fall from 417 to 26. The four new rungs (run 2 Nov on CPU) sharpen this: count jitter (R2) is indistinguishable from the real wiring, and cell-type-level wiring (R3) still carries the left-right channel at 74% of the real rate. But R3.5, which gives every neuron the right number of inputs, the right input strength and the right excitatory/inhibitory mix from the wrong partners, is as silent as R4. The transition lies between R3 and R3.5, and it is about partner identity, not input statistics. Transmitter errors (R1) halve the network rate; with 8 brains the VS channel was noisy, so R1 got the 30-brain confirmatory run (3 Nov, 1,000 random balanced relabellings): 35 and 31 lateralised outputs against null maxima of 4 and 13. R1 passes. One rewiring draw; 8 brains per cell except that run; treat as a pilot.</p>
 
   <h3 data-i18n="n_h">3. The rungs generated this week</h3>
   <div class="tbl"><table>
@@ -223,8 +223,8 @@ zh: {
  g_c:'从空白解码器出发，第 0 代平均只骑 0.75–1.0 秒，还不如不扶把。57–63 代之后，4.0 m/s 下平均坚持 9.6–11.8 秒，4.5 m/s 下 11.9–13.7 秒，23–77% 的骑手骑满 15 秒。不扶把的车分别只能撑 3.5 秒和 5.7 秒，没有一次骑满。每个速度两个种子。',
  g_tbl:'表格视图',
  p_h:'2. 传输预测试：打乱的大脑还能传左右信号吗？',
- p_p:'在任何一级拿到搜索算力之前，我们把车扶正、所有感官按巡航速率驱动，再给 8 个大脑的左侧或右侧垂直系统（VS）或平衡棒输入多加 30 Hz。下行和运动神经元对左右的响应有显著差别（|z| > 3；随机水平不到 1 个），且网络放电率在真实大脑的 2 倍以内，即为通过。突触尺度是 Shiu 权重的倍数；0.47 是雄性 CNS 的校准值。',
- p_c:'在校准尺度下，最底下两级几乎静默，只有真实网络约 1% 的活动，最多一个侧化输出。保度接线（R4）要三倍的突触权重才能达到真实活动的一半和 14–17 个侧化输出，而且分散在五倍多的神经元上。随机接线（R5）处处停在随机水平。原因是汇聚：从自行车的 789 个感觉神经元接收 200 个以上突触的神经元，从 417 个掉到 26 个。11 月 2 日在 CPU 上跑的四个新级把这一点说得更清楚：突触数抖动（R2）和真实接线没有区别，只保留细胞类型级接线的 R3 仍以真实速率的 74% 传出左右信号。但 R3.5——让每个神经元从错误的伙伴那里得到正确数量、正确强度、正确兴奋/抑制比例的输入——和 R4 一样静默。转折点在 R3 和 R3.5 之间，决定因素是伙伴的身份，不是输入的统计量。递质错误（R1）让网络速率减半，平衡棒通道还在，VS 通道要等 30 个脑的确认实验。只有一个重接线抽样、每格 8 个脑；当作试点看。',
+ p_p:'在任何一级拿到搜索算力之前，我们把车扶正、所有感官按巡航速率驱动，再给 8 个大脑（确认实验 30 个）的左侧或右侧垂直系统（VS）或平衡棒输入多加 30 Hz。下行和运动神经元对左右的响应有显著差别（|z| > 3；随机水平不到 1 个），且网络放电率在真实大脑的 2 倍以内，即为通过。突触尺度是 Shiu 权重的倍数；0.47 是雄性 CNS 的校准值。',
+ p_c:'在校准尺度下，最底下两级几乎静默，只有真实网络约 1% 的活动，最多一个侧化输出。保度接线（R4）要三倍的突触权重才能达到真实活动的一半和 14–17 个侧化输出，而且分散在五倍多的神经元上。随机接线（R5）处处停在随机水平。原因是汇聚：从自行车的 789 个感觉神经元接收 200 个以上突触的神经元，从 417 个掉到 26 个。11 月 2 日在 CPU 上跑的四个新级把这一点说得更清楚：突触数抖动（R2）和真实接线没有区别，只保留细胞类型级接线的 R3 仍以真实速率的 74% 传出左右信号。但 R3.5——让每个神经元从错误的伙伴那里得到正确数量、正确强度、正确兴奋/抑制比例的输入——和 R4 一样静默。转折点在 R3 和 R3.5 之间，决定因素是伙伴的身份，不是输入的统计量。递质错误（R1）让网络速率减半；8 个脑时 VS 通道偏噪，所以 R1 做了 30 个脑的确认实验（11 月 3 日，1000 种随机平衡重标）：35 和 31 个侧化输出，null 最大只有 4 和 13。R1 通过。只有一个重接线抽样；除这一次外每格 8 个脑；当作试点看。',
  n_h:'3. 本周生成的各级',
  n_t1:'级（种子 1）', n_t2:'保留的真实连接', n_t3:'生成器报告',
  n_r1:'9,907 个神经元换了递质（5.9%），8,584 个翻转了输出符号（5.1%）；抑制性突触占比 38.4% → 40.2%',
@@ -248,7 +248,7 @@ zh: {
  lad_r2:'一切，每条连接的突触数乘一个对数正态因子（中位数 1，一个标准差 ×1.25；flybench 的 ±25%）',
  lad_r3:'哪些细胞类型和哪些细胞类型相连、各在哪一侧；目标在同类型同侧内重抽', lad_r35:'每个神经元的入度、输入总突触数和兴奋/抑制输入比例；在相同符号和突触数的连接之间置换目标',
  lad_r4:'每个神经元的输入数和输出数', lad_r5:'什么都不剩：目标随机',
- st_done:'完成', st_run:'试点', st_todo:'等待', st_gate:'门槛通过', st_na:'—',
+ st_done:'完成', st_run:'试点', st_todo:'等待', st_gate:'门槛通过', st_pass:'预测试通过', st_na:'—',
  ms:[['2026-10','done','平衡门槛：真实接线在 4.0 和 4.5 m/s 学会骑车，对照不扶把的地板（作业 37491–37494）。R4/R5 生成器和预测试，突触强度 0.47–1.5。'],
      ['2026-11','run','R1、R2、R3、R3.5 生成器和不变量测试。预注册。校准强度下 R4 的第一次学骑车。各级的预测试。'],
      ['2026-11-13','todo','三行中期图：骑行、无解码器预测、可解码性，各一行，R0 到 R5 共用横轴。'],
@@ -258,7 +258,7 @@ zh: {
      ['2027-08','todo','带保真度曲线的预印本；代码、解码器、轨迹和作业账本全部发布。'],
      ['2027-11','todo','公开基准：提交一个连接组或仿真器，得到它的梯子分数。在第二个雌性连接组上验证。']],
  gate_y:'平均骑行时间（秒）', gate_x:'代', floor:'不扶把', seed:'种子', ms_lbl:'m/s',
- pt_h1:'级', pt_sc:'突触尺度', pt_net:'网络 spikes/s', pt_lat:'侧化输出 VS / 平衡棒（随机水平）', real:'R0 真实接线', r1n:'R1 递质错误', r2n:'R2 突触数抖动', r3n:'R3 保类型', r35n:'R3.5 保强度', degree:'R4 保度', random:'R5 随机',
+ pt_h1:'级', pt_sc:'突触尺度', pt_net:'网络 spikes/s', pt_lat:'侧化输出 VS / 平衡棒（随机水平）', real:'R0 真实接线', r1n:'R1 递质错误', r1c:'R1 递质错误，30 脑确认', r2n:'R2 突触数抖动', r3n:'R3 保类型', r35n:'R3.5 保强度', degree:'R4 保度', random:'R5 随机',
  gt_run:'运行', gt_gens:'代数', gt_g0:'第 0 代平均', gt_last:'末代平均', gt_fin:'末代骑满 15 秒'
 }};
 I18N.en = {
@@ -266,7 +266,7 @@ I18N.en = {
  lad_r2:'everything, with each connection\'s synapse count times a lognormal factor (median 1, one sigma ×1.25; flybench\'s ±25%)',
  lad_r3:'which cell types connect to which, on each side; targets redrawn within the same type and side', lad_r35:'each neuron\'s in-degree, incoming synapse total and excitatory/inhibitory input mix; targets permuted among connections of equal sign and count',
  lad_r4:'each neuron\'s number of inputs and outputs', lad_r5:'nothing: random targets',
- st_done:'done', st_run:'pilot', st_todo:'queued', st_gate:'gate passed', st_na:'—',
+ st_done:'done', st_run:'pilot', st_todo:'queued', st_gate:'gate passed', st_pass:'pre-test passed', st_na:'—',
  ms:[['Oct 2026','done','Balance gate: the real wiring learns to ride at 4.0 and 4.5 m/s against the hands-off floor (jobs 37491–37494). R4/R5 generators and the pre-test across synapse strengths 0.47–1.5.'],
      ['Nov 2026','run','Generators for R1, R2, R3 and R3.5 with invariant tests. Preregistration. First learn-to-ride run on R4 at its calibrated strength. Pre-test on every rung.'],
      ['13 Nov 2026','todo','Interim three-row figure: riding, decoder-free predictions and decodability, one row each, R0 to R5 on a shared axis.'],
@@ -276,7 +276,7 @@ I18N.en = {
      ['Aug 2027','todo','Preprint with the fidelity curve; code, decoders, traces and job ledger released.'],
      ['Nov 2027','todo','Open benchmark: submit a connectome or emulator, get its ladder scores. Validated on a second, female connectome.']],
  gate_y:'mean riding time (s)', gate_x:'generation', floor:'hands-off', seed:'seed', ms_lbl:'m/s',
- pt_h1:'Rung', pt_sc:'synapse scale', pt_net:'network spikes/s', pt_lat:'lateralised outputs VS / haltere (null)', real:'R0 real wiring', r1n:'R1 transmitter errors', r2n:'R2 count jitter', r3n:'R3 type-preserving', r35n:'R3.5 strength-preserving', degree:'R4 degree-preserving', random:'R5 random',
+ pt_h1:'Rung', pt_sc:'synapse scale', pt_net:'network spikes/s', pt_lat:'lateralised outputs VS / haltere (null)', real:'R0 real wiring', r1n:'R1 transmitter errors', r1c:'R1 transmitter errors, 30 brains', r2n:'R2 count jitter', r3n:'R3 type-preserving', r35n:'R3.5 strength-preserving', degree:'R4 degree-preserving', random:'R5 random',
  gt_run:'run', gt_gens:'generations', gt_g0:'gen 0 mean', gt_last:'last gen mean', gt_fin:'last gen riding all 15 s'
 };
 let LANG = 'en';
@@ -292,9 +292,9 @@ const T = k => (LANG === 'zh' && I18N.zh[k] !== undefined) ? I18N.zh[k] : (I18N.
 let DATA = null;
 
 const LADDER = [
-  ['R0', 'lad_r0', 'done', 'done', 'gate'], ['R1', 'lad_r1', 'done', 'run', 'todo'], ['R2', 'lad_r2', 'done', 'run', 'todo'],
+  ['R0', 'lad_r0', 'done', 'done', 'gate'], ['R1', 'lad_r1', 'done', 'pass', 'todo'], ['R2', 'lad_r2', 'done', 'run', 'todo'],
   ['R3', 'lad_r3', 'done', 'run', 'todo'], ['R3.5', 'lad_r35', 'done', 'run', 'todo'], ['R4', 'lad_r4', 'done', 'run', 'todo'], ['R5', 'lad_r5', 'done', 'run', 'todo']];
-const chip = s => s === 'gate' ? `<span class="chip ok">${T('st_gate')}</span>` : s === 'done' ? `<span class="chip ok">${T('st_done')}</span>` : s === 'run' ? `<span class="chip run">${T('st_run')}</span>` : `<span class="chip todo">${T('st_todo')}</span>`;
+const chip = s => s === 'gate' ? `<span class="chip ok">${T('st_gate')}</span>` : s === 'pass' ? `<span class="chip ok">${T('st_pass')}</span>` : s === 'done' ? `<span class="chip ok">${T('st_done')}</span>` : s === 'run' ? `<span class="chip run">${T('st_run')}</span>` : `<span class="chip todo">${T('st_todo')}</span>`;
 
 function renderStatic() {
   document.documentElement.lang = LANG === 'zh' ? 'zh-CN' : 'en';
@@ -349,7 +349,7 @@ function renderGate() {
 }
 function renderPretest() {
   const P = DATA.pretest, scales = ['0.47', '0.6', '0.8', '1', '1.5'];
-  const rows = [['r0', 'real'], ['r1_s1', 'r1n'], ['r2_s1', 'r2n'], ['r3_s1', 'r3n'], ['r35_s1', 'r35n'], ['r4_s1', 'degree'], ['r5_s1', 'random']];
+  const rows = [['r0', 'real'], ['r1_s1', 'r1n'], ['r1_s1_b30', 'r1c'], ['r2_s1', 'r2n'], ['r3_s1', 'r3n'], ['r35_s1', 'r35n'], ['r4_s1', 'degree'], ['r5_s1', 'random']];
   const fmt = n => n >= 1e5 ? (n / 1000).toFixed(0) + 'k' : n >= 1e4 ? (n / 1000).toFixed(1) + 'k' : Math.round(n).toLocaleString('en-US');
   let h = `<thead><tr><th>${T('pt_h1')}</th>` + scales.map(s => `<th class="num">${T('pt_sc')} ${s}</th>`).join('') + '</tr></thead><tbody>';
   rows.forEach(([k, name]) => {

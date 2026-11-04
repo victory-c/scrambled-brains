@@ -43,8 +43,9 @@ constants, to put wiring error next to neuron-model error of the same size.
 fly-brain `runs/pretest.py`: bike held upright at 4.5 m/s, every sense at cruise rate, +30 Hz on the left VS (or
 haltere) inputs in half the brains and on the right in the other half, 300 ms warm-up then 1 s, 8 brains per cell
 (30 for the confirmatory run). A rung **passes** at a synapse scale s if (a) the number of descending and motor
-neurons with |z| > 3 between left and right brains exceeds the largest value over the 18 balanced relabellings
-(the null), for both VS and haltere drive, and (b) the network rate outside the driven neurons is within 2x of
+neurons with |z| > 3 between left and right brains exceeds the largest value over the balanced relabellings
+(the null: all 18 with 8 brains; 1,000 drawn at random from the 19.3 million with 30 brains, `--null-splits`),
+for both VS and haltere drive, and (b) the network rate outside the driven neurons is within 2x of
 R0's at scale 0.47 (21,500 spikes/s; so 10,750-43,000). Scales tried, in order: 0.47, 0.6, 0.8, 1.0, 1.5, 2.0. A
 rung that fails at every scale is reported as "no transmission" and gets one confirmatory Track A seed, no more.
 
@@ -101,6 +102,9 @@ probe radii 10, 25 and 50 µm.
   spikes/s and lateralised outputs VS / haltere: R1 13,700, 15 / 16 (VS null max 24); R2 25,300, 23 / 28;
   R3 15,900, 25 / 20; R3.5 890, 0 / 0. R3.5 is as silent as R4 and R5; R3 transmits. This was seen before the
   tag, so prediction 2 is not a blind prediction for the pre-test; it remains one for riding.
+- Confirmatory pre-test on R1 at 0.47 (2026-11-03, CPU, 30 brains, draw 1, 1,000 random balanced relabellings):
+  13,000 / 14,300 network spikes/s; 35 / 31 lateralised outputs against null maxima of 4 / 13 (95th percentile 1).
+  R1 passes the gate. So, before the tag, R1, R2 and R3 pass at 0.47 and R3.5, R4 and R5 fail at 0.47.
 
 ## 10. Deviations
 
