@@ -30,8 +30,11 @@ predictions (Track B), and how many recorded neurons a decoder needs (Track C).
 ## Layout
 
 - `site/` the project page, served as is by Vercel (`vercel.json`); `site/data.json` holds the numbers the page
-  draws, exported from fly-brain's `results/`.
-- `docs/` preregistration and reports (to come).
+  draws.
+- `tools/export_data.py` rebuilds `site/data.json` from a fly-brain checkout's `fly_brain/results/` (balance gate,
+  rung rides, pre-test cells). Run it and commit the file whenever new runs land.
+- `docs/PREREGISTRATION.md` the preregistration draft, with what has already been run and the open points before
+  it is tagged.
 
 ## Licence
 
