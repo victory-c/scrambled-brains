@@ -55,7 +55,7 @@ for p in sorted((SRC / "rungs").glob("pretest_*.json")):
         if m.group(3):
             cell[pop].update(brains=d["brains"], null_splits=row.get("null_splits"),
                              null_outputs_z3_p95=row.get("null_outputs_z3_p95"))
-    data["pretest"].setdefault(key, {})[m.group(4)] = cell
+    data["pretest"].setdefault(key, {})[f"{float(m.group(4)):g}"] = cell  # 1.0 and 1 are the same column
 OUT.write_text(json.dumps(data, separators=(",", ":")))
 print(f"{OUT}: {len(data['gate'])} gate runs, {len(data['rides'])} rung rides, "
       f"{sum(len(v) for v in data['pretest'].values())} pre-test cells in {len(data['pretest'])} rows")

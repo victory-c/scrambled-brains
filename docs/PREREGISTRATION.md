@@ -109,20 +109,24 @@ probe radii 10, 25 and 50 µm.
   13,000 / 14,300 network spikes/s; 35 / 31 lateralised outputs against null maxima of 4 / 13 (95th percentile 1).
   R1 passes the gate. So, before the tag, R1, R2 and R3 pass at 0.47 and R3.5, R4 and R5 fail at 0.47.
 - Pre-test with 30 brains over the whole scale ladder (2026-11-05, CPU; table in fly-brain
-  `docs/CURRENT_NUMBERS.md`, data in `site/data.json`). R0, R1, R2 and R3 pass at 0.47 (35 to 50 lateralised
+  `docs/CURRENT_NUMBERS.md`, data in `site/data.json`). R0, R1, R2 and R3 pass at 0.47 (31 to 50 lateralised
   outputs, null maxima 4 to 13). R3.5 fails at every ladder scale: 2,800 spikes/s at 0.47, 117,000 at 0.6. R4
-  fails at every ladder scale: at 1.5 it has 21 / 35 lateralised outputs but 9,275 spikes/s on the VS probe (the
-  window starts at 10,750), and at 2.0 it runs away (8 million spikes/s). R5 passes at 2.0 (12,000 / 11,200
+  passes at none of the ladder scales run with 30 brains (0.6 to 1.5): at 1.5 it has 21 / 35 lateralised outputs
+  but 9,275 spikes/s on the VS probe (the window starts at 10,750); at 2.0 only the VS probe was run and it ran
+  away (8 million spikes/s, 8 outputs against a null maximum of 14). R5 passes at 2.0 (12,000 / 11,200
   spikes/s; 7 / 8 outputs against a null maximum of 4 / 4) and fails below. **The R5 pass contradicts prediction 4
   as drafted.** The prediction is left as written; this line records that the pilot went against it.
-- Fine scans between ladder steps (same date, exploratory, not on the ladder): R3.5 at 0.50 has the real brain's
-  rate (15,300 / 16,300) and no signal (1 / 1 outputs, null maxima 162 / 158); at 0.53 and 0.56 the rate is 48,000
-  and 83,000, still without a signal above the null. R4 at 1.2: 3,000 / 3,500 spikes/s, 11 / 14 outputs (null
-  maximum 1); at 1.6: 234,000 / 2.1 million, no signal.
-- R4 in closed loop (same date): replaying the reference decoder, R4's rate while riding is 16,300 spikes/s per
-  brain at scale 1.0, 48,100 at 1.2, 167,000 at 1.3, 1.6 million at 1.4 and 2.5 million at 1.5; the real wiring
-  rides at 61,000. Upright, the same brains fire 1,200 to 9,000. The upright pre-test therefore does not tell
-  whether a rung is stable while riding.
+- Fine scans between ladder steps (same date, exploratory, not on the ladder): R3.5 at 0.50 is inside the rate
+  window (15,300 / 16,300, three quarters of the real rate) and has no signal (1 / 1 outputs, null maxima
+  162 / 158); at 0.53 and 0.56 the rate is 48,000 and 83,000 and it still does not beat the null on both probes.
+  R4 at 1.2: 3,000 / 3,500 spikes/s, 11 / 14 outputs (null maximum 1); at 1.6: 234,000 / 2.1 million, no signal
+  on the VS probe.
+- R4 in closed loop (same date): replaying the reference decoder, R4's rate over the first 0.6 s of riding is
+  12,700 spikes/s per brain at scale 1.0, 39,400 at 1.2, 79,600 at 1.3, 327,000 at 1.4 and 1.2 million at 1.5;
+  the real wiring is at 23,400 on the same window. Upright, the same R4 brains fire 1,200 to 9,000 and the real
+  wiring 10,000 to 12,800. The upright pre-test therefore does not tell whether a rung is stable while riding.
+  In the first generations of the pilot search R4 at 1.2 averages about three times the real wiring's rate
+  (173,000 to 212,000 against 59,500 to 68,800), since most bikes have already fallen.
 - Pilot rides, balance gate unchanged (hand-picked readout, 4.5 m/s, CEM seed 201, rewiring draw 1), on CPU
   because the GPU node has no working CUDA: R3 at 0.47 (fly-brain jobs 37938, 37946) and R4 at 1.2 (job 37945),
   started 2026-11-05 and continued across 24 h jobs. Curves: the project page.
@@ -134,9 +138,11 @@ These came out of the runs above and need a decision before this document is tag
 1. The model-side rung (section 3) and the Track B prediction CSV (section 6) are not written yet.
 2. Scale ladder: R3.5 and R4 go from too quiet to runaway inside one ladder step (0.47 to 0.6, and 1.5 to 1.6).
    Proposed: when a rung brackets the rate window between two ladder scales, bisect up to three times.
-3. Where the scale is set: the rate criterion is measured upright, and riding drives the network 5 times harder on
-   the real wiring and 13 to 19 times harder on R4. Proposed: add a closed-loop check to section 4 (rate while
-   riding in the reference replay within 2x of R0's 61,000), and set a rung's scale there.
+3. Where the scale is set: the rate criterion is measured upright, and the first 0.6 s of riding doubles the real
+   wiring's rate but multiplies R4's by 10 to 22. Proposed: add a closed-loop check to section 4 (rate over the
+   first 0.6 s of the reference replay within 2x of R0's 23,400, and the rate averaged over generation 0 of the
+   search reported next to R0's), and set a rung's scale there. The replay's whole-run average is not usable for
+   this: it depends on when the last rider falls.
 4. Prediction 4 (R5 fails at every scale) is contradicted by the pilot at 2.0. Either keep it and report it as
    failed, or restate it (for example: R5's lateralised outputs stay under a quarter of R0's at every scale).
 5. Track A readout: the top-k neurons are ranked by roll-rate correlation only, and the per-brain readout has no

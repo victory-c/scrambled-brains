@@ -149,31 +149,31 @@ footer a{color:var(--ink2)}
   <h3 data-i18n="p_h">2. The transmission pre-test: do scrambled brains still carry a left-right signal?</h3>
   <p data-i18n="p_p">Before any rung gets search compute, we hold the bike upright, drive every sense at cruise rate, and add 30 Hz to the left or the right vertical-system (VS) or haltere inputs, in 30 brains per cell. A cell passes when, for both probes, more descending and motor neurons tell left from right (|z| &gt; 3) than in any of 1,000 shuffled groupings, at a network rate within 2× of the real brain's (10,750 to 43,000 spikes/s). The synapse scale multiplies Shiu's weight; 0.47 is the male CNS calibration.</p>
   <div class="tbl"><table id="pretestTable"></table></div>
-  <p class="caption" data-i18n="p_c">The real wiring and the three mildest rungs pass at the calibrated scale: transmitter errors (R1), count jitter (R2) and type-preserving rewiring (R3) give 31 to 50 lateralised outputs where shuffled groupings give at most 13. R3 does it at 73% of the real network rate, so wiring specified only down to cell types still carries the bike's left-right signal. One step down, R3.5 gives every neuron the right number of inputs, the right input strength and the right excitatory/inhibitory mix, from the wrong partners, and fails at every scale. Degree-preserving wiring (R4) and random wiring (R5) are silent at the calibrated scale. R4 carries a signal at 1.5 times Shiu's weight but stays just under the rate window; R5 passes at twice Shiu's weight with a weak signal (7 and 8 outputs; the real wiring has 38 and 39). That pass contradicts our draft prediction that random wiring fails everywhere. One rewiring draw per rung. Cells marked <sup class="b8">8</sup> are the earlier 8-brain pilot.</p>
+  <p class="caption" data-i18n="p_c">The real wiring and the three mildest rungs pass at the calibrated scale: transmitter errors (R1), count jitter (R2) and type-preserving rewiring (R3) give 31 to 50 lateralised outputs where shuffled groupings give at most 13. R3 does it at 73% of the real network rate, so wiring specified only down to cell types still carries the bike's left-right signal. One step down, R3.5 gives every neuron the right number of inputs, the right input strength and the right excitatory/inhibitory mix, from the wrong partners, and fails at every scale we ran. Degree-preserving wiring (R4) and random wiring (R5) are silent at the calibrated scale. R4 carries a signal at 1.5 times Shiu's weight but stays just under the rate window; R5 passes at twice Shiu's weight with a weak signal (7 and 8 outputs; the real wiring has 38 and 39). That pass contradicts our draft prediction that random wiring fails everywhere. One rewiring draw per rung. Cells marked <sup class="b8">8</sup> are the earlier 8-brain pilot.</p>
 
   <h3 data-i18n="f_h">Between the ladder steps: is a failing rung only miscalibrated?</h3>
   <div class="tbl"><table id="fineTable"></table></div>
-  <p class="caption" data-i18n="f_c">No, for R3.5. At 0.50 its network rate equals the real brain's and it still carries no left-right signal: one lateralised output, while single brains burst so much that shuffled groupings reach 160. A signal above the shuffles appears only from 0.6, at more than five times the real rate. R4 has the opposite problem: a clear signal at 1.2 and 1.5, then runaway activity at 1.6.</p>
+  <p class="caption" data-i18n="f_c">Not on this evidence, for R3.5 (nine scales, one rewiring draw). At 0.50 its network rate is inside the window, about three quarters of the real brain's, and it still carries no left-right signal: one lateralised output per probe, while single brains burst so much that shuffled groupings reach 160. Both probes beat the shuffles only from 0.6, at more than five times the real rate. R4 has the opposite problem: a clear signal from 1.2 to 1.5 at a fraction of the real rate, then runaway activity at 1.6.</p>
 
   <h3 data-i18n="cl_h">R4 once the bike moves</h3>
   <div class="tbl"><table>
-    <thead><tr><th data-i18n="cl_t1">R4 synapse scale</th><th class="num" data-i18n="cl_t2">Upright, spikes/s per brain</th><th class="num" data-i18n="cl_t3">While riding, spikes/s per brain</th></tr></thead>
+    <thead><tr><th data-i18n="cl_t1">Brain, synapse scale</th><th class="num" data-i18n="cl_t2">Upright, spikes/s per brain</th><th class="num" data-i18n="cl_t3">First 0.6 s of riding</th><th class="num" data-i18n="cl_t4">Relative to the real wiring</th></tr></thead>
     <tbody>
-      <tr><td class="rung">1.0</td><td class="num">1,207</td><td class="num">16,289</td></tr>
-      <tr><td class="rung">1.2</td><td class="num">2,543</td><td class="num"><b>48,094</b></td></tr>
-      <tr><td class="rung">1.3</td><td class="num">3,644</td><td class="num">167,442</td></tr>
-      <tr><td class="rung">1.4</td><td class="num">5,354</td><td class="num">1,609,072</td></tr>
-      <tr><td class="rung">1.5</td><td class="num">8,980</td><td class="num">2,487,027</td></tr>
-      <tr><td class="rung" data-i18n="cl_r0">Real wiring, 0.47</td><td class="num">11,628</td><td class="num"><b>61,004</b></td></tr>
+      <tr><td class="rung" data-i18n="cl_r0">Real wiring, 0.47</td><td class="num">12,824</td><td class="num"><b>23,388</b></td><td class="num">1</td></tr>
+      <tr><td class="rung">R4, 1.0</td><td class="num">1,207</td><td class="num">12,720</td><td class="num">0.5</td></tr>
+      <tr><td class="rung">R4, 1.2</td><td class="num">2,543</td><td class="num"><b>39,396</b></td><td class="num">1.7</td></tr>
+      <tr><td class="rung">R4, 1.3</td><td class="num">3,644</td><td class="num">79,613</td><td class="num">3.4</td></tr>
+      <tr><td class="rung">R4, 1.4</td><td class="num">5,354</td><td class="num">326,775</td><td class="num">14</td></tr>
+      <tr><td class="rung">R4, 1.5</td><td class="num">8,980</td><td class="num">1,233,955</td><td class="num">53</td></tr>
     </tbody>
   </table></div>
-  <p class="caption" data-i18n="cl_c">The pre-test holds the bike upright, and riding drives the senses harder. The real wiring's activity rises five times once the bike moves; R4's rises 13 to 19 times, and above 1.3 it runs away: at 1.5 every R4 brain reached 4 million spikes/s within 0.4 s of setting off, before any bike fell. So a rung's synaptic scale has to be set while riding, not upright. For R4 that scale is 1.2, where its activity matches the real brain's, and that is where its pilot ride runs.</p>
+  <p class="caption" data-i18n="cl_c">The pre-test holds the bike upright, and riding drives the senses harder. Over the first 0.6 s after setting off, with nearly every rider still up, the real wiring's activity roughly doubles. R4's rises 10 to 22 times at scales 1.0 to 1.3, and above that it runs away: at 1.5 every R4 brain reached 4 million spikes/s within a second, each before its own bike fell. So a rung's synaptic scale has to be checked while riding, not only upright. R4's pilot ride runs at 1.2, the highest scale in this scan within 2× of the real rate. It is not matched throughout: averaged over the first generations of the search, where most bikes have already fallen, R4 at 1.2 fires about three times as much as the real wiring.</p>
 
   <h3 data-i18n="rr_h">3. Riding on rewired brains: first pilot runs</h3>
-  <p data-i18n="rr_p">The pilot is the balance gate unchanged, same hand-picked readout, search and seed, on rewiring draw 1, so its curves compare directly with the real wiring's. The GPU node has had no working CUDA since its operating-system upgrade, so these runs are on CPU: 30 to 60 minutes per generation instead of 2 to 3, continued from one 24-hour job to the next. The figure grows as generations finish.</p>
+  <p data-i18n="rr_p">The pilot is the balance gate unchanged, same hand-picked readout, search and seed, on rewiring draw 1, so its curves compare directly with the real wiring's. The GPU node has had no working CUDA since its operating-system upgrade, so these runs are on CPU: about half an hour per generation so far, against 2 to 3 minutes on the GPU, continued from one 24-hour job to the next. The figure grows as generations finish.</p>
   <div class="fig" id="rungFig">
     <h3 data-i18n="rr_t">Mean riding time per generation at 4.5 m/s: real wiring and rewired brains</h3>
-    <p class="sub" data-i18n="rr_s">5 N·m gusts, 48 riders × 15 s, blank decoder at the start. R4 runs at 1.2 times Shiu's synaptic weight. Dashed grey: the bike with no steering at all.</p>
+    <p class="sub" data-i18n="rr_s">5 N·m gusts, 48 riders × 15 s, blank decoder at the start. R4 runs at 1.2 times Shiu's synaptic weight (the real wiring and R3 at 0.47). Dashed grey: the bike with no steering at all.</p>
     <svg id="rungSvg" viewBox="0 0 760 330" role="img" aria-labelledby="rungTitle"><title id="rungTitle">Learning curves on rewired brains</title></svg>
     <ul class="legend" id="rungLegend"></ul>
     <div class="tip" id="rungTip"></div>
@@ -257,16 +257,16 @@ zh: {
  g_tbl:'表格视图',
  p_h:'2. 传输预测试：打乱的大脑还能传左右信号吗？',
  p_p:'在任何一级拿到搜索算力之前，我们把车扶正、所有感官按巡航速率驱动，再给左侧或右侧的垂直系统（VS）或平衡棒输入多加 30 Hz，每格 30 个大脑。一格算通过，要两种探针都满足：能分清左右的下行和运动神经元（|z| > 3）比 1000 种随机分组里的任何一种都多，而且网络速率在真实大脑的 2 倍以内（10,750 到 43,000 spikes/s）。突触尺度乘在 Shiu 的权重上；0.47 是雄性 CNS 的校准值。',
- p_c:'真实接线和最温和的三级在校准尺度下通过：递质错误（R1）、突触数抖动（R2）和保类型重接线（R3）给出 31 到 50 个侧化输出，随机分组最多只有 13 个。R3 的网络速率只有真实的 73%，所以只精确到细胞类型的接线仍然带着自行车的左右信号。再往下一级，R3.5 让每个神经元从错误的伙伴那里得到正确数量、正确强度、正确兴奋/抑制比例的输入，在所有尺度都不通过。保度接线（R4）和随机接线（R5）在校准尺度下静默。R4 在 Shiu 权重的 1.5 倍时有信号，但速率略低于窗口；R5 在 2 倍时以很弱的信号通过（7 和 8 个输出，真实接线是 38 和 39）。这次通过和我们草稿里“随机接线处处不通过”的预测相矛盾。每级一个重接线抽样。带 <sup class="b8">8</sup> 的格子是早先 8 个脑的试点。',
+ p_c:'真实接线和最温和的三级在校准尺度下通过：递质错误（R1）、突触数抖动（R2）和保类型重接线（R3）给出 31 到 50 个侧化输出，随机分组最多只有 13 个。R3 的网络速率只有真实的 73%，所以只精确到细胞类型的接线仍然带着自行车的左右信号。再往下一级，R3.5 让每个神经元从错误的伙伴那里得到正确数量、正确强度、正确兴奋/抑制比例的输入，在我们跑过的所有尺度都不通过。保度接线（R4）和随机接线（R5）在校准尺度下静默。R4 在 Shiu 权重的 1.5 倍时有信号，但速率略低于窗口；R5 在 2 倍时以很弱的信号通过（7 和 8 个输出，真实接线是 38 和 39）。这次通过和我们草稿里“随机接线处处不通过”的预测相矛盾。每级一个重接线抽样。带 <sup class="b8">8</sup> 的格子是早先 8 个脑的试点。',
  f_h:'阶梯之间：不通过的级只是没校准好吗？',
- f_c:'对 R3.5 来说不是。在 0.50 尺度它的网络速率和真实大脑一样，却仍然不带左右信号：只有一个侧化输出，而单个大脑的爆发让随机分组能到 160 个。高于随机分组的信号要到 0.6 才出现，那时速率已是真实的五倍多。R4 的问题相反：1.2 和 1.5 有清楚的信号，到 1.6 就失控。',
+ f_c:'就目前的证据看，R3.5 不是（九个尺度，一个重接线抽样）。在 0.50 尺度它的网络速率落在窗口内，约为真实大脑的四分之三，却仍然不带左右信号：每种探针只有一个侧化输出，而单个大脑的爆发让随机分组能到 160 个。两种探针都高于随机分组要到 0.6 才出现，那时速率已是真实的五倍多。R4 的问题相反：1.2 到 1.5 有清楚的信号但速率只有真实的一小部分，到 1.6 就失控。',
  cl_h:'车一动起来的 R4',
- cl_t1:'R4 突触尺度', cl_t2:'扶正时，每脑 spikes/s', cl_t3:'骑行时，每脑 spikes/s', cl_r0:'真实接线，0.47',
- cl_c:'预测试是把车扶正做的，而骑行对感官的驱动更强。车动起来后真实接线的活动升到 5 倍；R4 升到 13 到 19 倍，超过 1.3 就失控：在 1.5 尺度，出发 0.4 秒内每个 R4 大脑都到了 400 万 spikes/s，这时还没有一辆车倒下。所以一级的突触尺度必须在骑行状态下定，而不是扶正状态。R4 的这个尺度是 1.2，那里它的活动和真实大脑相当，它的试点骑行就在这个尺度上跑。',
+ cl_t1:'大脑，突触尺度', cl_t2:'扶正时，每脑 spikes/s', cl_t3:'骑行头 0.6 秒', cl_t4:'相对真实接线', cl_r0:'真实接线，0.47',
+ cl_c:'预测试是把车扶正做的，而骑行对感官的驱动更强。出发后的头 0.6 秒，几乎所有骑手都还没倒，真实接线的活动大约翻一倍；R4 在 1.0 到 1.3 尺度升到 10 到 22 倍，再往上就失控：在 1.5 尺度，每个 R4 大脑都在一秒内到了 400 万 spikes/s，而且都发生在自己的车倒下之前。所以一级的突触尺度必须在骑行状态下检查，不能只看扶正状态。R4 的试点骑行用 1.2，这是这次扫描里速率在真实大脑 2 倍以内的最高尺度。但它并不是全程匹配：在搜索的头几代，大部分车已经倒下，这时 R4 在 1.2 尺度的放电大约是真实接线的三倍。',
  rr_h:'3. 在改接线的大脑上骑车：第一批试点',
- rr_p:'试点原样照搬平衡门槛：同一个手挑读出、同样的搜索和种子，用第 1 个重接线抽样，所以曲线能和真实接线直接比较。GPU 节点自操作系统升级后 CUDA 一直不可用，这些实验是在 CPU 上跑的：每代 30 到 60 分钟，而不是 2 到 3 分钟，并且一个 24 小时作业接着一个往下续。图会随着每一代完成而变长。',
+ rr_p:'试点原样照搬平衡门槛：同一个手挑读出、同样的搜索和种子，用第 1 个重接线抽样，所以曲线能和真实接线直接比较。GPU 节点自操作系统升级后 CUDA 一直不可用，这些实验是在 CPU 上跑的：目前每代大约半小时，而 GPU 上是 2 到 3 分钟，并且一个 24 小时作业接着一个往下续。图会随着每一代完成而变长。',
  rr_t:'4.5 m/s 下每代的平均骑行时间：真实接线和改接线的大脑',
- rr_s:'5 N·m 阵风，48 名骑手 × 15 秒，从空白解码器开始。R4 用 Shiu 突触权重的 1.2 倍。灰色虚线：完全不打把的车。',
+ rr_s:'5 N·m 阵风，48 名骑手 × 15 秒，从空白解码器开始。R4 用 Shiu 突触权重的 1.2 倍（真实接线和 R3 是 0.47 倍）。灰色虚线：完全不打把的车。',
  n_h:'4. 每一级生成时改了什么',
  n_t1:'级（种子 1）', n_t2:'保留的真实连接', n_t3:'生成器报告',
  n_r1:'9,907 个神经元换了递质（5.9%），8,584 个翻转了输出符号（5.1%）；抑制性突触占比 38.4% → 40.2%',
@@ -426,7 +426,7 @@ function renderRungs() {
   const W = 760, H = 330, L = 52, R = 70, Tm = 14, B = 40, pw = W - L - R, ph = H - Tm - B;
   const maxGen = Math.max(...S.map(s => s.pts[s.pts.length - 1].gen)), yMax = 15;
   const x = g => L + g / maxGen * pw, y = t => Tm + (1 - t / yMax) * ph;
-  const refAt = g => { const v = refs.map(s => s.pts[g]).filter(Boolean).map(p => p.t); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; };
+  const refAt = g => { const v = refs.map(s => s.pts[Math.min(g, s.pts.length - 1)].t); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; };
   let o = '';
   for (let t = 0; t <= 15; t += 5) o += `<line x1="${L}" x2="${L + pw}" y1="${y(t)}" y2="${y(t)}" stroke="var(--grid)"/><text x="${L - 8}" y="${y(t) + 4}" text-anchor="end" fill="var(--mute)">${t}</text>`;
   for (let g = 0; g <= maxGen; g += 10) o += `<text x="${x(g)}" y="${H - B + 18}" text-anchor="middle" fill="var(--mute)">${g}</text>`;
