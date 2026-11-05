@@ -179,6 +179,7 @@ footer a{color:var(--ink2)}
     <div class="tip" id="rungTip"></div>
   </div>
   <p class="caption" id="rungCaption"></p>
+  <p class="caption" data-i18n="rr_i">Reading on 5 November, early generations and one rewiring draw. R3, which keeps only which cell types connect to which, learns to ride: its first seed passed the hands-off bike in generation 8 and is at about three quarters of the real wiring's riding time at the same generation; its second seed is inside the real wiring's range so far. R4 at 1.2 did not learn in 25 generations: its riders fall within two seconds, sooner than a bike with no steering at all, and no rider ever rode the full 15 s. That run is paused to free CPU; the R3 runs continue toward 60 generations.</p>
   <details><summary class="small" data-i18n="g_tbl">Table view</summary><div class="tbl"><table id="rungTable"></table></div></details>
 
   <h3 data-i18n="n_h">4. What each generated rung changes</h3>
@@ -266,6 +267,7 @@ zh: {
  rr_h:'3. 在改接线的大脑上骑车：第一批试点',
  rr_p:'试点原样照搬平衡门槛：同一个手挑读出、同样的搜索和种子，用第 1 个重接线抽样，所以曲线能和真实接线直接比较。GPU 节点自操作系统升级后 CUDA 一直不可用，这些实验是在 CPU 上跑的：目前每代大约半小时，而 GPU 上是 2 到 3 分钟，并且一个 24 小时作业接着一个往下续。图会随着每一代完成而变长。',
  rr_t:'4.5 m/s 下每代的平均骑行时间：真实接线和改接线的大脑',
+ rr_i:'11 月 5 日的读法，只有前面若干代、一个重接线抽样。R3 只保留“哪种细胞类型连哪种”，它学得会骑车：第一个种子在第 8 代超过了不扶把的车，同一代上的骑行时间约为真实接线的四分之三；第二个种子目前落在真实接线的范围内。R4 在 1.2 尺度跑了 25 代没有学会：骑手两秒内就倒，比完全不打把的车倒得还早，没有一名骑手骑满 15 秒。这个实验先暂停以腾出 CPU；R3 的实验继续跑向 60 代。',
  rr_s:'5 N·m 阵风，48 名骑手 × 15 秒，从空白解码器开始。R4 用 Shiu 突触权重的 1.2 倍（真实接线和 R3 是 0.47 倍）。灰色虚线：完全不打把的车。',
  n_h:'4. 每一级生成时改了什么',
  n_t1:'级（种子 1）', n_t2:'保留的真实连接', n_t3:'生成器报告',
@@ -335,7 +337,7 @@ let DATA = null;
 
 const LADDER = [
   ['R0', 'lad_r0', 'done', 'pass', 'gate'], ['R1', 'lad_r1', 'done', 'pass', 'todo'], ['R2', 'lad_r2', 'done', 'pass', 'todo'],
-  ['R3', 'lad_r3', 'done', 'pass', 'riding'], ['R3.5', 'lad_r35', 'done', 'fail', 'todo'], ['R4', 'lad_r4', 'done', 'fail', 'riding'], ['R5', 'lad_r5', 'done', 'pass2', 'todo']];
+  ['R3', 'lad_r3', 'done', 'pass', 'riding'], ['R3.5', 'lad_r35', 'done', 'fail', 'todo'], ['R4', 'lad_r4', 'done', 'fail', 'run'], ['R5', 'lad_r5', 'done', 'pass2', 'todo']];
 const chip = s => s === 'gate' ? `<span class="chip ok">${T('st_gate')}</span>` : s === 'pass' ? `<span class="chip ok">${T('st_pass')}</span>` : s === 'pass2' ? `<span class="chip ok">${T('st_pass2')}</span>` : s === 'fail' ? `<span class="chip bad">${T('st_fail')}</span>` : s === 'riding' ? `<span class="chip run">${T('st_riding')}</span>` : s === 'done' ? `<span class="chip ok">${T('st_done')}</span>` : s === 'run' ? `<span class="chip run">${T('st_run')}</span>` : `<span class="chip todo">${T('st_todo')}</span>`;
 
 function renderStatic() {

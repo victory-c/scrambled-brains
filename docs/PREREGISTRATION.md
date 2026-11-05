@@ -130,6 +130,11 @@ probe radii 10, 25 and 50 µm.
 - Pilot rides, balance gate unchanged (hand-picked readout, 4.5 m/s, CEM seed 201, rewiring draw 1), on CPU
   because the GPU node has no working CUDA: R3 at 0.47 (fly-brain jobs 37938, 37946) and R4 at 1.2 (job 37945),
   started 2026-11-05 and continued across 24 h jobs. Curves: the project page.
+  State on 2026-11-05 14:50: R3 seed 201 rides 7.0 s after generation 10 (R0's two seeds: 9.0 and 10.1 s) and
+  passed the hands-off bike (5.7 s) in generation 8; a second CEM seed (202; jobs 37948, 37952, 37953) rides
+  5.9 s after generation 5 (R0: 6.8 and 4.9 s). R4 at 1.2 stayed at 1.3 to 1.8 s through generation 24, below the
+  hands-off bike, and was paused there. So far this agrees with prediction 2 and says nothing yet about its 30%
+  bound; R4 was run with the hand-picked readout, which prediction 3 does not cover.
 
 ## 9a. Open points before the tag
 
