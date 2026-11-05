@@ -414,11 +414,11 @@ function renderPretest() {
     f += `<tr><td class="rung">${name}</td><td class="num">×${s}</td><td class="num">${fmtRate(vs.network_spikes_per_s)} / ${fmtRate(ha.network_spikes_per_s)}</td><td class="num">${vs.outputs_z3} / ${ha.outputs_z3}</td><td class="num">${vs.null_outputs_z3_max} / ${ha.null_outputs_z3_max}</td><td>${w.length ? `<span class="chip bad">${w.map(T).join(', ')}</span>` : `<span class="chip ok">${T('v_pass')}</span>`}</td></tr>`; });
   document.getElementById('fineTable').innerHTML = f + '</tbody>';
 }
-const RUNG_RUNS = [['r3_s1_cpu/v4.5_s201', 'R3', 'var(--r3)'], ['r4_s1_w1.2_cpu/v4.5_s201', 'R4 ×1.2', 'var(--r4)']];
+const RUNG_RUNS = [['r3_s1_cpu/v4.5_s201', 'R3', 'var(--r3)', ''], ['r3_s1_cpu/v4.5_s202', 'R3', 'var(--r3)', '6 4'], ['r4_s1_w1.2_cpu/v4.5_s201', 'R4 ×1.2', 'var(--r4)', '']];
 function rungSeries() {
   const out = [], g = DATA.gate, R = DATA.rides || {};
   Object.keys(g).sort().forEach(k => { if (g[k].v0 === 4.5) out.push({ ref: true, label: 'R0', seed: g[k].seed, color: 'var(--a45)', dash: g[k].seed === 201 ? '' : '6 4', w: 1.5, pts: g[k].history.map(h => ({ gen: h[0], t: h[1], fin: h[3] })) }); });
-  RUNG_RUNS.forEach(([k, label, color]) => { const r = R[k]; if (r && r.history.length) out.push({ label, seed: r.seed, color, dash: '', w: 2.5, pts: r.history.map(h => ({ gen: h[0], t: h[1], fin: h[3] })) }); });
+  RUNG_RUNS.forEach(([k, label, color, dash]) => { const r = R[k]; if (r && r.history.length) out.push({ label, seed: r.seed, color, dash, w: 2.5, pts: r.history.map(h => ({ gen: h[0], t: h[1], fin: h[3] })) }); });
   return out;
 }
 function renderRungs() {
@@ -458,7 +458,7 @@ function renderRungs() {
   };
   hit.addEventListener('pointermove', move); hit.addEventListener('pointerleave', () => { cross.style.display = 'none'; tip.style.display = 'none'; });
   const fill = (str, o) => str.replace(/\{(\w+)\}/g, (_, k) => o[k]);
-  document.getElementById('rungCaption').innerHTML = (runs.length ? runs.map(s => { const z = s.pts[s.pts.length - 1], r = refAt(z.gen); return fill(T('rr_now'), { name: s.label, n: s.pts.length, t: z.t.toFixed(1), f: Math.round(z.fin * 100), r: r === null ? '–' : r.toFixed(1) }); }).join(' ') : T('rr_none')) + ' ' + T('rr_floor');
+  document.getElementById('rungCaption').innerHTML = (runs.length ? runs.map(s => { const z = s.pts[s.pts.length - 1], r = refAt(z.gen); return fill(T('rr_now'), { name: `${s.label} (${T('seed')} ${s.seed})`, n: s.pts.length, t: z.t.toFixed(1), f: Math.round(z.fin * 100), r: r === null ? '–' : r.toFixed(1) }); }).join(' ') : T('rr_none')) + ' ' + T('rr_floor');
   document.getElementById('rungTable').innerHTML = `<thead><tr><th>${T('gt_run')}</th><th class="num">${T('gt_gens')}</th><th class="num">${T('gt_g0')}</th><th class="num">${T('gt_last')}</th><th class="num">${T('rr_same')}</th><th class="num">${T('gt_fin')}</th></tr></thead><tbody>` +
     S.map(s => { const a = s.pts[0], z = s.pts[s.pts.length - 1], r = refAt(z.gen); return `<tr><td>${name(s)}</td><td class="num">${s.pts.length}</td><td class="num">${a.t.toFixed(2)} s</td><td class="num">${z.t.toFixed(1)} s</td><td class="num">${s.ref || r === null ? '–' : r.toFixed(1) + ' s'}</td><td class="num">${Math.round(z.fin * 100)}%</td></tr>`; }).join('') + '</tbody>';
 }
