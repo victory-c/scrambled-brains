@@ -290,7 +290,7 @@ zh: {
  lad_r2:'一切，每条连接的突触数乘一个对数正态因子（中位数 1，一个标准差 ×1.25；flybench 的 ±25%）',
  lad_r3:'哪些细胞类型和哪些细胞类型相连、各在哪一侧；目标在同类型同侧内重抽', lad_r35:'每个神经元的入度、输入总突触数和兴奋/抑制输入比例；在相同符号和突触数的连接之间置换目标',
  lad_r4:'每个神经元的输入数和输出数', lad_r5:'什么都不剩：目标随机',
- st_done:'完成', st_run:'试点', st_todo:'等待', st_gate:'门槛通过', st_pass:'通过', st_pass2:'2.0 倍时通过', st_fail:'不通过', st_riding:'试点进行中', st_ok:'通过', rr_none:'还没有完成的代。', rr_now:'{name}：{n} 代后平均骑 {t} 秒，{f}% 骑满 15 秒；真实接线在同一代是 {r} 秒。', rr_floor:'不扶把的车是 5.7 秒。', rr_r0:'R0 真实接线', rr_same:'真实接线同代', ft_rung:'级', ft_scale:'尺度', ft_rate:'网络 spikes/s，VS / 平衡棒', ft_out:'侧化输出 VS / 平衡棒', ft_null:'随机分组最大值', ft_v:'判定', v_pass:'通过', v_quiet:'太安静', v_run:'失控', v_nosig:'无信号',
+ st_done:'完成', st_run:'试点', st_todo:'等待', st_gate:'门槛通过', st_pass:'通过', st_pass2:'2.0 倍时通过', st_fail:'不通过', st_riding:'试点进行中', st_ok:'通过', rr_none:'还没有完成的代。', rr_now:'{name}：{n} 代后平均骑 {t} 秒，{f}% 骑满 15 秒；真实接线在同一代是 {r} 秒。', rr_floor:'不扶把的车是 5.7 秒。', rr_r0:'R0 真实接线', rr_same:'真实接线同代', ft_rung:'级', ft_scale:'尺度', ft_rate:'spikes/s，VS / 平衡棒', ft_out:'侧化输出', ft_null:'随机分组最大', ft_v:'判定', v_pass:'通过', v_quiet:'太安静', v_run:'失控', v_nosig:'无信号',
  ms:[['2026-10','done','平衡门槛：真实接线在 4.0 和 4.5 m/s 学会骑车，对照不扶把的地板（作业 37491–37494）。R4/R5 生成器和预测试，突触强度 0.47–1.5。'],
      ['2026-11','run','R1、R2、R3、R3.5 生成器和不变量测试。预注册。校准强度下 R4 的第一次学骑车。各级的预测试。'],
      ['2026-11-13','todo','三行中期图：骑行、无解码器预测、可解码性，各一行，R0 到 R5 共用横轴。'],
@@ -300,7 +300,7 @@ zh: {
      ['2027-08','todo','带保真度曲线的预印本；代码、解码器、轨迹和作业账本全部发布。'],
      ['2027-11','todo','公开基准：提交一个连接组或仿真器，得到它的梯子分数。在第二个雌性连接组上验证。']],
  gate_y:'平均骑行时间（秒）', gate_x:'代', floor:'不扶把', seed:'种子', ms_lbl:'m/s',
- pt_h1:'级', pt_sc:'突触尺度', pt_net:'网络 spikes/s', pt_lat:'侧化输出 VS / 平衡棒（随机分组最大值）', real:'R0 真实接线', r1n:'R1 递质错误', r1c:'R1 递质错误，30 脑确认', r2n:'R2 突触数抖动', r3n:'R3 保类型', r35n:'R3.5 保强度', degree:'R4 保度', random:'R5 随机',
+ pt_h1:'级 · 突触尺度 →', pt_sc:'突触尺度', pt_net:'网络 spikes/s', pt_lat:'侧化输出 VS / 平衡棒（随机分组最大值）', real:'R0 真实接线', r1n:'R1 递质错误', r1c:'R1 递质错误，30 脑确认', r2n:'R2 突触数抖动', r3n:'R3 保类型', r35n:'R3.5 保强度', degree:'R4 保度', random:'R5 随机',
  gt_run:'运行', gt_gens:'代数', gt_g0:'第 0 代平均', gt_last:'末代平均', gt_fin:'末代骑满 15 秒'
 }};
 I18N.en = {
@@ -308,7 +308,7 @@ I18N.en = {
  lad_r2:'everything, with each connection\'s synapse count times a lognormal factor (median 1, one sigma ×1.25; flybench\'s ±25%)',
  lad_r3:'which cell types connect to which, on each side; targets redrawn within the same type and side', lad_r35:'each neuron\'s in-degree, incoming synapse total and excitatory/inhibitory input mix; targets permuted among connections of equal sign and count',
  lad_r4:'each neuron\'s number of inputs and outputs', lad_r5:'nothing: random targets',
- st_done:'done', st_run:'pilot', st_todo:'queued', st_gate:'gate passed', st_pass:'passed', st_pass2:'passed at 2.0×', st_fail:'failed', st_riding:'pilot running', st_ok:'passes', rr_none:'No generation has finished yet.', rr_now:'{name}: after {n} generations the riders stay up {t} s on average and {f}% ride the full 15 s; the real wiring was at {r} s at the same generation.', rr_floor:'The hands-off bike manages 5.7 s.', rr_r0:'R0 real wiring', rr_same:'real wiring, same generation', ft_rung:'Rung', ft_scale:'Scale', ft_rate:'network spikes/s, VS / haltere', ft_out:'lateralised outputs VS / haltere', ft_null:'largest shuffled count', ft_v:'Verdict', v_pass:'passes', v_quiet:'too quiet', v_run:'runaway', v_nosig:'no signal',
+ st_done:'done', st_run:'pilot', st_todo:'queued', st_gate:'gate passed', st_pass:'passed', st_pass2:'passed at 2.0×', st_fail:'failed', st_riding:'pilot running', st_ok:'passes', rr_none:'No generation has finished yet.', rr_now:'{name}: after {n} generations the riders stay up {t} s on average and {f}% ride the full 15 s; the real wiring was at {r} s at the same generation.', rr_floor:'The hands-off bike manages 5.7 s.', rr_r0:'R0 real wiring', rr_same:'real wiring, same generation', ft_rung:'Rung', ft_scale:'Scale', ft_rate:'spikes/s, VS / haltere', ft_out:'outputs', ft_null:'shuffled max', ft_v:'Verdict', v_pass:'passes', v_quiet:'too quiet', v_run:'runaway', v_nosig:'no signal',
  ms:[['Oct 2026','done','Balance gate: the real wiring learns to ride at 4.0 and 4.5 m/s against the hands-off floor (jobs 37491–37494). R4/R5 generators and the pre-test across synapse strengths 0.47–1.5.'],
      ['Nov 2026','run','Generators for R1, R2, R3 and R3.5 with invariant tests. Preregistration. First learn-to-ride run on R4 at its calibrated strength. Pre-test on every rung.'],
      ['13 Nov 2026','todo','Interim three-row figure: riding, decoder-free predictions and decodability, one row each, R0 to R5 on a shared axis.'],
@@ -318,7 +318,7 @@ I18N.en = {
      ['Aug 2027','todo','Preprint with the fidelity curve; code, decoders, traces and job ledger released.'],
      ['Nov 2027','todo','Open benchmark: submit a connectome or emulator, get its ladder scores. Validated on a second, female connectome.']],
  gate_y:'mean riding time (s)', gate_x:'generation', floor:'hands-off', seed:'seed', ms_lbl:'m/s',
- pt_h1:'Rung', pt_sc:'synapse scale', pt_net:'network spikes/s', pt_lat:'lateralised outputs VS / haltere (largest shuffled count)', real:'R0 real wiring', r1n:'R1 transmitter errors', r1c:'R1 transmitter errors, 30 brains', r2n:'R2 count jitter', r3n:'R3 type-preserving', r35n:'R3.5 strength-preserving', degree:'R4 degree-preserving', random:'R5 random',
+ pt_h1:'Rung · synapse scale →', pt_sc:'synapse scale', pt_net:'network spikes/s', pt_lat:'lateralised outputs VS / haltere (largest shuffled count)', real:'R0 real wiring', r1n:'R1 transmitter errors', r1c:'R1 transmitter errors, 30 brains', r2n:'R2 count jitter', r3n:'R3 type-preserving', r35n:'R3.5 strength-preserving', degree:'R4 degree-preserving', random:'R5 random',
  gt_run:'run', gt_gens:'generations', gt_g0:'gen 0 mean', gt_last:'last gen mean', gt_fin:'last gen riding all 15 s'
 };
 let LANG = 'en';
@@ -400,7 +400,7 @@ const fmtRate = n => n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e5 ? (n / 100
 function renderPretest() {
   const P = DATA.pretest, scales = ['0.47', '0.6', '0.8', '1', '1.5', '2'];
   const rows = [['r0', 'real'], ['r1_s1', 'r1n'], ['r2_s1', 'r2n'], ['r3_s1', 'r3n'], ['r35_s1', 'r35n'], ['r4_s1', 'degree'], ['r5_s1', 'random']];
-  let h = `<thead><tr><th>${T('pt_h1')}</th>` + scales.map(s => `<th class="num">${T('pt_sc')} ${s}</th>`).join('') + '</tr></thead><tbody>';
+  let h = `<thead><tr><th>${T('pt_h1')}</th>` + scales.map(s => `<th class="num">×${s}</th>`).join('') + '</tr></thead><tbody>';
   rows.forEach(([k, name]) => {
     h += `<tr><td class="rung">${T(name)}</td>` + scales.map(s => { const r = ptCell(P, k, s); if (!r) return '<td class="num">–</td>';
       const [c, nb] = r, vs = c.VS, ha = c.HALT, nul = Math.max(vs.null_outputs_z3_max, ha.null_outputs_z3_max), ok = nb === 30 && !ptWhy(c).length;
@@ -408,10 +408,10 @@ function renderPretest() {
   });
   h += `</tbody><caption style="caption-side:bottom;text-align:left;padding:8px 10px 4px" class="small">${T('pt_net')}; ${T('pt_lat')}</caption>`;
   document.getElementById('pretestTable').innerHTML = h;
-  const fine = [['r35_s1', 'r35n', '0.47'], ['r35_s1', 'r35n', '0.5'], ['r35_s1', 'r35n', '0.53'], ['r35_s1', 'r35n', '0.56'], ['r35_s1', 'r35n', '0.6'], ['r4_s1', 'degree', '1.2'], ['r4_s1', 'degree', '1.3'], ['r4_s1', 'degree', '1.5'], ['r4_s1', 'degree', '1.6']];
+  const fine = [['r35_s1', 'R3.5', '0.47'], ['r35_s1', 'R3.5', '0.5'], ['r35_s1', 'R3.5', '0.53'], ['r35_s1', 'R3.5', '0.56'], ['r35_s1', 'R3.5', '0.6'], ['r4_s1', 'R4', '1.2'], ['r4_s1', 'R4', '1.3'], ['r4_s1', 'R4', '1.5'], ['r4_s1', 'R4', '1.6']];
   let f = `<thead><tr><th>${T('ft_rung')}</th><th class="num">${T('ft_scale')}</th><th class="num">${T('ft_rate')}</th><th class="num">${T('ft_out')}</th><th class="num">${T('ft_null')}</th><th>${T('ft_v')}</th></tr></thead><tbody>`;
   fine.forEach(([k, name, s]) => { const c = P[k + '_b30'] && P[k + '_b30'][s]; if (!c) return; const vs = c.VS, ha = c.HALT, w = ptWhy(c);
-    f += `<tr><td class="rung">${T(name)}</td><td class="num">${s}</td><td class="num">${fmtRate(vs.network_spikes_per_s)} / ${fmtRate(ha.network_spikes_per_s)}</td><td class="num">${vs.outputs_z3} / ${ha.outputs_z3}</td><td class="num">${vs.null_outputs_z3_max} / ${ha.null_outputs_z3_max}</td><td>${w.length ? `<span class="chip bad">${w.map(T).join(', ')}</span>` : `<span class="chip ok">${T('v_pass')}</span>`}</td></tr>`; });
+    f += `<tr><td class="rung">${name}</td><td class="num">×${s}</td><td class="num">${fmtRate(vs.network_spikes_per_s)} / ${fmtRate(ha.network_spikes_per_s)}</td><td class="num">${vs.outputs_z3} / ${ha.outputs_z3}</td><td class="num">${vs.null_outputs_z3_max} / ${ha.null_outputs_z3_max}</td><td>${w.length ? `<span class="chip bad">${w.map(T).join(', ')}</span>` : `<span class="chip ok">${T('v_pass')}</span>`}</td></tr>`; });
   document.getElementById('fineTable').innerHTML = f + '</tbody>';
 }
 const RUNG_RUNS = [['r3_s1_cpu/v4.5_s201', 'R3', 'var(--r3)'], ['r4_s1_w1.2_cpu/v4.5_s201', 'R4 ×1.2', 'var(--r4)']];
