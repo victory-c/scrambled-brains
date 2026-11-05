@@ -12,7 +12,7 @@
 <style>
 :root{
   --bg:#f4f2ed; --panel:#fff; --line:#dad6cd; --ink:#1c1b18; --ink2:#5f5b53; --mute:#8b867c;
-  --accent:#6b3fa0; --a40:#d8501f; --a45:#2f7fc5; --ok:#2b8a5b; --warn:#b8860b; --grid:#e6e2d9;
+  --accent:#6b3fa0; --a40:#d8501f; --a45:#2f7fc5; --ok:#2b8a5b; --warn:#b8860b; --bad:#b3402e; --r3:#6b3fa0; --r4:#1b8f7a; --grid:#e6e2d9;
   --font:"Manrope","PingFang SC","Noto Sans SC",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,"PingFang SC","Noto Sans SC",monospace;
 }
@@ -20,13 +20,13 @@
   :root:not([data-theme="light"]){
     color-scheme:dark;
     --bg:#15171c; --panel:#1d2027; --line:#333843; --ink:#eeeae2; --ink2:#b6b0a4; --mute:#7f7a70;
-    --accent:#a985d9; --a40:#e8602a; --a45:#5a9ad6; --ok:#4fbf83; --warn:#d4a62a; --grid:#2a2e37;
+    --accent:#a985d9; --a40:#e8602a; --a45:#5a9ad6; --ok:#4fbf83; --warn:#d4a62a; --bad:#e07a66; --r3:#a985d9; --r4:#3fbfa5; --grid:#2a2e37;
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
   --bg:#15171c; --panel:#1d2027; --line:#333843; --ink:#eeeae2; --ink2:#b6b0a4; --mute:#7f7a70;
-  --accent:#a985d9; --a40:#e8602a; --a45:#5a9ad6; --ok:#4fbf83; --warn:#d4a62a; --grid:#2a2e37;
+  --accent:#a985d9; --a40:#e8602a; --a45:#5a9ad6; --ok:#4fbf83; --warn:#d4a62a; --bad:#e07a66; --r3:#a985d9; --r4:#3fbfa5; --grid:#2a2e37;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55}
@@ -62,6 +62,9 @@ td b{font-weight:700}
 .chip.ok{color:var(--ok);border-color:var(--ok)}
 .chip.run{color:var(--warn);border-color:var(--warn)}
 .chip.todo{color:var(--mute)}
+.chip.bad{color:var(--bad);border-color:var(--bad)}
+td .chip{margin-top:5px}
+sup.b8{color:var(--mute);font-weight:400}
 .chip + .chip{margin-left:4px}
 .rung{font-family:var(--mono);font-weight:500;white-space:nowrap}
 .fig{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 12px;position:relative}
@@ -130,7 +133,7 @@ footer a{color:var(--ink2)}
 
 <section id="results">
   <h2 data-i18n="r_h">Results so far</h2>
-  <p data-i18n="r_p">Two things are settled before any scrambled brain is raced. First, the real wiring can balance the bike below its self-stable speed, so the task is not solved by the bicycle. Second, the pre-test tells us which rungs still carry a left-right signal at all.</p>
+  <p data-i18n="r_p">Three things so far. The real wiring can balance the bike below its self-stable speed, so the task is not solved by the bicycle. The pre-test shows which rungs still carry a left-right signal, and it puts the break between two rungs that differ only in who a neuron's partners are. And the first rewired brains are now learning to ride.</p>
 
   <h3 data-i18n="g_h">1. The balance gate: the real wiring learns to ride</h3>
   <div class="fig" id="gateFig">
@@ -144,11 +147,41 @@ footer a{color:var(--ink2)}
   <details><summary class="small" data-i18n="g_tbl">Table view</summary><div class="tbl"><table id="gateTable"></table></div></details>
 
   <h3 data-i18n="p_h">2. The transmission pre-test: do scrambled brains still carry a left-right signal?</h3>
-  <p data-i18n="p_p">Before any rung gets search compute, we hold the bike upright, drive every sense at cruise rate, and add 30 Hz to the left or the right vertical-system (VS) or haltere inputs in 8 brains (30 for a confirmatory run). A rung passes when descending and motor neurons respond differently to left and right (|z| &gt; 3; chance under 1) at a network rate within 2× of the real brain's. The synapse scale multiplies Shiu's weight; 0.47 is the male CNS calibration.</p>
+  <p data-i18n="p_p">Before any rung gets search compute, we hold the bike upright, drive every sense at cruise rate, and add 30 Hz to the left or the right vertical-system (VS) or haltere inputs, in 30 brains per cell. A cell passes when, for both probes, more descending and motor neurons tell left from right (|z| &gt; 3) than in any of 1,000 shuffled groupings, at a network rate within 2× of the real brain's (10,750 to 43,000 spikes/s). The synapse scale multiplies Shiu's weight; 0.47 is the male CNS calibration.</p>
   <div class="tbl"><table id="pretestTable"></table></div>
-  <p class="caption" data-i18n="p_c">At the calibrated scale the two bottom rungs are almost silent, about 1% of the real network's activity, with at most one lateralised output. Degree-preserving wiring (R4) needs three times the synaptic weight to reach half the real activity and 14 to 17 lateralised outputs, spread over five times as many neurons. Random wiring (R5) stays at chance everywhere. The cause is convergence: neurons receiving 200 or more synapses from the bike's 789 sensory neurons fall from 417 to 26. The four new rungs (run 2 Nov on CPU) sharpen this: count jitter (R2) is indistinguishable from the real wiring, and cell-type-level wiring (R3) still carries the left-right channel at 74% of the real rate. But R3.5, which gives every neuron the right number of inputs, the right input strength and the right excitatory/inhibitory mix from the wrong partners, is as silent as R4. The transition lies between R3 and R3.5, and it is about partner identity, not input statistics. Transmitter errors (R1) halve the network rate; with 8 brains the VS channel was noisy, so R1 got the 30-brain confirmatory run (3 Nov, 1,000 random balanced relabellings): 35 and 31 lateralised outputs against null maxima of 4 and 13. R1 passes. One rewiring draw; 8 brains per cell except that run; treat as a pilot.</p>
+  <p class="caption" data-i18n="p_c">The real wiring and the three mildest rungs pass at the calibrated scale: transmitter errors (R1), count jitter (R2) and type-preserving rewiring (R3) give 31 to 50 lateralised outputs where shuffled groupings give at most 13. R3 does it at 73% of the real network rate, so wiring specified only down to cell types still carries the bike's left-right signal. One step down, R3.5 gives every neuron the right number of inputs, the right input strength and the right excitatory/inhibitory mix, from the wrong partners, and fails at every scale. Degree-preserving wiring (R4) and random wiring (R5) are silent at the calibrated scale. R4 carries a signal at 1.5 times Shiu's weight but stays just under the rate window; R5 passes at twice Shiu's weight with a weak signal (7 and 8 outputs; the real wiring has 38 and 39). That pass contradicts our draft prediction that random wiring fails everywhere. One rewiring draw per rung. Cells marked <sup class="b8">8</sup> are the earlier 8-brain pilot.</p>
 
-  <h3 data-i18n="n_h">3. The rungs generated this week</h3>
+  <h3 data-i18n="f_h">Between the ladder steps: is a failing rung only miscalibrated?</h3>
+  <div class="tbl"><table id="fineTable"></table></div>
+  <p class="caption" data-i18n="f_c">No, for R3.5. At 0.50 its network rate equals the real brain's and it still carries no left-right signal: one lateralised output, while single brains burst so much that shuffled groupings reach 160. A signal above the shuffles appears only from 0.6, at more than five times the real rate. R4 has the opposite problem: a clear signal at 1.2 and 1.5, then runaway activity at 1.6.</p>
+
+  <h3 data-i18n="cl_h">R4 once the bike moves</h3>
+  <div class="tbl"><table>
+    <thead><tr><th data-i18n="cl_t1">R4 synapse scale</th><th class="num" data-i18n="cl_t2">Upright, spikes/s per brain</th><th class="num" data-i18n="cl_t3">While riding, spikes/s per brain</th></tr></thead>
+    <tbody>
+      <tr><td class="rung">1.0</td><td class="num">1,207</td><td class="num">16,289</td></tr>
+      <tr><td class="rung">1.2</td><td class="num">2,543</td><td class="num"><b>48,094</b></td></tr>
+      <tr><td class="rung">1.3</td><td class="num">3,644</td><td class="num">167,442</td></tr>
+      <tr><td class="rung">1.4</td><td class="num">5,354</td><td class="num">1,609,072</td></tr>
+      <tr><td class="rung">1.5</td><td class="num">8,980</td><td class="num">2,487,027</td></tr>
+      <tr><td class="rung" data-i18n="cl_r0">Real wiring, 0.47</td><td class="num">11,628</td><td class="num"><b>61,004</b></td></tr>
+    </tbody>
+  </table></div>
+  <p class="caption" data-i18n="cl_c">The pre-test holds the bike upright, and riding drives the senses harder. The real wiring's activity rises five times once the bike moves; R4's rises 13 to 19 times, and above 1.3 it runs away: at 1.5 every R4 brain reached 4 million spikes/s within 0.4 s of setting off, before any bike fell. So a rung's synaptic scale has to be set while riding, not upright. For R4 that scale is 1.2, where its activity matches the real brain's, and that is where its pilot ride runs.</p>
+
+  <h3 data-i18n="rr_h">3. Riding on rewired brains: first pilot runs</h3>
+  <p data-i18n="rr_p">The pilot is the balance gate unchanged, same hand-picked readout, search and seed, on rewiring draw 1, so its curves compare directly with the real wiring's. The GPU node has had no working CUDA since its operating-system upgrade, so these runs are on CPU: 30 to 60 minutes per generation instead of 2 to 3, continued from one 24-hour job to the next. The figure grows as generations finish.</p>
+  <div class="fig" id="rungFig">
+    <h3 data-i18n="rr_t">Mean riding time per generation at 4.5 m/s: real wiring and rewired brains</h3>
+    <p class="sub" data-i18n="rr_s">5 N·m gusts, 48 riders × 15 s, blank decoder at the start. R4 runs at 1.2 times Shiu's synaptic weight. Dashed grey: the bike with no steering at all.</p>
+    <svg id="rungSvg" viewBox="0 0 760 330" role="img" aria-labelledby="rungTitle"><title id="rungTitle">Learning curves on rewired brains</title></svg>
+    <ul class="legend" id="rungLegend"></ul>
+    <div class="tip" id="rungTip"></div>
+  </div>
+  <p class="caption" id="rungCaption"></p>
+  <details><summary class="small" data-i18n="g_tbl">Table view</summary><div class="tbl"><table id="rungTable"></table></div></details>
+
+  <h3 data-i18n="n_h">4. What each generated rung changes</h3>
   <div class="tbl"><table>
     <thead><tr><th data-i18n="n_t1">Rung (seed 1)</th><th class="num" data-i18n="n_t2">Real connections kept</th><th data-i18n="n_t3">What the generator reports</th></tr></thead>
     <tbody>
@@ -160,7 +193,7 @@ footer a{color:var(--ink2)}
       <tr><td class="rung">R5</td><td class="num">0.27%</td><td data-i18n="n_r5">0.13% merged</td></tr>
     </tbody>
   </table></div>
-  <p class="caption" data-i18n="n_c">Riding runs on R1 to R3.5 are queued behind the GPU node; their pre-test at the calibrated scale is in the table above. Every number above comes with its command and log in fly-brain's <a href="https://github.com/victory-c/fly-brain/blob/main/docs/CURRENT_NUMBERS.md">CURRENT_NUMBERS.md</a> and <a href="https://github.com/victory-c/fly-brain/blob/main/JOBS.md">JOBS.md</a>.</p>
+  <p class="caption" data-i18n="n_c">Every number above comes with its command and log in fly-brain's <a href="https://github.com/victory-c/fly-brain/blob/main/docs/CURRENT_NUMBERS.md">CURRENT_NUMBERS.md</a> and <a href="https://github.com/victory-c/fly-brain/blob/main/JOBS.md">JOBS.md</a>.</p>
 </section>
 
 <section id="tracks">
@@ -174,7 +207,7 @@ footer a{color:var(--ink2)}
 
 <section id="prereg">
   <h2 data-i18n="pr_h">What we predict</h2>
-  <p data-i18n="pr_p">Preregistered before the ladder is raced (<a href="https://github.com/victory-c/scrambled-brains/blob/main/docs/PREREGISTRATION.md">draft</a>): R1 and R2 ride within one seed-SD of the real wiring. R3 loses under 30%, and the transition lies between R3 and the strength-preserving R3.5. R4, recalibrated to its own synaptic strength, rides no better than the sensory bypass. If R4 rides as well as R0, a trained decoder can extract the behaviour from scrambled wiring, closed-loop behaviour is not a valid test of an emulation, and we release the decoder-free battery as the test the field should use instead. Negative results get published as prominently as positive ones.</p>
+  <p data-i18n="pr_p">From the preregistration <a href="https://github.com/victory-c/scrambled-brains/blob/main/docs/PREREGISTRATION.md">draft</a>, which is not yet tagged; the pilot rides above started before the tag, so they are reported as pilots and the confirmatory runs use readouts and rewiring draws the pilots never saw: R1 and R2 ride within one seed-SD of the real wiring. R3 loses under 30%, and the transition lies between R3 and the strength-preserving R3.5. R4, recalibrated to its own synaptic strength, rides no better than the sensory bypass. If R4 rides as well as R0, a trained decoder can extract the behaviour from scrambled wiring, closed-loop behaviour is not a valid test of an emulation, and we release the decoder-free battery as the test the field should use instead. Negative results get published as prominently as positive ones.</p>
 </section>
 
 <section id="milestones">
@@ -216,29 +249,38 @@ zh: {
  l_p:'每一级都保留神经元和每条连接的发送方，所以出度和递质符号不动。此外还能保留什么，一级比一级少。生成器和测试：<a href="https://github.com/victory-c/fly-brain/blob/main/fly_brain/brain/variants.py">fly-brain, brain/variants.py</a>。',
  l_t1:'级', l_t2:'真实接线还剩下什么', l_t3:'生成器', l_t4:'传输预测试', l_t5:'骑行',
  r_h:'目前的结果',
- r_p:'在赛任何一个打乱的大脑之前，有两件事先定下来。第一，真实接线能在自稳速度以下把车扶住，所以任务不是自行车自己解决的。第二，预测试告诉我们哪些级还能传出左右信号。',
+ r_p:'目前有三件事。真实接线能在自稳速度以下把车骑稳，所以这个任务不是自行车自己解决的。预测试告诉我们哪些级还带着左右信号，并且把断点定在两个只差“伙伴是谁”的级之间。第一批改接线的大脑也已经开始学骑车。',
  g_h:'1. 平衡门槛：真实接线学会骑车',
  g_t:'每代平均骑行时间，48 个骑手 × 15 秒，从空白解码器开始',
  g_s:'低于自稳区间（4.70–7.74 m/s）；5 N·m 阵风；出路即结束。灰色虚线：完全不转向的自行车。作业 37491–37494，各在 5 小时上限停止。',
  g_c:'从空白解码器出发，第 0 代平均只骑 0.75–1.0 秒，还不如不扶把。57–63 代之后，4.0 m/s 下平均坚持 9.6–11.8 秒，4.5 m/s 下 11.9–13.7 秒，23–77% 的骑手骑满 15 秒。不扶把的车分别只能撑 3.5 秒和 5.7 秒，没有一次骑满。每个速度两个种子。',
  g_tbl:'表格视图',
  p_h:'2. 传输预测试：打乱的大脑还能传左右信号吗？',
- p_p:'在任何一级拿到搜索算力之前，我们把车扶正、所有感官按巡航速率驱动，再给 8 个大脑（确认实验 30 个）的左侧或右侧垂直系统（VS）或平衡棒输入多加 30 Hz。下行和运动神经元对左右的响应有显著差别（|z| > 3；随机水平不到 1 个），且网络放电率在真实大脑的 2 倍以内，即为通过。突触尺度是 Shiu 权重的倍数；0.47 是雄性 CNS 的校准值。',
- p_c:'在校准尺度下，最底下两级几乎静默，只有真实网络约 1% 的活动，最多一个侧化输出。保度接线（R4）要三倍的突触权重才能达到真实活动的一半和 14–17 个侧化输出，而且分散在五倍多的神经元上。随机接线（R5）处处停在随机水平。原因是汇聚：从自行车的 789 个感觉神经元接收 200 个以上突触的神经元，从 417 个掉到 26 个。11 月 2 日在 CPU 上跑的四个新级把这一点说得更清楚：突触数抖动（R2）和真实接线没有区别，只保留细胞类型级接线的 R3 仍以真实速率的 74% 传出左右信号。但 R3.5——让每个神经元从错误的伙伴那里得到正确数量、正确强度、正确兴奋/抑制比例的输入——和 R4 一样静默。转折点在 R3 和 R3.5 之间，决定因素是伙伴的身份，不是输入的统计量。递质错误（R1）让网络速率减半；8 个脑时 VS 通道偏噪，所以 R1 做了 30 个脑的确认实验（11 月 3 日，1000 种随机平衡重标）：35 和 31 个侧化输出，null 最大只有 4 和 13。R1 通过。只有一个重接线抽样；除这一次外每格 8 个脑；当作试点看。',
- n_h:'3. 本周生成的各级',
+ p_p:'在任何一级拿到搜索算力之前，我们把车扶正、所有感官按巡航速率驱动，再给左侧或右侧的垂直系统（VS）或平衡棒输入多加 30 Hz，每格 30 个大脑。一格算通过，要两种探针都满足：能分清左右的下行和运动神经元（|z| > 3）比 1000 种随机分组里的任何一种都多，而且网络速率在真实大脑的 2 倍以内（10,750 到 43,000 spikes/s）。突触尺度乘在 Shiu 的权重上；0.47 是雄性 CNS 的校准值。',
+ p_c:'真实接线和最温和的三级在校准尺度下通过：递质错误（R1）、突触数抖动（R2）和保类型重接线（R3）给出 31 到 50 个侧化输出，随机分组最多只有 13 个。R3 的网络速率只有真实的 73%，所以只精确到细胞类型的接线仍然带着自行车的左右信号。再往下一级，R3.5 让每个神经元从错误的伙伴那里得到正确数量、正确强度、正确兴奋/抑制比例的输入，在所有尺度都不通过。保度接线（R4）和随机接线（R5）在校准尺度下静默。R4 在 Shiu 权重的 1.5 倍时有信号，但速率略低于窗口；R5 在 2 倍时以很弱的信号通过（7 和 8 个输出，真实接线是 38 和 39）。这次通过和我们草稿里“随机接线处处不通过”的预测相矛盾。每级一个重接线抽样。带 <sup class="b8">8</sup> 的格子是早先 8 个脑的试点。',
+ f_h:'阶梯之间：不通过的级只是没校准好吗？',
+ f_c:'对 R3.5 来说不是。在 0.50 尺度它的网络速率和真实大脑一样，却仍然不带左右信号：只有一个侧化输出，而单个大脑的爆发让随机分组能到 160 个。高于随机分组的信号要到 0.6 才出现，那时速率已是真实的五倍多。R4 的问题相反：1.2 和 1.5 有清楚的信号，到 1.6 就失控。',
+ cl_h:'车一动起来的 R4',
+ cl_t1:'R4 突触尺度', cl_t2:'扶正时，每脑 spikes/s', cl_t3:'骑行时，每脑 spikes/s', cl_r0:'真实接线，0.47',
+ cl_c:'预测试是把车扶正做的，而骑行对感官的驱动更强。车动起来后真实接线的活动升到 5 倍；R4 升到 13 到 19 倍，超过 1.3 就失控：在 1.5 尺度，出发 0.4 秒内每个 R4 大脑都到了 400 万 spikes/s，这时还没有一辆车倒下。所以一级的突触尺度必须在骑行状态下定，而不是扶正状态。R4 的这个尺度是 1.2，那里它的活动和真实大脑相当，它的试点骑行就在这个尺度上跑。',
+ rr_h:'3. 在改接线的大脑上骑车：第一批试点',
+ rr_p:'试点原样照搬平衡门槛：同一个手挑读出、同样的搜索和种子，用第 1 个重接线抽样，所以曲线能和真实接线直接比较。GPU 节点自操作系统升级后 CUDA 一直不可用，这些实验是在 CPU 上跑的：每代 30 到 60 分钟，而不是 2 到 3 分钟，并且一个 24 小时作业接着一个往下续。图会随着每一代完成而变长。',
+ rr_t:'4.5 m/s 下每代的平均骑行时间：真实接线和改接线的大脑',
+ rr_s:'5 N·m 阵风，48 名骑手 × 15 秒，从空白解码器开始。R4 用 Shiu 突触权重的 1.2 倍。灰色虚线：完全不打把的车。',
+ n_h:'4. 每一级生成时改了什么',
  n_t1:'级（种子 1）', n_t2:'保留的真实连接', n_t3:'生成器报告',
  n_r1:'9,907 个神经元换了递质（5.9%），8,584 个翻转了输出符号（5.1%）；抑制性突触占比 38.4% → 40.2%',
  n_r2:'抖动因子中位数 1.00，16–84% 范围 0.80–1.25；总突触数 +2.6%',
  n_r3:'25,267 个（类型，侧）组，13,611 个只有一个神经元；8.2% 的神经元保留自己的输入。很多组非常小，重抽的目标经常落回原神经元',
  n_r35:'1,358 个（符号，突触数）层，所有连接都能移动；每个神经元的入度、输入强度和 E/I 输入比例精确不变',
  n_r4:'0.34% 的连接作为重复项合并', n_r5:'0.13% 合并',
- n_c:'R1 到 R3.5 的骑行在等 GPU 节点，它们在校准尺度下的预测试已在上表。上面每个数字都带命令和日志，见 fly-brain 的 <a href="https://github.com/victory-c/fly-brain/blob/main/docs/CURRENT_NUMBERS.md">CURRENT_NUMBERS.md</a> 和 <a href="https://github.com/victory-c/fly-brain/blob/main/JOBS.md">JOBS.md</a>。',
+ n_c:'上面每个数字都带命令和日志，见 fly-brain 的 <a href="https://github.com/victory-c/fly-brain/blob/main/docs/CURRENT_NUMBERS.md">CURRENT_NUMBERS.md</a> 和 <a href="https://github.com/victory-c/fly-brain/blob/main/JOBS.md">JOBS.md</a>。',
  t_h:'给每一级打分的三种方式',
  ta_h:'Track A · 闭环骑行', ta_p:'从空白权重学出的解码器（交叉熵方法，每级相同种子）读取该大脑自己的乘客筛选排名最高的 k 个下行神经元，k = 8 和 32，并有随机 k 对照。结果报告为与两条参照线的差距：绕过大脑直接读感官的解码器（天花板）和不扶把的车（地板）。',
  tb_h:'Track B · 无解码器预测', tb_p:'Shiu 等人已发表的进食和理毛预测，加几个 flybench 任务，在每一级上不经任何训练读出重跑。新增按 Eckstein 等人实测混淆率加入的递质错误对照，这是领域里还没有的。',
  tc_h:'Track C · 可解码性', tc_p:'解码器需要读多少神经元才能达到完整 roll-rate R² 的 90%（N90），分别在脑的下行神经元位点和腹神经索运动位点；钙成像模糊和低帧率之下还剩多少；探针偏离目标几十微米时解码掉得多快。',
  pr_h:'我们的预测',
- pr_p:'在赛梯子之前预注册（<a href="https://github.com/victory-c/scrambled-brains/blob/main/docs/PREREGISTRATION.md">草稿</a>）：R1 和 R2 的骑行在真实接线的一个种子标准差之内。R3 损失不到 30%，转折出现在 R3 和保强度的 R3.5 之间。R4 按自己的突触强度重新校准后，骑得不比感官旁路好。如果 R4 骑得和 R0 一样好，说明训练过的解码器能从打乱的接线里榨出行为，闭环行为不是检验仿真的有效标准，我们将把无解码器测试集作为领域应采用的标准发布。阴性结果和阳性结果同等公开。',
+ pr_p:'来自预注册<a href="https://github.com/victory-c/scrambled-brains/blob/main/docs/PREREGISTRATION.md">草稿</a>（尚未打 tag；上面的试点骑行在打 tag 之前就开始了，所以只作为试点报告，确认性实验用的是试点没见过的读出和重接线抽样）：R1 和 R2 的骑行在真实接线的一个种子标准差之内。R3 损失不到 30%，转折出现在 R3 和保强度的 R3.5 之间。R4 按自己的突触强度重新校准后，骑得不比感官旁路好。如果 R4 骑得和 R0 一样好，说明训练过的解码器能从打乱的接线里榨出行为，闭环行为不是检验仿真的有效标准，我们将把无解码器测试集作为领域应采用的标准发布。阴性结果和阳性结果同等公开。',
  m_h:'里程碑', te_h:'团队',
  te_p:'由 <a href="https://github.com/victory-c">Victor Chun</a> 牵头（模拟、Track A），与 DeepBrain at Berkeley 的学生合作：梯子工程师（生成器、不变量测试、传输门槛）、误差预算负责人（Track B）、解码与统计分析师（Track C、配对 bootstrap）、成像与电极负责人（模拟钙成像、探针容差）。每个成员拥有一块图和报告的一节。智能体生成各级、跑集群作业、起草报告；每个数字由人核对。',
  f1:'代码 MIT · 数字与图 CC BY 4.0 · 连接组 male CNS v1.0（HHMI Janelia FlyEM、Cambridge Connectomics Group、Google）· 神经元模型依 Shiu 等 2024',
@@ -248,7 +290,7 @@ zh: {
  lad_r2:'一切，每条连接的突触数乘一个对数正态因子（中位数 1，一个标准差 ×1.25；flybench 的 ±25%）',
  lad_r3:'哪些细胞类型和哪些细胞类型相连、各在哪一侧；目标在同类型同侧内重抽', lad_r35:'每个神经元的入度、输入总突触数和兴奋/抑制输入比例；在相同符号和突触数的连接之间置换目标',
  lad_r4:'每个神经元的输入数和输出数', lad_r5:'什么都不剩：目标随机',
- st_done:'完成', st_run:'试点', st_todo:'等待', st_gate:'门槛通过', st_pass:'预测试通过', st_na:'—',
+ st_done:'完成', st_run:'试点', st_todo:'等待', st_gate:'门槛通过', st_pass:'通过', st_pass2:'2.0 倍时通过', st_fail:'不通过', st_riding:'试点进行中', st_ok:'通过', rr_none:'还没有完成的代。', rr_now:'{name}：{n} 代后平均骑 {t} 秒，{f}% 骑满 15 秒；真实接线在同一代是 {r} 秒。', rr_floor:'不扶把的车是 5.7 秒。', rr_r0:'R0 真实接线', rr_same:'真实接线同代', ft_rung:'级', ft_scale:'尺度', ft_rate:'网络 spikes/s，VS / 平衡棒', ft_out:'侧化输出 VS / 平衡棒', ft_null:'随机分组最大值', ft_v:'判定', v_pass:'通过', v_quiet:'太安静', v_run:'失控', v_nosig:'无信号',
  ms:[['2026-10','done','平衡门槛：真实接线在 4.0 和 4.5 m/s 学会骑车，对照不扶把的地板（作业 37491–37494）。R4/R5 生成器和预测试，突触强度 0.47–1.5。'],
      ['2026-11','run','R1、R2、R3、R3.5 生成器和不变量测试。预注册。校准强度下 R4 的第一次学骑车。各级的预测试。'],
      ['2026-11-13','todo','三行中期图：骑行、无解码器预测、可解码性，各一行，R0 到 R5 共用横轴。'],
@@ -258,7 +300,7 @@ zh: {
      ['2027-08','todo','带保真度曲线的预印本；代码、解码器、轨迹和作业账本全部发布。'],
      ['2027-11','todo','公开基准：提交一个连接组或仿真器，得到它的梯子分数。在第二个雌性连接组上验证。']],
  gate_y:'平均骑行时间（秒）', gate_x:'代', floor:'不扶把', seed:'种子', ms_lbl:'m/s',
- pt_h1:'级', pt_sc:'突触尺度', pt_net:'网络 spikes/s', pt_lat:'侧化输出 VS / 平衡棒（随机水平）', real:'R0 真实接线', r1n:'R1 递质错误', r1c:'R1 递质错误，30 脑确认', r2n:'R2 突触数抖动', r3n:'R3 保类型', r35n:'R3.5 保强度', degree:'R4 保度', random:'R5 随机',
+ pt_h1:'级', pt_sc:'突触尺度', pt_net:'网络 spikes/s', pt_lat:'侧化输出 VS / 平衡棒（随机分组最大值）', real:'R0 真实接线', r1n:'R1 递质错误', r1c:'R1 递质错误，30 脑确认', r2n:'R2 突触数抖动', r3n:'R3 保类型', r35n:'R3.5 保强度', degree:'R4 保度', random:'R5 随机',
  gt_run:'运行', gt_gens:'代数', gt_g0:'第 0 代平均', gt_last:'末代平均', gt_fin:'末代骑满 15 秒'
 }};
 I18N.en = {
@@ -266,7 +308,7 @@ I18N.en = {
  lad_r2:'everything, with each connection\'s synapse count times a lognormal factor (median 1, one sigma ×1.25; flybench\'s ±25%)',
  lad_r3:'which cell types connect to which, on each side; targets redrawn within the same type and side', lad_r35:'each neuron\'s in-degree, incoming synapse total and excitatory/inhibitory input mix; targets permuted among connections of equal sign and count',
  lad_r4:'each neuron\'s number of inputs and outputs', lad_r5:'nothing: random targets',
- st_done:'done', st_run:'pilot', st_todo:'queued', st_gate:'gate passed', st_pass:'pre-test passed', st_na:'—',
+ st_done:'done', st_run:'pilot', st_todo:'queued', st_gate:'gate passed', st_pass:'passed', st_pass2:'passed at 2.0×', st_fail:'failed', st_riding:'pilot running', st_ok:'passes', rr_none:'No generation has finished yet.', rr_now:'{name}: after {n} generations the riders stay up {t} s on average and {f}% ride the full 15 s; the real wiring was at {r} s at the same generation.', rr_floor:'The hands-off bike manages 5.7 s.', rr_r0:'R0 real wiring', rr_same:'real wiring, same generation', ft_rung:'Rung', ft_scale:'Scale', ft_rate:'network spikes/s, VS / haltere', ft_out:'lateralised outputs VS / haltere', ft_null:'largest shuffled count', ft_v:'Verdict', v_pass:'passes', v_quiet:'too quiet', v_run:'runaway', v_nosig:'no signal',
  ms:[['Oct 2026','done','Balance gate: the real wiring learns to ride at 4.0 and 4.5 m/s against the hands-off floor (jobs 37491–37494). R4/R5 generators and the pre-test across synapse strengths 0.47–1.5.'],
      ['Nov 2026','run','Generators for R1, R2, R3 and R3.5 with invariant tests. Preregistration. First learn-to-ride run on R4 at its calibrated strength. Pre-test on every rung.'],
      ['13 Nov 2026','todo','Interim three-row figure: riding, decoder-free predictions and decodability, one row each, R0 to R5 on a shared axis.'],
@@ -276,7 +318,7 @@ I18N.en = {
      ['Aug 2027','todo','Preprint with the fidelity curve; code, decoders, traces and job ledger released.'],
      ['Nov 2027','todo','Open benchmark: submit a connectome or emulator, get its ladder scores. Validated on a second, female connectome.']],
  gate_y:'mean riding time (s)', gate_x:'generation', floor:'hands-off', seed:'seed', ms_lbl:'m/s',
- pt_h1:'Rung', pt_sc:'synapse scale', pt_net:'network spikes/s', pt_lat:'lateralised outputs VS / haltere (null)', real:'R0 real wiring', r1n:'R1 transmitter errors', r1c:'R1 transmitter errors, 30 brains', r2n:'R2 count jitter', r3n:'R3 type-preserving', r35n:'R3.5 strength-preserving', degree:'R4 degree-preserving', random:'R5 random',
+ pt_h1:'Rung', pt_sc:'synapse scale', pt_net:'network spikes/s', pt_lat:'lateralised outputs VS / haltere (largest shuffled count)', real:'R0 real wiring', r1n:'R1 transmitter errors', r1c:'R1 transmitter errors, 30 brains', r2n:'R2 count jitter', r3n:'R3 type-preserving', r35n:'R3.5 strength-preserving', degree:'R4 degree-preserving', random:'R5 random',
  gt_run:'run', gt_gens:'generations', gt_g0:'gen 0 mean', gt_last:'last gen mean', gt_fin:'last gen riding all 15 s'
 };
 let LANG = 'en';
@@ -292,9 +334,9 @@ const T = k => (LANG === 'zh' && I18N.zh[k] !== undefined) ? I18N.zh[k] : (I18N.
 let DATA = null;
 
 const LADDER = [
-  ['R0', 'lad_r0', 'done', 'done', 'gate'], ['R1', 'lad_r1', 'done', 'pass', 'todo'], ['R2', 'lad_r2', 'done', 'run', 'todo'],
-  ['R3', 'lad_r3', 'done', 'run', 'todo'], ['R3.5', 'lad_r35', 'done', 'run', 'todo'], ['R4', 'lad_r4', 'done', 'run', 'todo'], ['R5', 'lad_r5', 'done', 'run', 'todo']];
-const chip = s => s === 'gate' ? `<span class="chip ok">${T('st_gate')}</span>` : s === 'pass' ? `<span class="chip ok">${T('st_pass')}</span>` : s === 'done' ? `<span class="chip ok">${T('st_done')}</span>` : s === 'run' ? `<span class="chip run">${T('st_run')}</span>` : `<span class="chip todo">${T('st_todo')}</span>`;
+  ['R0', 'lad_r0', 'done', 'pass', 'gate'], ['R1', 'lad_r1', 'done', 'pass', 'todo'], ['R2', 'lad_r2', 'done', 'pass', 'todo'],
+  ['R3', 'lad_r3', 'done', 'pass', 'riding'], ['R3.5', 'lad_r35', 'done', 'fail', 'todo'], ['R4', 'lad_r4', 'done', 'fail', 'riding'], ['R5', 'lad_r5', 'done', 'pass2', 'todo']];
+const chip = s => s === 'gate' ? `<span class="chip ok">${T('st_gate')}</span>` : s === 'pass' ? `<span class="chip ok">${T('st_pass')}</span>` : s === 'pass2' ? `<span class="chip ok">${T('st_pass2')}</span>` : s === 'fail' ? `<span class="chip bad">${T('st_fail')}</span>` : s === 'riding' ? `<span class="chip run">${T('st_riding')}</span>` : s === 'done' ? `<span class="chip ok">${T('st_done')}</span>` : s === 'run' ? `<span class="chip run">${T('st_run')}</span>` : `<span class="chip todo">${T('st_todo')}</span>`;
 
 function renderStatic() {
   document.documentElement.lang = LANG === 'zh' ? 'zh-CN' : 'en';
@@ -347,20 +389,80 @@ function renderGate() {
   document.getElementById('gateTable').innerHTML = `<thead><tr><th>${T('gt_run')}</th><th class="num">${T('gt_gens')}</th><th class="num">${T('gt_g0')}</th><th class="num">${T('gt_last')}</th><th class="num">${T('gt_fin')}</th></tr></thead><tbody>` +
     S.map(s => { const a = s.pts[0], z = s.pts[s.pts.length - 1]; return `<tr><td>${s.v0.toFixed(1)} ${T('ms_lbl')}, ${T('seed')} ${s.seed}</td><td class="num">${s.pts.length}</td><td class="num">${a.t.toFixed(2)} s</td><td class="num">${z.t.toFixed(1)} s</td><td class="num">${Math.round(z.fin * 100)}%</td></tr>`; }).join('') + '</tbody>';
 }
+const LO = 10750, HI = 43000;
+const ptCell = (P, k, s) => { const a = P[k + '_b30'] && P[k + '_b30'][s]; if (a) return [a, 30]; const b = P[k] && P[k][s]; return b ? [b, 8] : null; };
+const ptWhy = c => { const pp = [c.VS, c.HALT], w = [];
+  if (!pp.every(p => p.outputs_z3 > p.null_outputs_z3_max)) w.push('v_nosig');
+  if (pp.some(p => p.network_spikes_per_s < LO)) w.push('v_quiet');
+  if (pp.some(p => p.network_spikes_per_s > HI)) w.push('v_run');
+  return w; };
+const fmtRate = n => n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e5 ? (n / 1000).toFixed(0) + 'k' : n >= 1e4 ? (n / 1000).toFixed(1) + 'k' : Math.round(n).toLocaleString('en-US');
 function renderPretest() {
-  const P = DATA.pretest, scales = ['0.47', '0.6', '0.8', '1', '1.5'];
-  const rows = [['r0', 'real'], ['r1_s1', 'r1n'], ['r1_s1_b30', 'r1c'], ['r2_s1', 'r2n'], ['r3_s1', 'r3n'], ['r35_s1', 'r35n'], ['r4_s1', 'degree'], ['r5_s1', 'random']];
-  const fmt = n => n >= 1e5 ? (n / 1000).toFixed(0) + 'k' : n >= 1e4 ? (n / 1000).toFixed(1) + 'k' : Math.round(n).toLocaleString('en-US');
+  const P = DATA.pretest, scales = ['0.47', '0.6', '0.8', '1', '1.5', '2'];
+  const rows = [['r0', 'real'], ['r1_s1', 'r1n'], ['r2_s1', 'r2n'], ['r3_s1', 'r3n'], ['r35_s1', 'r35n'], ['r4_s1', 'degree'], ['r5_s1', 'random']];
   let h = `<thead><tr><th>${T('pt_h1')}</th>` + scales.map(s => `<th class="num">${T('pt_sc')} ${s}</th>`).join('') + '</tr></thead><tbody>';
   rows.forEach(([k, name]) => {
-    h += `<tr><td class="rung">${T(name)}</td>` + scales.map(s => { const c = P[k] && P[k][s]; if (!c) return '<td class="num">–</td>';
-      const vs = c.VS, ha = c.HALT; const nul = Math.max(vs.null_outputs_z3_mean, ha.null_outputs_z3_mean).toFixed(1);
-      return `<td class="num"><b>${fmt(vs.network_spikes_per_s)}</b><br><span class="small">${vs.outputs_z3} / ${ha.outputs_z3} (${nul})</span></td>`; }).join('') + '</tr>';
+    h += `<tr><td class="rung">${T(name)}</td>` + scales.map(s => { const r = ptCell(P, k, s); if (!r) return '<td class="num">–</td>';
+      const [c, nb] = r, vs = c.VS, ha = c.HALT, nul = Math.max(vs.null_outputs_z3_max, ha.null_outputs_z3_max), ok = nb === 30 && !ptWhy(c).length;
+      return `<td class="num"><b>${fmtRate(vs.network_spikes_per_s)}</b>${nb === 8 ? '<sup class="b8">8</sup>' : ''}<br><span class="small">${vs.outputs_z3} / ${ha.outputs_z3} (${nul})</span>${ok ? `<br><span class="chip ok">${T('st_ok')}</span>` : ''}</td>`; }).join('') + '</tr>';
   });
   h += `</tbody><caption style="caption-side:bottom;text-align:left;padding:8px 10px 4px" class="small">${T('pt_net')}; ${T('pt_lat')}</caption>`;
   document.getElementById('pretestTable').innerHTML = h;
+  const fine = [['r35_s1', 'r35n', '0.47'], ['r35_s1', 'r35n', '0.5'], ['r35_s1', 'r35n', '0.53'], ['r35_s1', 'r35n', '0.56'], ['r35_s1', 'r35n', '0.6'], ['r4_s1', 'degree', '1.2'], ['r4_s1', 'degree', '1.3'], ['r4_s1', 'degree', '1.5'], ['r4_s1', 'degree', '1.6']];
+  let f = `<thead><tr><th>${T('ft_rung')}</th><th class="num">${T('ft_scale')}</th><th class="num">${T('ft_rate')}</th><th class="num">${T('ft_out')}</th><th class="num">${T('ft_null')}</th><th>${T('ft_v')}</th></tr></thead><tbody>`;
+  fine.forEach(([k, name, s]) => { const c = P[k + '_b30'] && P[k + '_b30'][s]; if (!c) return; const vs = c.VS, ha = c.HALT, w = ptWhy(c);
+    f += `<tr><td class="rung">${T(name)}</td><td class="num">${s}</td><td class="num">${fmtRate(vs.network_spikes_per_s)} / ${fmtRate(ha.network_spikes_per_s)}</td><td class="num">${vs.outputs_z3} / ${ha.outputs_z3}</td><td class="num">${vs.null_outputs_z3_max} / ${ha.null_outputs_z3_max}</td><td>${w.length ? `<span class="chip bad">${w.map(T).join(', ')}</span>` : `<span class="chip ok">${T('v_pass')}</span>`}</td></tr>`; });
+  document.getElementById('fineTable').innerHTML = f + '</tbody>';
 }
-function renderAll() { renderStatic(); if (DATA) { renderGate(); renderPretest(); } }
+const RUNG_RUNS = [['r3_s1_cpu/v4.5_s201', 'R3', 'var(--r3)'], ['r4_s1_w1.2_cpu/v4.5_s201', 'R4 ×1.2', 'var(--r4)']];
+function rungSeries() {
+  const out = [], g = DATA.gate, R = DATA.rides || {};
+  Object.keys(g).sort().forEach(k => { if (g[k].v0 === 4.5) out.push({ ref: true, label: 'R0', seed: g[k].seed, color: 'var(--a45)', dash: g[k].seed === 201 ? '' : '6 4', w: 1.5, pts: g[k].history.map(h => ({ gen: h[0], t: h[1], fin: h[3] })) }); });
+  RUNG_RUNS.forEach(([k, label, color]) => { const r = R[k]; if (r && r.history.length) out.push({ label, seed: r.seed, color, dash: '', w: 2.5, pts: r.history.map(h => ({ gen: h[0], t: h[1], fin: h[3] })) }); });
+  return out;
+}
+function renderRungs() {
+  const svg = document.getElementById('rungSvg'); const S = rungSeries(), refs = S.filter(s => s.ref), runs = S.filter(s => !s.ref);
+  const W = 760, H = 330, L = 52, R = 70, Tm = 14, B = 40, pw = W - L - R, ph = H - Tm - B;
+  const maxGen = Math.max(...S.map(s => s.pts[s.pts.length - 1].gen)), yMax = 15;
+  const x = g => L + g / maxGen * pw, y = t => Tm + (1 - t / yMax) * ph;
+  const refAt = g => { const v = refs.map(s => s.pts[g]).filter(Boolean).map(p => p.t); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; };
+  let o = '';
+  for (let t = 0; t <= 15; t += 5) o += `<line x1="${L}" x2="${L + pw}" y1="${y(t)}" y2="${y(t)}" stroke="var(--grid)"/><text x="${L - 8}" y="${y(t) + 4}" text-anchor="end" fill="var(--mute)">${t}</text>`;
+  for (let g = 0; g <= maxGen; g += 10) o += `<text x="${x(g)}" y="${H - B + 18}" text-anchor="middle" fill="var(--mute)">${g}</text>`;
+  o += `<text x="${L + pw / 2}" y="${H - 6}" text-anchor="middle" fill="var(--ink2)">${T('gate_x')}</text>`;
+  o += `<text transform="translate(13 ${Tm + ph / 2}) rotate(-90)" text-anchor="middle" fill="var(--ink2)">${T('gate_y')}</text>`;
+  o += `<line x1="${L}" x2="${L + pw}" y1="${y(5.7)}" y2="${y(5.7)}" stroke="var(--mute)" stroke-dasharray="3 4"/><text x="${L + pw - 4}" y="${y(5.7) - 5}" text-anchor="end" fill="var(--mute)">${T('floor')}</text>`;
+  S.forEach(s => {
+    const d = s.pts.map((p, i) => (i ? 'L' : 'M') + x(p.gen).toFixed(1) + ' ' + y(p.t).toFixed(1)).join(' ');
+    o += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.w}" stroke-dasharray="${s.dash}" stroke-linejoin="round" stroke-linecap="round"/>`;
+    const last = s.pts[s.pts.length - 1];
+    o += `<circle cx="${x(last.gen)}" cy="${y(last.t)}" r="4" fill="${s.color}" stroke="var(--panel)" stroke-width="2"/>`;
+    if (!s.ref) o += `<text x="${x(last.gen) + 8}" y="${y(last.t) + 4}" fill="${s.color}" font-weight="500">${s.label}</text>`;
+  });
+  if (refs.length) { const yy = refs.reduce((a, s) => a + y(s.pts[s.pts.length - 1].t), 0) / refs.length; o += `<text x="${L + pw + 6}" y="${yy + 4}" fill="var(--a45)" font-weight="500">R0</text>`; }
+  o += `<line id="rungCross" x1="0" x2="0" y1="${Tm}" y2="${Tm + ph}" stroke="var(--ink2)" stroke-width="1" style="display:none"/>`;
+  o += `<rect x="${L}" y="${Tm}" width="${pw}" height="${ph}" fill="transparent" id="rungHit"/>`;
+  svg.innerHTML = svg.querySelector('title').outerHTML + o;
+  const name = s => s.ref ? `${T('rr_r0')} · ${T('seed')} ${s.seed}` : `${s.label} · ${T('seed')} ${s.seed}`;
+  document.getElementById('rungLegend').innerHTML = S.map(s => `<li><svg viewBox="0 0 26 10"><line x1="1" x2="25" y1="5" y2="5" stroke="${s.color}" stroke-width="${s.w}" stroke-dasharray="${s.dash}"/></svg>${name(s)}</li>`).join('') + `<li><svg viewBox="0 0 26 10"><line x1="1" x2="25" y1="5" y2="5" stroke="var(--mute)" stroke-width="1" stroke-dasharray="3 4"/></svg>${T('floor')}</li>`;
+  const hit = document.getElementById('rungHit'), cross = document.getElementById('rungCross'), tip = document.getElementById('rungTip'), fig = document.getElementById('rungFig');
+  const move = ev => {
+    const r = svg.getBoundingClientRect(); const px = (ev.clientX - r.left) / r.width * W;
+    const g = Math.max(0, Math.min(maxGen, Math.round((px - L) / pw * maxGen)));
+    cross.setAttribute('x1', x(g)); cross.setAttribute('x2', x(g)); cross.style.display = '';
+    tip.innerHTML = `<b>${T('gate_x')} ${g}</b><br>` + S.map(s => { const p = s.pts[g]; return p ? `${name(s)}: ${p.t.toFixed(1)} s, ${Math.round(p.fin * 100)}%` : ''; }).filter(Boolean).join('<br>');
+    tip.style.display = 'block';
+    const fr = fig.getBoundingClientRect(); let tx = ev.clientX - fr.left + 14; if (tx + tip.offsetWidth > fr.width - 10) tx = ev.clientX - fr.left - tip.offsetWidth - 14;
+    tip.style.left = tx + 'px'; tip.style.top = (ev.clientY - fr.top - 10) + 'px';
+  };
+  hit.addEventListener('pointermove', move); hit.addEventListener('pointerleave', () => { cross.style.display = 'none'; tip.style.display = 'none'; });
+  const fill = (str, o) => str.replace(/\{(\w+)\}/g, (_, k) => o[k]);
+  document.getElementById('rungCaption').innerHTML = (runs.length ? runs.map(s => { const z = s.pts[s.pts.length - 1], r = refAt(z.gen); return fill(T('rr_now'), { name: s.label, n: s.pts.length, t: z.t.toFixed(1), f: Math.round(z.fin * 100), r: r === null ? '–' : r.toFixed(1) }); }).join(' ') : T('rr_none')) + ' ' + T('rr_floor');
+  document.getElementById('rungTable').innerHTML = `<thead><tr><th>${T('gt_run')}</th><th class="num">${T('gt_gens')}</th><th class="num">${T('gt_g0')}</th><th class="num">${T('gt_last')}</th><th class="num">${T('rr_same')}</th><th class="num">${T('gt_fin')}</th></tr></thead><tbody>` +
+    S.map(s => { const a = s.pts[0], z = s.pts[s.pts.length - 1], r = refAt(z.gen); return `<tr><td>${name(s)}</td><td class="num">${s.pts.length}</td><td class="num">${a.t.toFixed(2)} s</td><td class="num">${z.t.toFixed(1)} s</td><td class="num">${s.ref || r === null ? '–' : r.toFixed(1) + ' s'}</td><td class="num">${Math.round(z.fin * 100)}%</td></tr>`; }).join('') + '</tbody>';
+}
+function renderAll() { renderStatic(); if (DATA) { renderGate(); renderPretest(); renderRungs(); } }
 document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => { LANG = b.dataset.lang; try { localStorage.setItem('scrambled.lang', LANG); } catch (e) {} renderAll(); }));
 renderStatic();
 fetch('data.json').then(r => r.json()).then(d => { DATA = d; renderAll(); window.DONE = true; }).catch(e => { document.getElementById('gateFig').insertAdjacentHTML('beforeend', '<p class="small">data.json failed to load</p>'); });

@@ -1,8 +1,11 @@
 # Scrambled Brains: preregistration (draft, 2026-11-02)
 
-**Status: draft.** This becomes the preregistration when it is tagged in this repository before the first
-closed-loop run on a scrambled rung. Everything run before the tag is listed under "Already run" and is not
-confirmatory. Changes after the tag go in a dated "Deviations" section at the end, never by editing the text above it.
+**Status: draft.** This becomes the preregistration when it is tagged in this repository before the first Track A
+run (section 5: per-brain readouts) on a scrambled rung. Everything run before the tag is listed under "Already run"
+and is not confirmatory. That includes pilot rides on scrambled rungs with the balance gate's hand-picked readout,
+which began on 2026-11-05 on rewiring draw 1: because of them the riding predictions in section 8 are informed by
+pilot data, not blind. The confirmatory runs use per-brain readouts and include rewiring draws the pilots never saw.
+Changes after the tag go in a dated "Deviations" section at the end, never by editing the text above it.
 
 ## 1. Question
 
@@ -105,6 +108,40 @@ probe radii 10, 25 and 50 µm.
 - Confirmatory pre-test on R1 at 0.47 (2026-11-03, CPU, 30 brains, draw 1, 1,000 random balanced relabellings):
   13,000 / 14,300 network spikes/s; 35 / 31 lateralised outputs against null maxima of 4 / 13 (95th percentile 1).
   R1 passes the gate. So, before the tag, R1, R2 and R3 pass at 0.47 and R3.5, R4 and R5 fail at 0.47.
+- Pre-test with 30 brains over the whole scale ladder (2026-11-05, CPU; table in fly-brain
+  `docs/CURRENT_NUMBERS.md`, data in `site/data.json`). R0, R1, R2 and R3 pass at 0.47 (35 to 50 lateralised
+  outputs, null maxima 4 to 13). R3.5 fails at every ladder scale: 2,800 spikes/s at 0.47, 117,000 at 0.6. R4
+  fails at every ladder scale: at 1.5 it has 21 / 35 lateralised outputs but 9,275 spikes/s on the VS probe (the
+  window starts at 10,750), and at 2.0 it runs away (8 million spikes/s). R5 passes at 2.0 (12,000 / 11,200
+  spikes/s; 7 / 8 outputs against a null maximum of 4 / 4) and fails below. **The R5 pass contradicts prediction 4
+  as drafted.** The prediction is left as written; this line records that the pilot went against it.
+- Fine scans between ladder steps (same date, exploratory, not on the ladder): R3.5 at 0.50 has the real brain's
+  rate (15,300 / 16,300) and no signal (1 / 1 outputs, null maxima 162 / 158); at 0.53 and 0.56 the rate is 48,000
+  and 83,000, still without a signal above the null. R4 at 1.2: 3,000 / 3,500 spikes/s, 11 / 14 outputs (null
+  maximum 1); at 1.6: 234,000 / 2.1 million, no signal.
+- R4 in closed loop (same date): replaying the reference decoder, R4's rate while riding is 16,300 spikes/s per
+  brain at scale 1.0, 48,100 at 1.2, 167,000 at 1.3, 1.6 million at 1.4 and 2.5 million at 1.5; the real wiring
+  rides at 61,000. Upright, the same brains fire 1,200 to 9,000. The upright pre-test therefore does not tell
+  whether a rung is stable while riding.
+- Pilot rides, balance gate unchanged (hand-picked readout, 4.5 m/s, CEM seed 201, rewiring draw 1), on CPU
+  because the GPU node has no working CUDA: R3 at 0.47 (fly-brain jobs 37938, 37946) and R4 at 1.2 (job 37945),
+  started 2026-11-05 and continued across 24 h jobs. Curves: the project page.
+
+## 9a. Open points before the tag
+
+These came out of the runs above and need a decision before this document is tagged.
+
+1. The model-side rung (section 3) and the Track B prediction CSV (section 6) are not written yet.
+2. Scale ladder: R3.5 and R4 go from too quiet to runaway inside one ladder step (0.47 to 0.6, and 1.5 to 1.6).
+   Proposed: when a rung brackets the rate window between two ladder scales, bisect up to three times.
+3. Where the scale is set: the rate criterion is measured upright, and riding drives the network 5 times harder on
+   the real wiring and 13 to 19 times harder on R4. Proposed: add a closed-loop check to section 4 (rate while
+   riding in the reference replay within 2x of R0's 61,000), and set a rung's scale there.
+4. Prediction 4 (R5 fails at every scale) is contradicted by the pilot at 2.0. Either keep it and report it as
+   failed, or restate it (for example: R5's lateralised outputs stay under a quarter of R0's at every scale).
+5. Track A readout: the top-k neurons are ranked by roll-rate correlation only, and the per-brain readout has no
+   lane signal, so a rider can balance and still leave the road. This has to be piloted on R0 (top-k, random-k,
+   bypass) before the design is fixed; those runs wait for the GPU.
 
 ## 10. Deviations
 
