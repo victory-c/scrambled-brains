@@ -152,7 +152,8 @@ These came out of the runs above and need a decision before this document is tag
    failed, or restate it (for example: R5's lateralised outputs stay under a quarter of R0's at every scale).
 5. Track A readout: the top-k neurons are ranked by roll-rate correlation only, and the per-brain readout has no
    lane signal, so a rider can balance and still leave the road. This has to be piloted on R0 (top-k, random-k,
-   bypass) before the design is fixed; those runs wait for the GPU.
+   bypass) before the design is fixed. Queued on CPU on 2026-11-05 as pilots on the real wiring only: per-brain
+   screens (fly-brain job 38035), top-8 (38036) and bypass (38037), 30 generations each at 4.5 m/s, seed 201.
 
 ## 10. Deviations
 

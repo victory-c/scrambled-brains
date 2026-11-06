@@ -170,7 +170,7 @@ footer a{color:var(--ink2)}
   <p class="caption" data-i18n="cl_c">The pre-test holds the bike upright, and riding drives the senses harder. Over the first 0.6 s after setting off, with nearly every rider still up, the real wiring's activity roughly doubles. R4's rises 10 to 22 times at scales 1.0 to 1.3, and above that it runs away: at 1.5 every R4 brain reached 4 million spikes/s within a second, each before its own bike fell. So a rung's synaptic scale has to be checked while riding, not only upright. R4's pilot ride runs at 1.2, the highest scale in this scan within 2× of the real rate. It is not matched throughout: averaged over the first generations of the search, where most bikes have already fallen, R4 at 1.2 fires about three times as much as the real wiring.</p>
 
   <h3 data-i18n="rr_h">3. Riding on rewired brains: first pilot runs</h3>
-  <p data-i18n="rr_p">The pilot is the balance gate unchanged, same hand-picked readout, search and seed, on rewiring draw 1, so its curves compare directly with the real wiring's. The GPU node has had no working CUDA since its operating-system upgrade, so these runs are on CPU: about half an hour per generation so far, against 2 to 3 minutes on the GPU, continued from one 24-hour job to the next. The figure grows as generations finish.</p>
+  <p data-i18n="rr_p">The pilot is the balance gate unchanged, same hand-picked readout, search and seed, on rewiring draw 1, so its curves compare directly with the real wiring's. The GPU node has had no working CUDA since its operating-system upgrade, so these runs are on CPU: half an hour to an hour per generation at first, 12 to 25 minutes since the evening of 5 November, when the simulator's step got a C version that gives the same spikes bit for bit, against 2 to 3 minutes on the GPU. A search continues from one 24-hour job to the next. The figure grows as generations finish.</p>
   <div class="fig" id="rungFig">
     <h3 data-i18n="rr_t">Mean riding time per generation at 4.5 m/s: real wiring and rewired brains</h3>
     <p class="sub" data-i18n="rr_s">5 N·m gusts, 48 riders × 15 s, blank decoder at the start. R4 runs at 1.2 times Shiu's synaptic weight (the real wiring and R3 at 0.47). Dashed grey: the bike with no steering at all.</p>
@@ -265,7 +265,7 @@ zh: {
  cl_t1:'大脑，突触尺度', cl_t2:'扶正时，每脑 spikes/s', cl_t3:'骑行头 0.6 秒', cl_t4:'相对真实接线', cl_r0:'真实接线，0.47',
  cl_c:'预测试是把车扶正做的，而骑行对感官的驱动更强。出发后的头 0.6 秒，几乎所有骑手都还没倒，真实接线的活动大约翻一倍；R4 在 1.0 到 1.3 尺度升到 10 到 22 倍，再往上就失控：在 1.5 尺度，每个 R4 大脑都在一秒内到了 400 万 spikes/s，而且都发生在自己的车倒下之前。所以一级的突触尺度必须在骑行状态下检查，不能只看扶正状态。R4 的试点骑行用 1.2，这是这次扫描里速率在真实大脑 2 倍以内的最高尺度。但它并不是全程匹配：在搜索的头几代，大部分车已经倒下，这时 R4 在 1.2 尺度的放电大约是真实接线的三倍。',
  rr_h:'3. 在改接线的大脑上骑车：第一批试点',
- rr_p:'试点原样照搬平衡门槛：同一个手挑读出、同样的搜索和种子，用第 1 个重接线抽样，所以曲线能和真实接线直接比较。GPU 节点自操作系统升级后 CUDA 一直不可用，这些实验是在 CPU 上跑的：目前每代大约半小时，而 GPU 上是 2 到 3 分钟，并且一个 24 小时作业接着一个往下续。图会随着每一代完成而变长。',
+ rr_p:'试点原样照搬平衡门槛：同一个手挑读出、同样的搜索和种子，用第 1 个重接线抽样，所以曲线能和真实接线直接比较。GPU 节点自操作系统升级后 CUDA 一直不可用，这些实验是在 CPU 上跑的：起初每代半小时到一小时；11 月 5 日晚上给模拟器的单步写了一个 C 版本（脉冲逐位相同）之后是每代 12 到 25 分钟，而 GPU 上是 2 到 3 分钟。搜索由一个 24 小时作业接着一个往下续。图会随着每一代完成而变长。',
  rr_t:'4.5 m/s 下每代的平均骑行时间：真实接线和改接线的大脑',
  rr_i:'11 月 5 日的读法，只有前面若干代、一个重接线抽样。R3 只保留“哪种细胞类型连哪种”，它学得会骑车：第一个种子在第 8 代超过了不扶把的车，同一代上的骑行时间约为真实接线的四分之三；第二个种子目前落在真实接线的范围内。R4 在 1.2 尺度跑了 25 代没有学会：骑手两秒内就倒，比完全不打把的车倒得还早，没有一名骑手骑满 15 秒。这个实验先暂停以腾出 CPU；R3 的实验继续跑向 60 代。',
  rr_s:'5 N·m 阵风，48 名骑手 × 15 秒，从空白解码器开始。R4 用 Shiu 突触权重的 1.2 倍（真实接线和 R3 是 0.47 倍）。灰色虚线：完全不打把的车。',
