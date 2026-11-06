@@ -4,5 +4,12 @@
   "installCommand": "echo 'nothing to install'",
   "buildCommand": "echo 'static site in site/'",
   "outputDirectory": "site",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://victory-c.github.io/scrambled-brains/$1",
+      "permanent": false
+    }
+  ]
 }
