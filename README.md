@@ -31,7 +31,9 @@ predictions (Track B), and how many recorded neurons a decoder needs (Track C).
 
 - `site/` the project page, published as is on GitHub Pages at https://victory-c.github.io/scrambled-brains/ by
   `.github/workflows/pages.yml` on every push to main that touches `site/`; `site/data.json` holds the numbers
-  the page draws. The old address, scrambled-brains.vercel.app, redirects there (`vercel.json`).
+  the page draws. The old address, scrambled-brains.vercel.app, redirects there (`vercel.json`); Vercel no
+  longer builds on push (`git.deploymentEnabled: false`), so changing that redirect takes a push with the flag
+  set back to true for that one commit.
 - `tools/export_data.py` rebuilds `site/data.json` from a fly-brain checkout's `fly_brain/results/` (balance gate,
   rung rides, pre-test cells). Run it and commit the file whenever new runs land.
 - `docs/PREREGISTRATION.md` the preregistration draft, with what has already been run and the open points before
