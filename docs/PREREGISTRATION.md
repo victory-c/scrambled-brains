@@ -166,8 +166,8 @@ probe radii 10, 25 and 50 µm.
   So these decoders balance on all three wirings, and the rungs differ in how well they hold the lane. Without
   the rule the riders that leave the road drift to one side, the same for R1 and both R3 decoders (all 35 on R1,
   17 of 18 and 10 of 10 on R3).
-  Two more R1 pilots are queued to tell the draw from the search seed: draw 2 with CEM seed 201 (job 38107) and
-  draw 1 with CEM seed 202 (job 38108). The R2 ride (job 38039) started on 2026-11-06 12:12.
+  Two more R1 pilots tell the draw from the search seed: draw 2 with CEM seed 201 (job 38107, started on
+  2026-11-06 14:23) and draw 1 with CEM seed 202 (job 38108, queued after the R2 ride). The R2 ride (job 38039) started on 2026-11-06 12:12.
 
 ## 9a. Open points before the tag
 
@@ -235,14 +235,23 @@ These came out of the runs above and need a decision before this document is tag
    and R1; a score without it would put all three at the cap. (R4 at 1.2 rides under 2 s and would be separated
    either way.) This is for a readout that has a lane signal. The top-k readouts have none on R0, so these
    replays do not show that the rule would separate the rungs with top-k. One replay seed per decoder, fixed
-   decoders from searches that had the rule on. The random-k pilot (8 neurons, job
-   38079) started on 2026-11-06 11:48. Numbers: fly-brain `docs/CURRENT_NUMBERS.md`, "Readout pilot on the real wiring" and
+   decoders from searches that had the rule on. The random-k pilot (8 neurons, one draw, job
+   38079) finished on 2026-11-06 14:23: 3.5 to 4.6 s from generation 3 on, 4.1 s in generation 29 with no rider
+   finishing, below the hands-off floor. Its replayed final mean decoder (jobs 38111, 38112) is close to blank
+   and rides about like the hands-off bike: 5.5 s with 38 of 48 leaving the road and 10 falling (hands-off: 5.4 s,
+   41 and 7); without the off-road rule all 48 fall (7.8 s; hands-off: 46 fall, 8.6 s). So top-k separates from random-k on balance (top-8 and top-32 keep all 48 replayed
+   riders upright), and neither holds the lane. Numbers: fly-brain `docs/CURRENT_NUMBERS.md`, "Readout pilot on the real wiring" and
    "Replays with and without the off-road rule".
 6. Prediction 3's first bound. On the real wiring the bypass pilot rides 13.9 s in generation 29 (job 38037),
    about where the better hand-picked search ended (13.7 s after 58 generations) and 6.7 s above R0's own top-8
    readout (7.2 s). "No better than the bypass" therefore holds for the real wiring too and cannot separate R4
-   from R0. Proposed: test prediction 3 by its second clause only (no better than random-k on R0), and decide
-   once the random-8 pilot (job 38079, running since 2026-11-06 11:48) is in.
+   from R0. Proposed: test prediction 3 by its second clause only (no better than random-k on R0). The
+   random-8 pilot (job 38079, one draw of the 8, one CEM seed) is in: 4.1 s in generation 29, below the
+   hands-off bike (5.4 to 5.7 s); its replayed final mean decoder rides 5.5 s, like the hands-off bike
+   (point 5). So the bound is either random-k's last generation (4.1 s here) or the hands-off level, and an R4
+   that rode 5 s would be above one and below the other; which one has to be fixed before the tag. The R4
+   pilot at 1.2 rode 1.7 s in generation 24, where it was paused, below both. It used the hand-picked readout,
+   which prediction 3 does not cover, so it is not the test of this clause. Still to decide.
 7. Prediction 1 (R1 and R2 ride within one seed-SD of R0 at both k): the R1 pilot went against it (section 9).
    It rode 5.8 s and 4.5 seed-SDs below R0, with the hand-picked readout, on one draw, one CEM seed and one
    speed. The pilot is not the prediction's test, and in the replay its deficit is in the lane, not in balance:
@@ -251,8 +260,8 @@ These came out of the runs above and need a decision before this document is tag
    7.2 s (k = 8) and 6.2 s (k = 32) after 30 generations, about where the R1 pilot ended (7.0 s after 60). So
    the pilot says little about how R1 compares with R0 at top-k. Either keep the prediction and report how
    it comes out in the confirmatory runs, or restate it before the tag. Two things to have in hand first: the
-   two R1 pilots now queued (draw 2, and draw 1 with a second CEM seed; jobs 38107 and 38108) and the R2 pilot
-   (job 38039, running). Also to settle: "one seed-SD" is 1.3 s from the two R0 seeds run so far, and the R1
+   two further R1 pilots (draw 2, job 38107, running; draw 1 with a second CEM seed, job 38108, queued) and the
+   R2 pilot (job 38039, running). Also to settle: "one seed-SD" is 1.3 s from the two R0 seeds run so far, and the R1
    pilot rides worse than R3, so the ladder's order (R1 mildest) is not the order of riding time on this draw.
 
 ## 10. Deviations
