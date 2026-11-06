@@ -145,6 +145,29 @@ probe radii 10, 25 and 50 µm.
   against R0's 12.8 s, 12% below (seed by seed 16% and 6% in the last generation; over each search's last five
   generations 15% below and 4% above), inside prediction 2's 30% bound. One rewiring draw,
   two CEM seeds, hand-picked readout: still a pilot. The R1 ride (job 38038) started on 2026-11-06 04:20.
+  State on 2026-11-06 13:00: R1 finished its 60 generations (job 38038, CEM seed 201): 7.0 s in the last
+  generation with 8% of riders finishing, against 13.7 and 11.9 s for R0's two seeds. That is 45% below R0's mean
+  (12.8 s) and 4.5 seed-SDs below it (R0's two seeds: SD 1.29 s, from only two values); over each search's last five
+  generations it is 7.6 s against 12.4 s, 3.4 SDs below (SD 1.41 s). It is also 38% below R3 (11.3 s). **This goes against prediction 1 as drafted.** The
+  prediction is left as written; this line records that the pilot went against it, and point 7 of section 9a
+  lists what to decide. The pilot is not the test of prediction 1: hand-picked readout, one rewiring draw, one
+  CEM seed, one speed. Its deficit is in holding the lane (see the replays below), which the top-k readouts of
+  prediction 1 do not do on R0 either (7.2 and 6.2 s; point 5 of section 9a). The R1 search also ended without
+  using the readout's matched-filter lane signal (gain +0.01, against -0.12 to -0.19 in the four searches on R0
+  and R3), and the lane filter and operating point built for R1 came out differently (fly-brain
+  `docs/CURRENT_NUMBERS.md`), so the brain, its lane filter and this one search are not yet told apart. In this draw 8,584 of 166,700 neurons change sign (5.1%); none of the 44 driven VS and HS cells is
+  among them, and 4.4% of the synapses onto the readout's neurons come from a neuron that changed sign (5.1%
+  over the brain). R1's network runs at about 70% of R0's rate, averaged over all 48 brains for a
+  whole generation of the search (ended rides included).
+  Replays of each search's final mean decoder, 48 riders, one replay seed (fly-brain jobs 38092 to 38101): with
+  the off-road rule 46 and 44 of 48 ride the full 15 s on R0, 22 and 28 on R3 and 10 on R1, and 86 of the 90
+  rides that end early end at the road edge (4 in a fall); without the rule 235 of the 240 riders are upright at
+  15 s (48 and 48, 48 and 44, 47), with 1 and 3, 18 and 10, and 35 of them more than 3.5 m from the center line.
+  So these decoders balance on all three wirings, and the rungs differ in how well they hold the lane. Without
+  the rule the riders that leave the road drift to one side, the same for R1 and both R3 decoders (all 35 on R1,
+  17 of 18 and 10 of 10 on R3).
+  Two more R1 pilots are queued to tell the draw from the search seed: draw 2 with CEM seed 201 (job 38107) and
+  draw 1 with CEM seed 202 (job 38108). The R2 ride (job 38039) started on 2026-11-06 12:12.
 
 ## 9a. Open points before the tag
 
@@ -169,7 +192,8 @@ These came out of the runs above and need a decision before this document is tag
    between 5.8 and 7.9 s, 7.2 s in generation 29 with 6% of riders finishing, where the hand-picked readout rode
    9.5 and 10.8 s. A replay of the search's final mean decoder (fly-brain job 38077, 48 riders): 9.0 s upright, 7
    ride all 15 s, 41 leave the road, none falls; the hands-off bike loses 3 of 16 to a fall and 13 to the road
-   (the gate's mean decoders were not replayed; like for like is 7.2 s against 9.5 and 10.8 s).
+   (the gate's final mean decoders, replayed later, ride 14.8 and 14.5 s with 46 and 44 of 48 finishing; at
+   generation 29, like for like is 7.2 s against 9.5 and 10.8 s).
    So the top-8 readout balances and does not hold the lane, as feared. The hand-picked readout has more neurons
    (9 of its 42 types picked by the HS lane probe), a matched-filter lane signal and a different search setup
    (zbar operating point, uncentred roll features, 300 ms lane smoothing), and this run does not say which of
@@ -179,15 +203,23 @@ These came out of the runs above and need a decision before this document is tag
    and the hand-picked readout 9.9 and 10.6 s; the hand-picked searches ended on 13.7 and 11.9 s after 58 and 57
    generations. A replay of its final mean decoder (job 38081, 48 riders): all 48 ride the full 15 s and end
    0.5 m from the center line on average. So the bypass rides at about the level the better hand-picked search
-   reached, and can serve as the ceiling section 5 takes it to be. One check on that is running: the driven
-   neurons also receive synapses from the rest of the brain (486,000 in all), so the same search is repeated
-   with every synapse off (job 38086, `ride-readout.sbatch ... bypass0`); its first 8 generations ride within
-   0.002 s of the bypass's. The search set-up the bypass shares with top-8 holds the lane when the features
+   reached, and can serve as the ceiling section 5 takes it to be. The check on that: the driven
+   neurons also receive synapses from the rest of the brain (486,000 in all), so the same search was repeated
+   with every synapse off (job 38086, `ride-readout.sbatch ... bypass0`). It rides 13.9 s in generation 29 with
+   81% finishing and is never more than 0.085 s from the bypass in any of the 30 generations, so the bypass
+   does not need the wiring: with every synapse off it rides the same (one seed). The search set-up the bypass shares with top-8 holds the lane when the features
    carry it (the HS populations are given heading and lane offset directly). So what top-8 lacks is not the
    centring or the operating point of the search. Still open: which neurons it reads, and whether single
    neurons need the matched filter and the 300 ms lane smoothing (the bypass reads means over 5 to 247 neurons,
-   top-8 eight single neurons). The top-32 search (job 38078) started on 2026-11-06 08:35. To decide
-   after it: whether the per-brain readout gets a lane signal of its own (for example a second screen ranked by
+   top-8 eight single neurons). Top-32, finished 2026-11-06 12:12 (job 38078): 5.3 to 7.7 s from generation 4 on,
+   6.2 s in generation 29 with no rider finishing. Its replayed final mean decoder (jobs 38104, 38105) loses 46
+   of 48 to the road and none to a fall; without the off-road rule it keeps all 48 upright for 15 s with 44 more
+   than 3.5 m from the center line. So in this one search more roll-rate-ranked neurons did not supply the lane. In R0's
+   screen no descending neuron follows the lateral offset closely (largest |r| 0.29, against 0.65 for roll rate;
+   the top 32 by roll rate reach 0.14), so a second ranking of the same screen by lane offset is not an obvious
+   source of a lane signal; the hand-picked readout's lane neurons come from the HS probe, which each rung run
+   already makes on its own brain. To decide:
+   whether the per-brain readout gets a lane signal of its own (for example a second screen ranked by
    lane offset), or whether riding time is scored without the off-road rule. For that choice, replays of fixed
    decoders on 2026-11-06 (48 riders, seed 201, fly-brain jobs 38082 to 38084): without the off-road rule the
    top-8 mean decoder keeps all 48 riders upright for 15 s (34 end more than 3.5 m from the center line; the
@@ -197,14 +229,31 @@ These came out of the runs above and need a decision before this document is tag
    hands-off bike still falls, but the replayed top-8 mean decoder is already at the 15 s cap. No search has run
    without the rule, so the last-generation mean of section 5 is not measured without it (with the rule it was
    1.1 s below the replay for the bypass and 1.8 s for top-8); if it also ends near the cap, there is no room
-   above top-8 unless rides get longer or gusts stronger. The random-k pilot (8 neurons, job 38079) is queued
-   behind the R1 ride. Numbers: fly-brain `docs/CURRENT_NUMBERS.md`, "Readout pilot on the real wiring" and
+   above top-8 unless rides get longer or gusts stronger. The replays of the hand-picked readout on R0, R3 and R1
+   (section 9, jobs 38092 to 38101) bear on the same choice: without the rule the three wirings all end within
+   0.4 s of the 15 s cap, and with it they ride 14.8 and 14.5 s, 12.3 and 12.7 s, and 10.1 s. On that evidence, with the hand-picked readout at 15 s and 5 N·m the off-road rule is what separates R0, R3
+   and R1; a score without it would put all three at the cap. (R4 at 1.2 rides under 2 s and would be separated
+   either way.) This is for a readout that has a lane signal. The top-k readouts have none on R0, so these
+   replays do not show that the rule would separate the rungs with top-k. One replay seed per decoder, fixed
+   decoders from searches that had the rule on. The random-k pilot (8 neurons, job
+   38079) started on 2026-11-06 11:48. Numbers: fly-brain `docs/CURRENT_NUMBERS.md`, "Readout pilot on the real wiring" and
    "Replays with and without the off-road rule".
 6. Prediction 3's first bound. On the real wiring the bypass pilot rides 13.9 s in generation 29 (job 38037),
    about where the better hand-picked search ended (13.7 s after 58 generations) and 6.7 s above R0's own top-8
    readout (7.2 s). "No better than the bypass" therefore holds for the real wiring too and cannot separate R4
    from R0. Proposed: test prediction 3 by its second clause only (no better than random-k on R0), and decide
-   once the random-8 pilot (job 38079, queued) is in.
+   once the random-8 pilot (job 38079, running since 2026-11-06 11:48) is in.
+7. Prediction 1 (R1 and R2 ride within one seed-SD of R0 at both k): the R1 pilot went against it (section 9).
+   It rode 5.8 s and 4.5 seed-SDs below R0, with the hand-picked readout, on one draw, one CEM seed and one
+   speed. The pilot is not the prediction's test, and in the replay its deficit is in the lane, not in balance:
+   without the off-road rule 47 of 48 riders are upright at 15 s, 35 of them more than 3.5 m from the center
+   line. The top-k readouts the prediction is written for have no lane signal (point 5). On R0 itself they ride
+   7.2 s (k = 8) and 6.2 s (k = 32) after 30 generations, about where the R1 pilot ended (7.0 s after 60). So
+   the pilot says little about how R1 compares with R0 at top-k. Either keep the prediction and report how
+   it comes out in the confirmatory runs, or restate it before the tag. Two things to have in hand first: the
+   two R1 pilots now queued (draw 2, and draw 1 with a second CEM seed; jobs 38107 and 38108) and the R2 pilot
+   (job 38039, running). Also to settle: "one seed-SD" is 1.3 s from the two R0 seeds run so far, and the R1
+   pilot rides worse than R3, so the ladder's order (R1 mildest) is not the order of riding time on this draw.
 
 ## 10. Deviations
 
