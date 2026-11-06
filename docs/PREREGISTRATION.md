@@ -135,6 +135,11 @@ probe radii 10, 25 and 50 µm.
   5.9 s after generation 5 (R0: 6.8 and 4.9 s). R4 at 1.2 stayed at 1.3 to 1.8 s through generation 24, below the
   hands-off bike, and was paused there. So far this agrees with prediction 2 and says nothing yet about its 30%
   bound; R4 was run with the hand-picked readout, which prediction 3 does not cover.
+  State on 2026-11-06 01:10: R3 seed 201 finished its 60 generations (job 38043): 11.5 s in the last generation
+  with 42% of riders finishing, against 13.7 and 11.9 s in the last generations of R0's two seeds (58 and 57
+  generations). That is 10% below R0's mean and 16% below the same CEM seed, inside prediction 2's 30% bound.
+  Seed 202 is at generation 41 (10.7 s). One rewiring draw, one finished seed, hand-picked readout: a pilot, not
+  the test of prediction 2.
 
 ## 9a. Open points before the tag
 
@@ -154,6 +159,8 @@ These came out of the runs above and need a decision before this document is tag
    lane signal, so a rider can balance and still leave the road. This has to be piloted on R0 (top-k, random-k,
    bypass) before the design is fixed. Queued on CPU on 2026-11-05 as pilots on the real wiring only: per-brain
    screens (fly-brain job 38035), top-8 (38036) and bypass (38037), 30 generations each at 4.5 m/s, seed 201.
+   The screens finished on 2026-11-05 (R0 to R3); the top-8 search started on 2026-11-06 00:53 and the bypass
+   search waits for R3's seed 202. Curves: the project page.
 
 ## 10. Deviations
 
