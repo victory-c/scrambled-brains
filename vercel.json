@@ -11,5 +11,8 @@
       "destination": "https://victory-c.github.io/scrambled-brains/$1",
       "permanent": false
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": false
+  }
 }
