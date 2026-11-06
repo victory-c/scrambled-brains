@@ -173,12 +173,38 @@ These came out of the runs above and need a decision before this document is tag
    So the top-8 readout balances and does not hold the lane, as feared. The hand-picked readout has more neurons
    (9 of its 42 types picked by the HS lane probe), a matched-filter lane signal and a different search setup
    (zbar operating point, uncentred roll features, 300 ms lane smoothing), and this run does not say which of
-   these it needs; the top-32 search tests only whether more roll-rate-ranked neurons are enough. The bypass
-   search started on 2026-11-06 04:48, and a top-32 search (job 38078) is queued behind it. To decide after
-   those two: whether the per-brain readout gets a lane signal of its own (for example a second screen ranked by
-   lane offset), or whether riding time is scored without the off-road rule. The random-k pilot (8 neurons,
-   job 38079) is queued behind the R1 ride. Numbers: fly-brain `docs/CURRENT_NUMBERS.md`,
-   "Readout pilot on the real wiring".
+   these it needs; the top-32 search tests only whether more roll-rate-ranked neurons are enough.
+   Bypass, finished 2026-11-06 08:35 (job 38037, the same search as top-8, reading the 10 sense populations):
+   13.9 s in generation 29 with 77% of riders finishing, 13.2 s over generations 25 to 29, where top-8 rode 7.1 s
+   and the hand-picked readout 9.9 and 10.6 s; the hand-picked searches ended on 13.7 and 11.9 s after 58 and 57
+   generations. A replay of its final mean decoder (job 38081, 48 riders): all 48 ride the full 15 s and end
+   0.5 m from the center line on average. So the bypass rides at about the level the better hand-picked search
+   reached, and can serve as the ceiling section 5 takes it to be. One check on that is running: the driven
+   neurons also receive synapses from the rest of the brain (486,000 in all), so the same search is repeated
+   with every synapse off (job 38086, `ride-readout.sbatch ... bypass0`); its first 8 generations ride within
+   0.002 s of the bypass's. The search set-up the bypass shares with top-8 holds the lane when the features
+   carry it (the HS populations are given heading and lane offset directly). So what top-8 lacks is not the
+   centring or the operating point of the search. Still open: which neurons it reads, and whether single
+   neurons need the matched filter and the 300 ms lane smoothing (the bypass reads means over 5 to 247 neurons,
+   top-8 eight single neurons). The top-32 search (job 38078) started on 2026-11-06 08:35. To decide
+   after it: whether the per-brain readout gets a lane signal of its own (for example a second screen ranked by
+   lane offset), or whether riding time is scored without the off-road rule. For that choice, replays of fixed
+   decoders on 2026-11-06 (48 riders, seed 201, fly-brain jobs 38082 to 38084): without the off-road rule the
+   top-8 mean decoder keeps all 48 riders upright for 15 s (34 end more than 3.5 m from the center line; the
+   median over all 48 is 7.7 m), and the hands-off bike loses 46 of 48 to a fall (the 48 last 8.6 s on
+   average); with the rule the hands-off bike rides 5.4 s (41 leave the road, 7 fall; the 5.7 s above is from
+   the earlier replay with 16 riders and stays the hands-off floor of section 5). So without the rule the
+   hands-off bike still falls, but the replayed top-8 mean decoder is already at the 15 s cap. No search has run
+   without the rule, so the last-generation mean of section 5 is not measured without it (with the rule it was
+   1.1 s below the replay for the bypass and 1.8 s for top-8); if it also ends near the cap, there is no room
+   above top-8 unless rides get longer or gusts stronger. The random-k pilot (8 neurons, job 38079) is queued
+   behind the R1 ride. Numbers: fly-brain `docs/CURRENT_NUMBERS.md`, "Readout pilot on the real wiring" and
+   "Replays with and without the off-road rule".
+6. Prediction 3's first bound. On the real wiring the bypass pilot rides 13.9 s in generation 29 (job 38037),
+   about where the better hand-picked search ended (13.7 s after 58 generations) and 6.7 s above R0's own top-8
+   readout (7.2 s). "No better than the bypass" therefore holds for the real wiring too and cannot separate R4
+   from R0. Proposed: test prediction 3 by its second clause only (no better than random-k on R0), and decide
+   once the random-8 pilot (job 38079, queued) is in.
 
 ## 10. Deviations
 
