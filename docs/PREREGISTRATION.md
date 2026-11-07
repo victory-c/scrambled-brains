@@ -167,7 +167,15 @@ probe radii 10, 25 and 50 µm.
   the rule the riders that leave the road drift to one side, the same for R1 and both R3 decoders (all 35 on R1,
   17 of 18 and 10 of 10 on R3).
   Two more R1 pilots tell the draw from the search seed: draw 2 with CEM seed 201 (job 38107, started on
-  2026-11-06 14:23) and draw 1 with CEM seed 202 (job 38108, queued after the R2 ride). The R2 ride (job 38039) started on 2026-11-06 12:12.
+  2026-11-06 14:23) and draw 1 with CEM seed 202 (job 38108, started 20:10 when the R2 ride ended).
+  State on 2026-11-06 20:30: R2 finished its 60 generations (job 38039, CEM seed 201, draw 1): 13.4 s in the
+  last generation with 69% of riders finishing, against 13.7 and 11.9 s for R0's two seeds; 5% above R0's mean
+  (12.8 s), 0.5 seed-SD above it (over each search's last five generations 13.0 against 12.4 s, also 0.5 SD).
+  So with the hand-picked readout, on one draw and one seed, R2 is inside prediction 1 and R1 is not. R2's
+  decoder uses the lane signal like R0's (gain -0.11 against -0.12 and -0.16) and its lane filter and operating
+  point came out like R0's, where R1's did not. Replays of R2's final mean decoder (fly-brain jobs 38118 and
+  38119) are queued. The R1 draw-2 ride was at generation 42 with 10.8 s (35% finishing), against 6.8 s (10%) for
+  draw 1 at that generation; not finished.
 
 ## 9a. Open points before the tag
 
@@ -252,16 +260,17 @@ These came out of the runs above and need a decision before this document is tag
    that rode 5 s would be above one and below the other; which one has to be fixed before the tag. The R4
    pilot at 1.2 rode 1.7 s in generation 24, where it was paused, below both. It used the hand-picked readout,
    which prediction 3 does not cover, so it is not the test of this clause. Still to decide.
-7. Prediction 1 (R1 and R2 ride within one seed-SD of R0 at both k): the R1 pilot went against it (section 9).
-   It rode 5.8 s and 4.5 seed-SDs below R0, with the hand-picked readout, on one draw, one CEM seed and one
+7. Prediction 1 (R1 and R2 ride within one seed-SD of R0 at both k): the R1 pilot went against it and the R2
+   pilot was inside it, 0.5 seed-SD above R0 (section 9).
+   The R1 pilot rode 5.8 s and 4.5 seed-SDs below R0, with the hand-picked readout, on one draw, one CEM seed and one
    speed. The pilot is not the prediction's test, and in the replay its deficit is in the lane, not in balance:
    without the off-road rule 47 of 48 riders are upright at 15 s, 35 of them more than 3.5 m from the center
    line. The top-k readouts the prediction is written for have no lane signal (point 5). On R0 itself they ride
    7.2 s (k = 8) and 6.2 s (k = 32) after 30 generations, about where the R1 pilot ended (7.0 s after 60). So
    the pilot says little about how R1 compares with R0 at top-k. Either keep the prediction and report how
    it comes out in the confirmatory runs, or restate it before the tag. Two things to have in hand first: the
-   two further R1 pilots (draw 2, job 38107, running; draw 1 with a second CEM seed, job 38108, queued) and the
-   R2 pilot (job 38039, running). Also to settle: "one seed-SD" is 1.3 s from the two R0 seeds run so far, and the R1
+   two further R1 pilots (draw 2, job 38107, running, at generation 42 well above draw 1; draw 1 with a second
+   CEM seed, job 38108, running) and the replays of the R2 pilot (jobs 38118 and 38119, queued). Also to settle: "one seed-SD" is 1.3 s from the two R0 seeds run so far, and the R1
    pilot rides worse than R3, so the ladder's order (R1 mildest) is not the order of riding time on this draw.
 
 ## 10. Deviations
