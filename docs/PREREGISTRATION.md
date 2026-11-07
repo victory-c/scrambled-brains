@@ -183,7 +183,9 @@ probe radii 10, 25 and 50 µm.
   at generation 19 it rode 8.0 s where draw 1's first seed rode 5.5 s. Replays of R2's final mean decoder
   (jobs 38118 and 38119): with the off-road rule 14.7 s, 46 of 48 finish, 2 leave the road, none falls; without
   it all 48 upright and all within 3.5 m of the center line (median 0.9 m), like R0's two decoders. Replays of
-  R1 draw 2's decoder (jobs 38120 and 38121) are queued.
+  R1 draw 2's decoder (jobs 38120 and 38121): with the rule 13.5 s, 29 of 48 finish, 15 leave the road, 4 fall;
+  without it 39 of 48 upright and 9 fall (more than any other replayed hand-picked decoder, 0 to 4), 7 of the 39 beyond
+  3.5 m. So draw 2 holds the lane about like R3 and balances a little less reliably than the other hand-picked decoders.
 
 ## 9a. Open points before the tag
 
@@ -276,9 +278,9 @@ These came out of the runs above and need a decision before this document is tag
    line. The top-k readouts the prediction is written for have no lane signal (point 5). On R0 itself they ride
    7.2 s (k = 8) and 6.2 s (k = 32) after 30 generations, about where the R1 pilot ended (7.0 s after 60). So
    the pilot says little about how R1 compares with R0 at top-k. Either keep the prediction and report how
-   it comes out in the confirmatory runs, or restate it before the tag. Two things to have in hand first: the
+   it comes out in the confirmatory runs, or restate it before the tag. One thing to have in hand first: the
    remaining R1 pilot (draw 1 with a second CEM seed, job 38108, running, which tells a bad draw from a bad
-   search) and the replays of R1 draw 2's decoder (jobs 38120 and 38121, queued). Also to settle: "one seed-SD" is 1.3 s from the two R0 seeds run so far, and the R1
+   search). Also to settle: "one seed-SD" is 1.3 s from the two R0 seeds run so far, and the R1
    draw-1 pilot rides worse than R3 (the draw-2 pilot 4% better), so the ladder's order (R1 mildest) is not the
    order of riding time on every draw.
 
