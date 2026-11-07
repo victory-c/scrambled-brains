@@ -179,8 +179,17 @@ probe radii 10, 25 and 50 µm.
   search's last five generations 11.5 against 12.4 s, 0.6 SD); 4% above R3's mean. So R1 is inside prediction 1
   on draw 2 and 4.5 SDs outside it on draw 1, with one CEM seed each. Draw 2's search used the lane signal (gain
   -0.14) and its network rate is as low as draw 1's (about 73% of R0's), so the rate is not what set draw 1
-  apart. Whether draw 1 is a bad draw or a bad search is what job 38108 (draw 1, CEM seed 202, running) tests;
-  at generation 19 it rode 8.0 s where draw 1's first seed rode 5.5 s. Replays of R2's final mean decoder
+  apart.
+  State on 2026-11-07 04:15: R1 on draw 1 with CEM seed 202 finished (job 38108): 12.3 s in the last generation
+  with 56% finishing, 4% below R0's mean and 0.4 seed-SD below it (last five generations 11.8 against 12.4 s,
+  0.4 SD); 3% above R0's seed 202 and 8% above R3. Same brain, same lane filter and operating point as the
+  7.0 s search (byte-identical `probe.json` and `zbar_mu.npy`), lane-filter gain -0.135. So the two searches
+  on draw 1 end 5.3 s apart, nearly three times R0's seed-to-seed gap: the 7.0 s pilot was a stalled search, not a
+  property of the draw. Of the three R1 pilots (7.0 and 12.3 s on draw 1, 11.8 s on draw 2) two are inside
+  prediction 1; their mean is 19% below R0. Replays of the seed-202 decoder (jobs 38122, 38123): with the rule
+  14.7 s, 44 of 48 finish, 4 leave the road, none falls; without it all 48 upright, 1 beyond 3.5 m (median
+  0.9 m): R0's result on the brain whose seed-201 decoder kept 10 of 48 on the road. So with this readout the
+  lane result on R1 is as much the search's as the wiring's. Replays of R2's final mean decoder
   (jobs 38118 and 38119): with the off-road rule 14.7 s, 46 of 48 finish, 2 leave the road, none falls; without
   it all 48 upright and all within 3.5 m of the center line (median 0.9 m), like R0's two decoders. Replays of
   R1 draw 2's decoder (jobs 38120 and 38121): with the rule 13.5 s, 29 of 48 finish, 15 leave the road, 4 fall;
@@ -270,19 +279,21 @@ These came out of the runs above and need a decision before this document is tag
    that rode 5 s would be above one and below the other; which one has to be fixed before the tag. The R4
    pilot at 1.2 rode 1.7 s in generation 24, where it was paused, below both. It used the hand-picked readout,
    which prediction 3 does not cover, so it is not the test of this clause. Still to decide.
-7. Prediction 1 (R1 and R2 ride within one seed-SD of R0 at both k): the R1 pilot on draw 1 went against it;
-   the R1 pilot on draw 2 (0.8 seed-SD below R0) and the R2 pilot (0.5 seed-SD above) were inside it (section 9).
-   The draw-1 pilot rode 5.8 s and 4.5 seed-SDs below R0, with the hand-picked readout, one CEM seed and one
-   speed. The pilot is not the prediction's test, and in the replay its deficit is in the lane, not in balance:
+7. Prediction 1 (R1 and R2 ride within one seed-SD of R0 at both k): one of the three R1 pilots went against
+   it; the other two (0.4 and 0.8 seed-SD below R0) and the R2 pilot (0.5 seed-SD above) were inside it
+   (section 9). The first draw-1 pilot rode 5.8 s and 4.5 seed-SDs below R0, with the hand-picked readout, one
+   CEM seed and one speed; a second CEM seed on the same draw, with the same lane filter, rode 12.3 s, so that
+   pilot was a stalled search. The pilot is not the prediction's test, and in the replay its deficit is in the lane, not in balance:
    without the off-road rule 47 of 48 riders are upright at 15 s, 35 of them more than 3.5 m from the center
    line. The top-k readouts the prediction is written for have no lane signal (point 5). On R0 itself they ride
    7.2 s (k = 8) and 6.2 s (k = 32) after 30 generations, about where the R1 pilot ended (7.0 s after 60). So
    the pilot says little about how R1 compares with R0 at top-k. Either keep the prediction and report how
-   it comes out in the confirmatory runs, or restate it before the tag. One thing to have in hand first: the
-   remaining R1 pilot (draw 1 with a second CEM seed, job 38108, running, which tells a bad draw from a bad
-   search). Also to settle: "one seed-SD" is 1.3 s from the two R0 seeds run so far, and the R1
-   draw-1 pilot rides worse than R3 (the draw-2 pilot 4% better), so the ladder's order (R1 mildest) is not the
-   order of riding time on every draw.
+   it comes out in the confirmatory runs, or restate it before the tag. All three R1 pilots are in hand. Also to
+   settle: "one seed-SD" is 1.3 s from the two R0 seeds run so far, while the two R1 searches on draw 1 differ
+   by 5.3 s, so with 5 CEM seeds one stalled search can move a rung's mean by about 1 s, most of a seed-SD, on its own; the
+   prediction's test might be better stated on the median over seeds, or on the best generation of each search
+   (to decide before the tag). The stalled R1 search rode worse than R3; the other two R1 pilots rode 4% and 8%
+   better than R3.
 
 ## 10. Deviations
 
