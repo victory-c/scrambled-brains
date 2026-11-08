@@ -202,7 +202,11 @@ probe radii 10, 25 and 50 µm.
   0.3 SD) and -42% for the stalled one (3.6 SD). Every pilot but the stalled R1 search is within one seed-SD of
   R0; by rung mean R2 +10%, R3 -7%, R1 -15%. Replays of the seed-203 decoder (jobs 38130, 38131): with the rule 14.3 s, 38 of 48 finish, 10 leave the road,
   none falls; without it all 48 upright, 5 beyond 3.5 m (median 1.2 m), between the GPU seeds' decoders and R3's.
-  Started 2026-11-07 13:00: pilot rides on a second rewiring draw of R3 (job 38134) and of R2 (job 38135), seed 201. Replays of R2's final mean decoder
+  Started 2026-11-07 18:51: pilot rides on a second rewiring draw of R3 (job 38134) and of R2 (job 38135), seed 201.
+  State on 2026-11-08 03:15: R3 draw 2 finished: 8.5 s, 10% finishing, 25% below draw 1's two-seed mean and 30%
+  below R0's three-seed mean (2.6 SD), at the edge of prediction 2's bound; its decoder ended without using the
+  lane signal (gain +0.003), like the stalled R1 search. A second CEM seed on the draw (job 38154, started 03:10) is running and replays
+  (38155, 38156) are queued; R2 draw 2 is at generation 49 (10.8 s). Replays of R2's final mean decoder
   (jobs 38118 and 38119): with the off-road rule 14.7 s, 46 of 48 finish, 2 leave the road, none falls; without
   it all 48 upright and all within 3.5 m of the center line (median 0.9 m), like R0's two decoders. Replays of
   R1 draw 2's decoder (jobs 38120 and 38121): with the rule 13.5 s, 29 of 48 finish, 15 leave the road, 4 fall;
