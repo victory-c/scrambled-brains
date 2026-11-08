@@ -226,11 +226,23 @@ probe radii 10, 25 and 50 µm.
   without it 39 of 48 upright and 9 fall (more than any other replayed hand-picked decoder, 0 to 4), 7 of the 39 beyond
   3.5 m. So draw 2 holds the lane about like R3 and balances a little less reliably than the other hand-picked decoders.
 
+- Track C pilot (2026-11-08, one replay per brain of a hand-picked-readout decoder, R0 and draw 1 of R1 to R3; fly-brain
+  `results/track_c/`, `tools/track_c.py`): R² for roll rate from all active descending neurons is 0.93 to 0.96; N90 is 3 in
+  screen order on all four brains and 250 to 454 (medians) in random order over all 1,314 neurons (58 to 101 over the
+  neurons active in that replay). At the wing-motor site the screened N90 is 3 to 6 against its own R² and 4, 7, 7 and 29
+  against the descending R²; random-order medians over all 67 neurons are 30 to 37 and 39 to 65. The simulated jGCaMP8 and
+  probe-distance parts are not done.
+
 ## 9a. Open points before the tag
 
 These came out of the runs above and need a decision before this document is tagged.
 
-1. The model-side rung (section 3) and the Track B prediction CSV (section 6) are not written yet.
+1. The model-side rung (section 3) and the Track B prediction CSV (section 6). State on 2026-11-08: the model-side
+   pre-test ran on R0 (synaptic scale x0.9 and x1.1, membrane time constant 18 and 22 ms, synaptic time constant 4.5
+   and 5.5 ms; all six pass the gate; fly-brain `docs/CURRENT_NUMBERS.md`), and none has been ridden. A draft CSV of 12
+   predictions is in `docs/track_b_predictions_DRAFT.csv`: not final. Which flybench tasks to include is to be decided, the
+   flybench-sourced citations are as flybench lists them and have not been checked against the papers, sign-0 (null)
+   rows need a scoring rule, and the grooming row has no readout because this male CNS annotation has no aDN1 or aDN2.
 2. Scale ladder: R3.5 and R4 go from too quiet to runaway inside one ladder step (0.47 to 0.6, and 1.5 to 1.6).
    Proposed: when a rung brackets the rate window between two ladder scales, bisect up to three times.
 3. Where the scale is set: the rate criterion is measured upright, and the first 0.6 s of riding doubles the real
@@ -339,6 +351,10 @@ These came out of the runs above and need a decision before this document is tag
    leave it to the median and report the number of stalled searches; or define a stall criterion before the tag.
    The marker seen so far (lane-filter gain near zero) exists only for the hand-picked readout; the top-k readouts
    of the confirmatory runs have no lane-filter channel, so a criterion would have to be stated on something else.
+9. Track C reference (open). Section 7 says N90 is 90% of "the R² that all descending neurons give together", at both sites.
+   Read literally, the wing-motor site uses the descending R² as its target; the alternative is each site's own R². The pilot
+   gives different wing-motor N90s under the two (section 9), so the wording needs settling before the tag. The pilot's random
+   orders are drawn over all of a site's neurons, including those silent in that replay.
 
 ## 10. Deviations
 
