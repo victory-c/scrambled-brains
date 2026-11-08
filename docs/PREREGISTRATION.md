@@ -87,7 +87,11 @@ probe radii 10, 25 and 50 µm.
 
 ## 8. Predictions
 
-1. R1 and R2 ride within one seed-SD of R0 at both k.
+1. R1's and R2's primary outcome (last-generation mean riding time, median over the 5 CEM seeds) lies within
+   one seed-SD of R0's at both k, where the seed-SD is the standard deviation of R0's five last-generation means
+   at that k and speed. (Restated on 2026-11-08 from "R1 and R2 ride within one seed-SD of R0" so that the
+   statistic compared is the median of section 5, which one stalled search can shift only to the neighbouring
+   seed's value, not drag down; section 9a, point 7.)
 2. R3 loses under 30% of R0's riding time; the transition lies between R3 and R3.5.
 3. R4, recalibrated to its own passing scale, rides no better than the bypass minus the brain's lag; in
    practice, no better than random-k on R0.
@@ -301,9 +305,16 @@ These came out of the runs above and need a decision before this document is tag
    it comes out in the confirmatory runs, or restate it before the tag. All three R1 pilots are in hand. Also to
    settle: "one seed-SD" is 1.4 s from the three R0 seeds run so far (1.3 s from the first two; the third, on
    CPU, rode 10.9 s), while the two R1 searches on draw 1 differ by 5.3 s, so with 5 CEM seeds one stalled search can move a rung's mean by about 1 s, most of a seed-SD, on its own; the
-   prediction's test might be better stated on the median over seeds, or on the best generation of each search
-   (to decide before the tag). The stalled R1 search rode worse than R3; the other two R1 pilots rode 4% and 8%
-   better than R3.
+   prediction's test might be better stated on the median over seeds, or on the best generation of each search.
+   The stalled R1 search rode worse than R3; the other two R1 pilots rode 4% and 8% better than R3.
+   **Decided 2026-11-08 (Victor): the median.** Prediction 1 now compares each rung's median over CEM seeds (the
+   primary outcome of section 5) with R0's median, against the SD of R0's five seed means; the wording in
+   section 8 is updated. On the pilots so far, with the hand-picked readout: R0's median over three seeds is
+   11.9 s (SD 1.42 s), R1's over its three searches on two draws 11.8 s (the stalled 7.0 s search is the lowest
+   of the three, so it only sets the median at the next value up, 11.8 instead of 12.0 s; 0.1 SD below) and R2's over two 13.4 s, 1.1 SD above: on the median R1 is inside and R2 just outside, because the
+   median pulls R0 down to its middle seed (11.9 s) while R2's two seeds agree at 13.4 s. Against R0's mean
+   (12.2 s) R2 was 0.9 SD above. Two and three seeds, hand-picked readout: not the test. The seed-SD itself is still the SD of means, so a stalled R0
+   search would widen it; that is accepted as is.
 
 ## 10. Deviations
 
