@@ -206,7 +206,12 @@ probe radii 10, 25 and 50 µm.
   State on 2026-11-08 03:15: R3 draw 2 finished: 8.5 s, 10% finishing, 25% below draw 1's two-seed mean and 30%
   below R0's three-seed mean (2.6 SD), at the edge of prediction 2's bound; its decoder ended without using the
   lane signal (gain +0.003), like the stalled R1 search. A second CEM seed on the draw (job 38154, started 03:10) is running and replays
-  (38155, 38156) are queued; R2 draw 2 is at generation 49 (10.8 s). Replays of R2's final mean decoder
+  (38155, 38156) are queued; R2 draw 2 is at generation 49 (10.8 s).
+  State on 2026-11-08 04:40: R2 draw 2 finished (job 38135): 12.0 s, 44% finishing, 2% below R0's three-seed
+  mean (0.15 SD), 11% below R2 draw 1 (13.4 and 13.5 s); decoder uses the lane signal (gain -0.09). R2 on
+  two draws, three searches: 13.4, 13.5, 12.0 s. The R3 draw-2 replays (38155, 38156): 15 of 48 finish, 33
+  leave the road, none falls; without the rule all 48 upright, 32 beyond 3.5 m on one side, the stalled R1
+  decoder's pattern. Job 38154 (R3 draw 2, seed 202) running; R2 draw-2 replays (38157, 38158) queued. Replays of R2's final mean decoder
   (jobs 38118 and 38119): with the off-road rule 14.7 s, 46 of 48 finish, 2 leave the road, none falls; without
   it all 48 upright and all within 3.5 m of the center line (median 0.9 m), like R0's two decoders. Replays of
   R1 draw 2's decoder (jobs 38120 and 38121): with the rule 13.5 s, 29 of 48 finish, 15 leave the road, 4 fall;
