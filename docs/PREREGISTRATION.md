@@ -207,12 +207,19 @@ probe radii 10, 25 and 50 µm.
   below R0's three-seed mean (2.6 SD), at the edge of prediction 2's bound; its decoder ended without using the
   lane signal (gain +0.003), like the stalled R1 search. A second CEM seed on the draw (job 38154, started 03:10) is running and replays
   (38155, 38156) are queued; R2 draw 2 is at generation 49 (10.8 s).
-  State on 2026-11-08 04:40: R2 draw 2 finished (job 38135): 12.0 s, 44% finishing, 2% below R0's three-seed
+  State on 2026-11-08 04:45: R2 draw 2 finished (job 38135): 12.0 s, 44% finishing, 2% below R0's three-seed
   mean (0.15 SD), 11% below R2 draw 1 (13.4 and 13.5 s); decoder uses the lane signal (gain -0.09). R2 on
   two draws, three searches: 13.4, 13.5, 12.0 s. The R3 draw-2 replays (38155, 38156): 15 of 48 finish, 33
   leave the road, none falls; without the rule all 48 upright, 32 beyond 3.5 m on one side, the stalled R1
   decoder's pattern. Job 38154 (R3 draw 2, seed 202) running. R2 draw-2 replays (38157, 38158): 34 of 48 finish, 14 leave the
-  road, none falls; without the rule all 48 upright, 9 beyond 3.5 m. Replays of R2's final mean decoder
+  road, none falls; without the rule all 48 upright, 9 beyond 3.5 m.
+  State on 2026-11-08 14:45: R3 draw 2 with CEM seed 202 finished (job 38154): 10.9 s, 40% finishing, 28% above
+  the seed-201 search on the same draw, with byte-identical lane filter and operating point and lane-filter gain
+  -0.14. So, on this one further seed, the 8.5 s search looks stalled rather than a worse draw. R3 over four searches on two draws: median 11.0 s,
+  7% below R0's median (0.6 SD), inside prediction 2's bound. Of 13 finished searches with the hand-picked
+  readout, the two lowest (7.0 and 8.5 s) are the two whose lane-filter gain ended near zero (the other eleven:
+  10.9 to 13.7 s, gain -0.09 to -0.19). Replays of the seed-202 decoder (jobs 38171, 38172): with the rule 37 of 48 finish, 11
+  leave the road, none falls (the seed-201 decoder: 15 and 33); without it all 48 upright, 6 beyond 3.5 m. Replays of R2's final mean decoder
   (jobs 38118 and 38119): with the off-road rule 14.7 s, 46 of 48 finish, 2 leave the road, none falls; without
   it all 48 upright and all within 3.5 m of the center line (median 0.9 m), like R0's two decoders. Replays of
   R1 draw 2's decoder (jobs 38120 and 38121): with the rule 13.5 s, 29 of 48 finish, 15 leave the road, 4 fall;
@@ -325,6 +332,13 @@ These came out of the runs above and need a decision before this document is tag
    median pulls R0 down to its middle seed (11.9 s) while R2's two seeds agree at 13.4 s. Against R0's mean
    (12.2 s) R2 was 0.9 SD above. Two and three seeds, hand-picked readout: not the test. The seed-SD itself is still the SD of means, so a stalled R0
    search would widen it; that is accepted as is.
+
+8. Stalled searches (open). Two of the 13 pilot searches ended near 7 to 8.5 s without using the lane signal, and
+   a second CEM seed on the same brain rode 2.4 and 5.3 s longer. The median of point 7 limits what one such
+   search can do to a rung's outcome, but 2 stalled searches out of 5 seeds would still move the median. Options:
+   leave it to the median and report the number of stalled searches; or define a stall criterion before the tag.
+   The marker seen so far (lane-filter gain near zero) exists only for the hand-picked readout; the top-k readouts
+   of the confirmatory runs have no lane-filter channel, so a criterion would have to be stated on something else.
 
 ## 10. Deviations
 
