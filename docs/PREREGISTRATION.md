@@ -361,6 +361,8 @@ These came out of the runs above and need a decision before this document is tag
    orders are drawn over all of a site's neurons, including those silent in that replay.
 10. Track B score (open). The pilot's real wiring gets 3 of 5 signed rows, so two rows cannot separate rungs as they stand, and a score of signs alone
    passes an R1 draw whose sugar response is about 700 times weaker than R0's, and the side driven matters (22.5 Hz from the right on R0, 0.13 Hz from the left), so which side to drive also has to be fixed. Either drop or re-specify those rows, and either add a magnitude criterion or keep signs only.
+11. Confirmatory matrix (decided 2026-11-08, Victor): keep the design of section 5 and run it on the GPU, not a reduced matrix on CPU. On CPU it
+   would take 30 to 45 days. CUDA on the node worked again on 2026-11-08 (`/dev/nvidia-uvm` present, a torch CUDA test passed); the matrix waits on the tag.
 
 ## 10. Deviations
 
