@@ -235,7 +235,7 @@ probe radii 10, 25 and 50 µm.
 
 - Track B pilot (2026-11-08, fly-brain `runs/predictions.py`, `results/track_b/`, five signed rows of the draft CSV at scale 0.47,
   two draws for R1 to R3 and one for R3.5, R4, R5): R0 and every R1 to R3 draw score 0.6 with the right taste groups; R3.5, R4 and R5 score 0 (R4 and R5 with no response;
-  R3.5 with both suppression rows of the wrong sign). With the left taste groups sugar drives MN9 at only 0.13 Hz on R0 and R1 draw 1 scores 0. Water to MN9 and JO-F to MDN are not as expected on R0. Calibrated-scale scoring and the 100 draws are not done.
+  R3.5 with both suppression rows of the wrong sign). With the left taste groups sugar drives MN9 at only 0.13 Hz on R0 and R1 draw 1 scores 0. Water to MN9 and JO-F to MDN are not as expected on R0. At the pre-test's scales R3.5 (0.5) scores 0.4, R4 (1.2) and R5 (2.0) score 0. The 100 draws are not done.
 
 ## 9a. Open points before the tag
 
@@ -243,7 +243,7 @@ These came out of the runs above and need a decision before this document is tag
 
 1. The model-side rung (section 3) and the Track B prediction CSV (section 6). State on 2026-11-08: the model-side
    pre-test ran on R0 (synaptic scale x0.9 and x1.1, membrane time constant 18 and 22 ms, synaptic time constant 4.5
-   and 5.5 ms; all six pass the gate; fly-brain `docs/CURRENT_NUMBERS.md`), and none has been ridden. A draft CSV of 12
+   and 5.5 ms; all six pass the gate; fly-brain `docs/CURRENT_NUMBERS.md`), and pilot rides of the six on R0 (fly-brain jobs 38191 to 38196, hand-picked readout) started on 2026-11-08. A draft CSV of 12
    predictions is in `docs/track_b_predictions_DRAFT.csv`: not final. Which flybench tasks to include is to be decided, the
    flybench-sourced citations are as flybench lists them and have not been checked against the papers, sign-0 (null)
    rows need a scoring rule, and the grooming row has no readout because this male CNS annotation has no aDN1 or aDN2.
