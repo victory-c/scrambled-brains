@@ -49,8 +49,11 @@ haltere) inputs in half the brains and on the right in the other half, 300 ms wa
 neurons with |z| > 3 between left and right brains exceeds the largest value over the balanced relabellings
 (the null: all 18 with 8 brains; 1,000 drawn at random from the 19.3 million with 30 brains, `--null-splits`),
 for both VS and haltere drive, and (b) the network rate outside the driven neurons is within 2x of
-R0's at scale 0.47 (21,500 spikes/s; so 10,750-43,000). Scales tried, in order: 0.47, 0.6, 0.8, 1.0, 1.5, 2.0. A
-rung that fails at every scale is reported as "no transmission" and gets one confirmatory Track A seed, no more.
+R0's at scale 0.47 (21,500 spikes/s; so 10,750-43,000). Scales tried, in order: 0.47, 0.6, 0.8, 1.0, 1.5, 2.0. When a
+rung brackets the rate window between two ladder scales, the interval is bisected up to three times. A rung's riding
+scale is set closed-loop: of the scales run, the one whose network rate over the first 0.6 s of the reference replay is closest to R0's
+23,400 spikes/s and within 2x of it. The reference replay is the balance gate's decoder `results/ride_slow_mu.json` replayed on that brain, used only to measure this rate. The rate averaged over generation 0 of the search is reported next to R0's. A
+rung that fails the upright gate at every scale is reported as "no transmission" and gets one confirmatory Track A seed, no more, at the closed-loop scale just defined (R4: 1.2 on the pilot's numbers); "its own passing scale" in section 8 means this scale. A rung with no scale inside the closed-loop window gets no ride, and is reported as such.
 
 ## 5. Track A: closed-loop riding
 
@@ -72,16 +75,18 @@ rung that fails at every scale is reported as "no transmission" and gets one con
 
 ## 6. Track B: decoder-free predictions
 
-Shiu et al. 2024's feeding and grooming predictions (fly-brain `brain/stimuli.py`, dashboard experiments) and
-about 5 in-class flybench tasks, each with stimulus, readout, expected sign and source listed in a CSV before the
-tag. Scored per rung as the fraction of predictions with the expected sign, mean over 100 draws for R1 and R2
-and over 3 draws for the shuffles, at that rung's calibrated scale and at 0.47.
+The predictions are the rows of `docs/track_b_predictions.csv`: stimulus, readout, expected sign, source and what the source
+actually shows, each source read for this purpose on 2026-11-09. Six rows are scored and two are controls, reported and not scored. Taste groups
+are driven on both sides. A scored row passes on a brain if its difference has the expected sign and is at least half as large as on
+the real wiring at scale 0.47, whichever scale the rung is scored at; a row that does not have the expected sign on the real wiring passes on no brain. A rung's score is the fraction of scored rows passed, mean over 100 draws for R1 and R2
+and over 3 draws for the shuffles, at that rung's calibrated scale and at 0.47 (fly-brain `runs/predictions.py`, `tools/track_b_score.py`). The half-of-R0 criterion, the choice of rows and the bilateral drive were
+set after the pilot of section 9 had been seen, and two rows that failed on the real wiring (water to MN9, JO-F to MDN) were dropped then, so they are not blind.
 
 ## 7. Track C: decodability
 
 Ridge regression from recorded spike counts (100 ms bins, as in the replay exports) to roll rate. N90: the
-number of neurons needed to reach 90% of the R² that all descending neurons give together, for neurons added in
-screen order and in random order, at a brain descending-neuron site and at a nerve-cord wing-motor site. Also:
+number of neurons needed to reach 90% of the R² that all the neurons of that site give together, for neurons added in
+screen order and in random order over all of the site's neurons, silent ones included, at a brain descending-neuron site and at a nerve-cord wing-motor site. Also:
 the same from simulated jGCaMP8 dF/F at 30 and 10 Hz; and R² against a probe's miss distance (0-50 µm) for
 probe radii 10, 25 and 50 µm.
 
@@ -93,8 +98,8 @@ probe radii 10, 25 and 50 µm.
    statistic compared is the median of section 5, which one stalled search can shift only to the neighbouring
    seed's value, not drag down; section 9a, point 7.)
 2. R3 loses under 30% of R0's riding time; the transition lies between R3 and R3.5.
-3. R4, recalibrated to its own passing scale, rides no better than the bypass minus the brain's lag; in
-   practice, no better than random-k on R0.
+3. R4, recalibrated to its own passing scale, rides no better than random-k on R0: the replayed final mean decoder
+   of R4 (48 riders, 15 s, off-road rule on, replay seed 201) rides no longer than the replayed final mean decoder of R0's random-k at the same k and speed, as medians over draws and CEM seeds.
 4. R5 fails the pre-test at every scale.
 5. If R4 at its own calibration rides as well as R0 at k = 32, closed-loop riding is not a valid acceptance
    test, and Track B becomes the headline result.
@@ -239,23 +244,21 @@ probe radii 10, 25 and 50 µm.
 
 ## 9a. Open points before the tag
 
-These came out of the runs above and need a decision before this document is tagged.
+These came out of the runs above. Decisions below are dated; points 2 to 4, 6 and 8 to 10 were decided on 2026-11-09 (Victor adopted the recommendations, and left point 4, the half-of-R0 criterion and the choice of Track B rows to Claude). Point 5 is still open.
 
-1. The model-side rung (section 3) and the Track B prediction CSV (section 6). State on 2026-11-08: the model-side
+1. The model-side rung (section 3) and the Track B prediction CSV (section 6). The CSV is final as of 2026-11-09. State on 2026-11-08: the model-side
    pre-test ran on R0 (synaptic scale x0.9 and x1.1, membrane time constant 18 and 22 ms, synaptic time constant 4.5
-   and 5.5 ms; all six pass the gate; fly-brain `docs/CURRENT_NUMBERS.md`), and pilot rides of the six on R0 (fly-brain jobs 38191 to 38196, hand-picked readout) started on 2026-11-08. A draft CSV of 12
-   predictions is in `docs/track_b_predictions_DRAFT.csv`: not final. Which flybench tasks to include is to be decided, the
-   flybench-sourced citations are as flybench lists them and have not been checked against the papers, sign-0 (null)
-   rows need a scoring rule, and the grooming row has no readout because this male CNS annotation has no aDN1 or aDN2.
+   and 5.5 ms; all six pass the gate; fly-brain `docs/CURRENT_NUMBERS.md`), and pilot rides of the six on R0 (fly-brain jobs 38191 to 38196, hand-picked readout) started on 2026-11-08. The 12-row draft of that date was cut to the 8 rows of the final CSV on 2026-11-09, after each source was read. Dethier 1976 could not be read and is no longer cited; Jaeger et al. 2018 is about salt and is no longer cited; DNp02 and DNp11 now cite Dombrovski et al. 2023; the sugar-to-giant-fiber control has no published test.
 2. Scale ladder: R3.5 and R4 go from too quiet to runaway inside one ladder step (0.47 to 0.6, and 1.5 to 1.6).
-   Proposed: when a rung brackets the rate window between two ladder scales, bisect up to three times.
+   **Decided 2026-11-09:** when a rung brackets the rate window between two ladder scales, bisect up to three times (section 4).
 3. Where the scale is set: the rate criterion is measured upright, and the first 0.6 s of riding doubles the real
    wiring's rate but multiplies R4's by 10 to 22. Proposed: add a closed-loop check to section 4 (rate over the
    first 0.6 s of the reference replay within 2x of R0's 23,400, and the rate averaged over generation 0 of the
    search reported next to R0's), and set a rung's scale there. The replay's whole-run average is not usable for
-   this: it depends on when the last rider falls.
+   this: it depends on when the last rider falls. **Decided 2026-11-09:** as proposed (section 4).
 4. Prediction 4 (R5 fails at every scale) is contradicted by the pilot at 2.0. Either keep it and report it as
    failed, or restate it (for example: R5's lateralised outputs stay under a quarter of R0's at every scale).
+   **Decided 2026-11-09:** kept as written and reported as failed; restating it after seeing the result would make it fit the pilot.
 5. Track A readout: the top-k neurons are ranked by roll-rate correlation only, and the per-brain readout has no
    lane signal, so a rider can balance and still leave the road. This has to be piloted on R0 (top-k, random-k,
    bypass) before the design is fixed. Queued on CPU on 2026-11-05 as pilots on the real wiring only: per-brain
@@ -315,6 +318,7 @@ These came out of the runs above and need a decision before this document is tag
    41 and 7); without the off-road rule all 48 fall (7.8 s; hands-off: 46 fall, 8.6 s). So top-k separates from random-k on balance (top-8 and top-32 keep all 48 replayed
    riders upright), and neither holds the lane. Numbers: fly-brain `docs/CURRENT_NUMBERS.md`, "Readout pilot on the real wiring" and
    "Replays with and without the off-road rule".
+   **State on 2026-11-09, still open.** The recommendation adopted was to keep the off-road rule and give the per-brain readout a lane channel, so it was built and piloted on R0: top-k plus the 12 descending (type, side) groups that the brain's own HS probe picks, through its matched filter with 300 ms smoothing (fly-brain `--lane-k`, jobs 38201 and 38202; GPU, 30 generations, seed 201). Top-8 with the lane channel: 6.93 s in the last generation, lane gain -0.08; its replay keeps 6 of 48 on the road for 15 s, 41 leave the road and 1 falls. Top-32 with the lane channel: 8.83 s, lane gain -0.09; its replay keeps 12 of 48, 36 leave the road, none falls, against 2 of 48 without the channel (median final distance without the rule 3.8 m against 16.5 m). The hand-picked readout's replays keep 46, 44 and 38 of 48 on R0. In this one seed the lane channel goes with 12 against 2 of 48 finishing at k = 32 and 6 against 7 at k = 8, and neither holds the lane. The lane runs were on the GPU and the runs without it on CPU, so the differences are not all the channel's. The readout of section 5 is therefore not settled and this document is not ready to tag.
 6. Prediction 3's first bound. On the real wiring the bypass pilot rides 13.9 s in generation 29 (job 38037),
    about where the better hand-picked search ended (13.7 s after 58 generations) and 6.7 s above R0's own top-8
    readout (7.2 s). "No better than the bypass" therefore holds for the real wiring too and cannot separate R4
@@ -324,7 +328,7 @@ These came out of the runs above and need a decision before this document is tag
    (point 5). So the bound is either random-k's last generation (4.1 s here) or the hands-off level, and an R4
    that rode 5 s would be above one and below the other; which one has to be fixed before the tag. The R4
    pilot at 1.2 rode 1.7 s in generation 24, where it was paused, below both. It used the hand-picked readout,
-   which prediction 3 does not cover, so it is not the test of this clause. Still to decide.
+   which prediction 3 does not cover, so it is not the test of this clause. **Decided 2026-11-09:** the second clause only, and the bound is random-k's replayed final mean decoder (section 8).
 7. Prediction 1 (R1 and R2 ride within one seed-SD of R0 at both k): one of the three R1 pilots went against
    it; the other two (0.4 and 0.8 seed-SD below R0) and both R2 pilots (0.5 seed-SD above) were inside it
    (section 9; against the three-seed R0 mean of 12.2 s with SD 1.42 s the same holds: R1 0.1 SD above and 0.3 SD below,
@@ -349,18 +353,19 @@ These came out of the runs above and need a decision before this document is tag
    (12.2 s) R2 was 0.9 SD above. Two and three seeds, hand-picked readout: not the test. The seed-SD itself is still the SD of means, so a stalled R0
    search would widen it; that is accepted as is.
 
-8. Stalled searches (open). Two of the 13 pilot searches ended near 7 to 8.5 s without using the lane signal, and
+8. Stalled searches (decided 2026-11-09). Two of the 13 pilot searches ended near 7 to 8.5 s without using the lane signal, and
    a second CEM seed on the same brain rode 2.4 and 5.3 s longer. The median of point 7 limits what one such
    search can do to a rung's outcome, but 2 stalled searches out of 5 seeds would still move the median. Options:
    leave it to the median and report the number of stalled searches; or define a stall criterion before the tag.
    The marker seen so far (lane-filter gain near zero) exists only for the hand-picked readout; the top-k readouts
    of the confirmatory runs have no lane-filter channel, so a criterion would have to be stated on something else.
-9. Track C reference (open). Section 7 says N90 is 90% of "the R² that all descending neurons give together", at both sites.
+   **Decided 2026-11-09:** no stall criterion. The median limits a stalled search, and every seed's value is reported, so readers can see any.
+9. Track C reference (decided 2026-11-09). Section 7 says N90 is 90% of "the R² that all descending neurons give together", at both sites.
    Read literally, the wing-motor site uses the descending R² as its target; the alternative is each site's own R². The pilot
    gives different wing-motor N90s under the two (section 9), so the wording needs settling before the tag. The pilot's random
-   orders are drawn over all of a site's neurons, including those silent in that replay.
-10. Track B score (open). The pilot's real wiring gets 3 of 5 signed rows, so two rows cannot separate rungs as they stand, and a score of signs alone
-   passes an R1 draw whose sugar response is about 700 times weaker than R0's, and the side driven matters (22.5 Hz from the right on R0, 0.13 Hz from the left), so which side to drive also has to be fixed. Either drop or re-specify those rows, and either add a magnitude criterion or keep signs only.
+   orders are drawn over all of a site's neurons, including those silent in that replay. **Decided 2026-11-09:** each site's own R² (section 7).
+10. Track B score (decided 2026-11-09). The pilot's real wiring gets 3 of 5 signed rows, so two rows cannot separate rungs as they stand, and a score of signs alone
+   passes an R1 draw whose sugar response is about 700 times weaker than R0's, and the side driven matters (22.5 Hz from the right on R0, 0.13 Hz from the left), so which side to drive also has to be fixed. Either drop or re-specify those rows, and either add a magnitude criterion or keep signs only. **Decided 2026-11-09:** both rows dropped (the grooming row too, having no readout, and the JO-C/E to MDN control, which was the JO-F row's partner), taste drive on both sides, half-of-R0 criterion, four flybench-derived rows (section 6, `docs/track_b_predictions.csv`).
 11. Confirmatory matrix (decided 2026-11-08, Victor): keep the design of section 5 and run it on the GPU, not a reduced matrix on CPU. On CPU it
    would take 30 to 45 days. CUDA on the node worked again on 2026-11-08 (`/dev/nvidia-uvm` present, a torch CUDA test passed); the matrix waits on the tag.
 
