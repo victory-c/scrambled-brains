@@ -233,6 +233,10 @@ probe radii 10, 25 and 50 µm.
   against the descending R²; random-order medians over all 67 neurons are 30 to 37 and 39 to 65. The simulated jGCaMP8 and
   probe-distance parts are not done.
 
+- Track B pilot (2026-11-08, fly-brain `runs/predictions.py`, `results/track_b/`, five signed rows of the draft CSV at scale 0.47,
+  two draws for R1 to R3 and one for R3.5, R4, R5): R0 and every R1 to R3 draw score 0.6 with the right taste groups; R3.5, R4 and R5 score 0 (R4 and R5 with no response;
+  R3.5 with both suppression rows of the wrong sign). With the left taste groups sugar drives MN9 at only 0.13 Hz on R0 and R1 draw 1 scores 0. Water to MN9 and JO-F to MDN are not as expected on R0. Calibrated-scale scoring and the 100 draws are not done.
+
 ## 9a. Open points before the tag
 
 These came out of the runs above and need a decision before this document is tagged.
@@ -355,6 +359,8 @@ These came out of the runs above and need a decision before this document is tag
    Read literally, the wing-motor site uses the descending R² as its target; the alternative is each site's own R². The pilot
    gives different wing-motor N90s under the two (section 9), so the wording needs settling before the tag. The pilot's random
    orders are drawn over all of a site's neurons, including those silent in that replay.
+10. Track B score (open). The pilot's real wiring gets 3 of 5 signed rows, so two rows cannot separate rungs as they stand, and a score of signs alone
+   passes an R1 draw whose sugar response is about 700 times weaker than R0's, and the side driven matters (22.5 Hz from the right on R0, 0.13 Hz from the left), so which side to drive also has to be fixed. Either drop or re-specify those rows, and either add a magnitude criterion or keep signs only.
 
 ## 10. Deviations
 
