@@ -1,16 +1,17 @@
-# Scrambled Brains: preregistration (draft, 2026-11-02)
+# Scrambled Brains: preregistration (first draft 2026-11-02, tagged `prereg-v1` on 2026-11-09)
 
-**Status: draft.** This becomes the preregistration when it is tagged in this repository before the first Track A
-run (section 5: per-brain readouts) on a scrambled rung. Everything run before the tag is listed under "Already run"
-and is not confirmatory. That includes pilot rides on scrambled rungs with the balance gate's hand-picked readout,
-which began on 2026-11-05 on rewiring draw 1: because of them the riding predictions in section 8 are informed by
-pilot data, not blind. The confirmatory runs use per-brain readouts and include rewiring draws the pilots never saw.
-Changes after the tag go in a dated "Deviations" section at the end, never by editing the text above it.
+**Status: preregistered.** This text is fixed by the git tag `prereg-v1`, made on 2026-11-09 before the first confirmatory
+Track A run (section 5). Everything run before the tag is listed under "Already run" and is not confirmatory. That includes
+pilot rides on scrambled rungs with the hand-picked readout, on rewiring draws 1 and 2, which began on 2026-11-05: because of them
+the riding predictions in section 8 are informed by pilot data, not blind. The primary readout of the confirmatory runs is that same
+hand-picked readout, chosen after those pilots (section 9a, point 5). R1 to R3 use rewiring draws 3 to 5 and all runs use CEM
+seeds 211 to 215, none of which any pilot used. R3.5, R4 and R5 ride draw 1, which the pre-test pilots used and, for R4, a pilot ride with the primary readout, so predictions 3 and 5 and the R3.5 clause of prediction 2 are not tested on a new draw. Changes after the tag go in the dated "Deviations" section at the end, never by
+editing the text above it.
 
 ## 1. Question
 
 On a closed-loop task that the body cannot solve by itself, how much of the measured wiring does a fixed-weight
-spiking model of the whole fly central nervous system need before a learned decoder of a given size stops learning
+spiking model of the whole fly central nervous system need before a decoder learned on a fixed list of descending and motor cell types (secondary: on neurons screened on that brain) stops learning
 the task? Secondary: do the same perturbations break the model's decoder-free predictions and its decodability?
 
 ## 2. System
@@ -38,8 +39,8 @@ the task? Secondary: do the same perturbations break the model's decoder-free pr
 | R4 | all targets permuted | in-degree, out-degree, output synapses, signs |
 | R5 | targets drawn uniformly | out-degree, output synapses, signs |
 
-Model-side rung (to be added before the tag): +/-10% in synaptic scale and in the membrane and synaptic time
-constants, to put wiring error next to neuron-model error of the same size.
+Model-side rung: +/-10% in synaptic scale and in the membrane and synaptic time constants of R0, six variants, to put wiring
+error next to neuron-model error of the same size (section 5).
 
 ## 4. Transmission pre-test (gate for Track A)
 
@@ -51,8 +52,8 @@ neurons with |z| > 3 between left and right brains exceeds the largest value ove
 for both VS and haltere drive, and (b) the network rate outside the driven neurons is within 2x of
 R0's at scale 0.47 (21,500 spikes/s; so 10,750-43,000). Scales tried, in order: 0.47, 0.6, 0.8, 1.0, 1.5, 2.0. When a
 rung brackets the rate window between two ladder scales, the interval is bisected up to three times. A rung's riding
-scale is set closed-loop: of the scales run, the one whose network rate over the first 0.6 s of the reference replay is closest to R0's
-23,400 spikes/s and within 2x of it. The reference replay is the balance gate's decoder `results/ride_slow_mu.json` replayed on that brain, used only to measure this rate. The rate averaged over generation 0 of the search is reported next to R0's. A
+scale is set closed-loop: of the scales run upright, fine scans included, the one whose network rate over the first 0.6 s of the reference replay is closest in ratio to R0's
+23,400 spikes/s (smallest |log(rate / 23,400)|) and within 2x of it. If two adjacent scales bracket that window with neither inside it, the interval is bisected up to three times; scales added this way are candidates on their closed-loop rate alone, with no upright run. The fine scans already run stand in for the upright bisection of R3.5 and R4. Procedure: `ride-rung.sbatch` with `GENS=0`, then `tools/replay_rate.py` against `results/gate/v4.5_s201/ride_slow_mu_trace.json`. R1, R2 and R3 are not rescaled: they ride at 0.47 on every draw, and their closed-loop rate is reported only. The reference replay is the balance gate's decoder `results/ride_slow_mu.json` replayed on that brain, used only to measure this rate. The rate averaged over generation 0 of the search is reported next to R0's. A
 rung that fails the upright gate at every scale is reported as "no transmission" and gets one confirmatory Track A seed, no more, at the closed-loop scale just defined (R4: 1.2 on the pilot's numbers); "its own passing scale" in section 8 means this scale. A rung with no scale inside the closed-loop window gets no ride, and is reported as such.
 
 ## 5. Track A: closed-loop riding
@@ -60,18 +61,20 @@ rung that fails the upright gate at every scale is reported as "no transmission"
 - Speeds: 4.0 and 4.5 m/s. Criterion: mean riding time over 48 riders in the last generation, and the fraction
   riding the full 15 s; the hands-off floor is 3.5 s (4.0 m/s) and 5.7 s (4.5 m/s).
 - Search: cross-entropy method from a blank decoder, 48 riders x 15 s per generation, elite 25%, sigma0 as in
-  the balance gate, 5 h cap per run (about 60 generations). Identical CEM seeds for every rung.
-- Readout (fly-brain `runs/ride.py --readout`): each brain gets its own passenger screen
-  (`runs/screen.py --brain`); the decoder reads the k descending neurons that screen ranks highest by roll-rate
-  correlation, k = 8 and k = 32 (`topk`); `randk` draws k at random from the same pool, 3 draws; `bypass` reads
-  the 10 sense populations directly (ceiling). No hand-picked neuron list is used on any rung.
-- Design: every rung that passes the pre-test x k in {8, 32} x 3 rewiring draws x 5 CEM seeds x 2 speeds, plus
-  R0, bypass and random-k. Rungs that fail the pre-test: 1 confirmatory seed at k = 32.
-- Primary outcome per rung: last-generation mean riding time, median over seeds, with a paired bootstrap 95%
-  CI (10,000 resamples, paired by CEM seed) against R0. Secondary: finish fraction; generations to reach half
-  of R0's final riding time ("never" at the cap).
-- Held-out tests on the final decoders (not used in the search): unseen gust seeds, speed +/-0.5 m/s, silencing
-  that brain's own top-screened neurons.
+  the balance gate, 60 generations (`GENS=60`). Jobs are capped at 340 min; a run stopped by the cap is resumed until generation 60 (the resumed segment reseeds the search). CEM seeds 211 to 215, the same on every rung. All runs on the GPU; a run that has to
+  use the CPU is reported as such and still counts.
+- Primary readout (decided 2026-11-09, section 9a, point 5): the hand-picked list of the balance gate, 42 cell types (35 descending, 7 motor; 112 neurons on R0), plus one lane signal: a matched filter
+  over the list's neurons, weighted by that brain's own HS probe, with 300 ms smoothing (fly-brain `ride-rung.sbatch`). The list of names is the same on every rung. It was chosen on the real wiring,
+  so it favours R0: on a scrambled brain the same names are read, whatever those neurons now receive. A rung losing riding time is therefore not evidence by itself that the rung has no usable signal anywhere; the secondary readout is there for that question.
+- Secondary readout: each brain gets its own passenger screen (`runs/screen.py --brain`); the decoder reads the 32 descending
+  neurons that screen ranks highest by roll-rate correlation, plus up to 12 descending (type, side) groups that brain's HS probe picks (those with |z| >= 3; the number found is reported per brain), through its matched filter with 300 ms smoothing (`ride-readout.sbatch ... topk 32`, `LANE_K=12`).
+  Random-32 draws the 32 at random from the same pool, with the same lane channel; `bypass` reads the 10 sense populations directly (ceiling). On R0's pilot the top-32 readout with the lane channel did not hold the lane (section 9a, point 5), so its results are read as a floor on what a screened readout carries, and no prediction but prediction 3 uses it.
+- Primary design, 100 rides: R0, 5 CEM seeds x 2 speeds; R1, R2, R3, each 3 rewiring draws (3, 4, 5) x 5 CEM seeds x 2 speeds. Each new draw takes the pre-test of section 4 at 0.47 with 30 brains. A draw that fails it is ridden anyway and reported, and all runs of the design enter the medians.
+- Secondary design, at 4.5 m/s unless stated, about 40 rides, after the primary design: top-32 plus lane on R0 (5 CEM seeds), on R1, R2 and R3 (draws 3 to 5, CEM seed 211) and on R4 (draw 1, CEM seed 211, its closed-loop scale); random-32 plus lane on R0 (`READOUT_SEED` 0, 1 and 2, CEM seed 211); bypass on R0 (CEM seed 211, both speeds); the six model-side variants of section 3 with the primary readout (CEM seeds 211 to 213).
+- R3.5, R4 and R5 are not in the primary design. Each gets one ride with the primary readout (draw 1, CEM seed 211, 4.5 m/s) at its closed-loop scale, or none if it has no scale in the closed-loop window (section 4). R5 passes the upright gate at 2.0 only, weakly, and is treated like the rungs that fail it.
+- Primary outcome per rung and speed: last-generation mean riding time, median over the rung's runs (5 for R0, 15 for R1 to R3, 3 draws x 5 seeds). Every run's value and final lane-filter gain are reported. Predictions are decided on these point medians; the CI is descriptive. CI against R0: 10,000 bootstrap replicates (RNG seed 0); each replicate resamples the 5 CEM seeds with replacement, once, shared by all rungs and speeds, and, independently for each of R1, R2 and R3, resamples its 3 draws with replacement, once; statistic = median(rung runs) - median(R0 runs) in seconds; 95% percentile interval (2.5th and 97.5th percentiles). Secondary: finish fraction; generations to reach half
+  of R0's final riding time ("never" at generation 60).
+- Held-out tests, descriptive, on each primary run's final mean decoder (CEM mu), not used in the search and not used by any prediction: replay with unseen gust seeds (301, 302), and at the training speed +/-0.5 m/s with the pedal bias reset to hold the test speed (5.0 m/s is inside the self-stable range, so that condition says little). Silencing is not preregistered: the simulator's silencing leaves a neuron's spikes in the readout, and the test was written for per-brain top-k decoders.
 
 ## 6. Track B: decoder-free predictions
 
@@ -92,22 +95,24 @@ probe radii 10, 25 and 50 µm.
 
 ## 8. Predictions
 
-1. R1's and R2's primary outcome (last-generation mean riding time, median over the 5 CEM seeds) lies within
-   one seed-SD of R0's at both k, where the seed-SD is the standard deviation of R0's five last-generation means
-   at that k and speed. (Restated on 2026-11-08 from "R1 and R2 ride within one seed-SD of R0" so that the
+1. R1's and R2's primary outcome (section 5, primary readout) lies within
+   one seed-SD of R0's at each speed, where the seed-SD is the standard deviation (n - 1) of R0's five last-generation means
+   at that speed. The prediction holds only if |median(rung) - median(R0)| <= SD for R1 and for R2 at both speeds; each of the four is also reported. (The primary readout replaced "at both k" on 2026-11-09, section 9a, point 5. Restated on 2026-11-08 from "R1 and R2 ride within one seed-SD of R0" so that the
    statistic compared is the median of section 5, which one stalled search can shift only to the neighbouring
    seed's value, not drag down; section 9a, point 7.)
-2. R3 loses under 30% of R0's riding time; the transition lies between R3 and R3.5.
-3. R4, recalibrated to its own passing scale, rides no better than random-k on R0: the replayed final mean decoder
-   of R4 (48 riders, 15 s, off-road rule on, replay seed 201) rides no longer than the replayed final mean decoder of R0's random-k at the same k and speed, as medians over draws and CEM seeds.
+2. At each speed, R3 loses under 30% of R0's riding time: 1 - median(R3) / median(R0) < 0.30. The transition lies between R3 and R3.5: at 4.5 m/s, R3.5's one ride is below 70% of R0's primary outcome. If R3.5 has no closed-loop scale, this clause is reported as not tested.
+3. R4, recalibrated to its own passing scale, rides no better than random-32 on R0: the replayed final mean decoder
+   of R4's top-32 plus lane readout (one ride, section 5; 48 riders, 15 s, off-road rule on, replay seed 201) rides no longer, in mean riding time over the 48 replayed riders, than the median of the replayed final mean decoders of R0's random-32 plus lane readout (`READOUT_SEED` 0, 1, 2) at 4.5 m/s. R4's ride with the primary readout is reported next to it.
 4. R5 fails the pre-test at every scale.
-5. If R4 at its own calibration rides as well as R0 at k = 32, closed-loop riding is not a valid acceptance
-   test, and Track B becomes the headline result.
+5. If R4's single ride at its own calibration, 4.5 m/s, rides as well as R0 with the primary readout (at or above R0's primary outcome minus one seed-SD), closed-loop riding is not a valid acceptance
+   test, and Track B becomes the headline result. If it does not, that does not show riding is a valid test, because the list was chosen on R0; R4's top-32 plus lane ride next to R0's is reported for that question.
 
 ## 9. Already run (not confirmatory)
 
+Entries are as of their date. Where they call top-k the confirmatory readout or the readout of prediction 1, sections 5 and 8 supersede them (section 9a, point 5). Pilots are not the test because of their draws and seeds, not their readout.
+
 - Balance gate on R0: jobs 37491-37494 (2026-10-17/18), 4.0 and 4.5 m/s, seeds 201 and 202, hand-picked
-  readout list (`--readout base`), reaching 9.6-11.8 s and 11.9-13.7 s.
+  readout list (`--readout lane`), reaching 9.6-11.8 s and 11.9-13.7 s.
 - Pre-test pilot on R0, R4, R5 at scales 0.47-1.5 (2026-10-29, 8 brains, one draw): R4 and R5 near silent at
   0.47; R4 reaches 46-63% of R0's activity and 14-17 lateralised outputs at 1.5.
 - Pre-test on R1, R2, R3, R3.5 at 0.47 (2026-11-02, CPU, 8 brains, draw 1; `site/data.json`): network
@@ -242,13 +247,15 @@ probe radii 10, 25 and 50 µm.
   two draws for R1 to R3 and one for R3.5, R4, R5): R0 and every R1 to R3 draw score 0.6 with the right taste groups; R3.5, R4 and R5 score 0 (R4 and R5 with no response;
   R3.5 with both suppression rows of the wrong sign). With the left taste groups sugar drives MN9 at only 0.13 Hz on R0 and R1 draw 1 scores 0. Water to MN9 and JO-F to MDN are not as expected on R0. At the pre-test's scales R3.5 (0.5) scores 0.4, R4 (1.2) and R5 (2.0) score 0. The 100 draws are not done.
 
-## 9a. Open points before the tag
+## 9a. Open points before the tag (all closed on 2026-11-09)
 
-These came out of the runs above. Decisions below are dated; points 2 to 4, 6 and 8 to 10 were decided on 2026-11-09 (Victor adopted the recommendations, and left point 4, the half-of-R0 criterion and the choice of Track B rows to Claude). Point 5 is still open.
+Entries are as of their date, as in section 9.
+
+These came out of the runs above. Decisions below are dated; points 2 to 6 and 8 to 10 were decided on 2026-11-09 (Victor adopted the recommendations and chose the readout of point 5, and left point 4, the half-of-R0 criterion and the choice of Track B rows to Claude). All are closed.
 
 1. The model-side rung (section 3) and the Track B prediction CSV (section 6). The CSV is final as of 2026-11-09. State on 2026-11-08: the model-side
    pre-test ran on R0 (synaptic scale x0.9 and x1.1, membrane time constant 18 and 22 ms, synaptic time constant 4.5
-   and 5.5 ms; all six pass the gate; fly-brain `docs/CURRENT_NUMBERS.md`), and pilot rides of the six on R0 (fly-brain jobs 38191 to 38196, hand-picked readout) started on 2026-11-08. The 12-row draft of that date was cut to the 8 rows of the final CSV on 2026-11-09, after each source was read. Dethier 1976 could not be read and is no longer cited; Jaeger et al. 2018 is about salt and is no longer cited; DNp02 and DNp11 now cite Dombrovski et al. 2023; the sugar-to-giant-fiber control has no published test.
+   and 5.5 ms; all six pass the gate; fly-brain `docs/CURRENT_NUMBERS.md`), and pilot rides of the six on R0 (fly-brain jobs 38191 to 38196, hand-picked readout, CPU, one CEM seed, 60 generations) started on 2026-11-08. Last-generation means at the tag: synaptic scale x0.9 12.43 s, x1.1 9.26 s; membrane time constant 18 ms 11.05 s, 22 ms 13.36 s; synaptic time constant 4.5 ms 10.63 s; 5.5 ms still running at the tag (job 38196; 9.87 s after 19 generations). R0's three seeds rode 13.71, 11.89 and 10.91 s. The 12-row draft of that date was cut to the 8 rows of the final CSV on 2026-11-09, after each source was read. Dethier 1976 could not be read and is no longer cited; Jaeger et al. 2018 is about salt and is no longer cited; DNp02 and DNp11 now cite Dombrovski et al. 2023; the sugar-to-giant-fiber control has no published test.
 2. Scale ladder: R3.5 and R4 go from too quiet to runaway inside one ladder step (0.47 to 0.6, and 1.5 to 1.6).
    **Decided 2026-11-09:** when a rung brackets the rate window between two ladder scales, bisect up to three times (section 4).
 3. Where the scale is set: the rate criterion is measured upright, and the first 0.6 s of riding doubles the real
@@ -318,7 +325,8 @@ These came out of the runs above. Decisions below are dated; points 2 to 4, 6 an
    41 and 7); without the off-road rule all 48 fall (7.8 s; hands-off: 46 fall, 8.6 s). So top-k separates from random-k on balance (top-8 and top-32 keep all 48 replayed
    riders upright), and neither holds the lane. Numbers: fly-brain `docs/CURRENT_NUMBERS.md`, "Readout pilot on the real wiring" and
    "Replays with and without the off-road rule".
-   **State on 2026-11-09, still open.** The recommendation adopted was to keep the off-road rule and give the per-brain readout a lane channel, so it was built and piloted on R0: top-k plus the 12 descending (type, side) groups that the brain's own HS probe picks, through its matched filter with 300 ms smoothing (fly-brain `--lane-k`, jobs 38201 and 38202; GPU, 30 generations, seed 201). Top-8 with the lane channel: 6.93 s in the last generation, lane gain -0.08; its replay keeps 6 of 48 on the road for 15 s, 41 leave the road and 1 falls. Top-32 with the lane channel: 8.83 s, lane gain -0.09; its replay keeps 12 of 48, 36 leave the road, none falls, against 2 of 48 without the channel (median final distance without the rule 3.8 m against 16.5 m). The hand-picked readout's replays keep 46, 44 and 38 of 48 on R0. In this one seed the lane channel goes with 12 against 2 of 48 finishing at k = 32 and 6 against 7 at k = 8, and neither holds the lane. The lane runs were on the GPU and the runs without it on CPU, so the differences are not all the channel's. The readout of section 5 is therefore not settled and this document is not ready to tag.
+   **State on 2026-11-09, before the decision.** The recommendation adopted was to keep the off-road rule and give the per-brain readout a lane channel, so it was built and piloted on R0: top-k plus the 12 descending (type, side) groups that the brain's own HS probe picks, through its matched filter with 300 ms smoothing (fly-brain `--lane-k`, jobs 38201 and 38202; GPU, 30 generations, seed 201). Top-8 with the lane channel: 6.93 s in the last generation, lane gain -0.08; its replay keeps 6 of 48 on the road for 15 s, 41 leave the road and 1 falls. Top-32 with the lane channel: 8.83 s, lane gain -0.09; its replay keeps 12 of 48, 36 leave the road, none falls, against 2 of 48 without the channel (median final distance without the rule 3.8 m against 16.5 m). The hand-picked readout's replays keep 46, 44 and 38 of 48 on R0. In this one seed the lane channel goes with 12 against 2 of 48 finishing at k = 32 and 6 against 7 at k = 8, and neither holds the lane. The lane runs were on the GPU and the runs without it on CPU, so the differences are not all the channel's.
+   **Decided 2026-11-09 (Victor):** the hand-picked readout is primary and top-32 plus the lane channel is secondary (section 5). Of the readouts that read the brain, only the hand-picked one holds the lane on R0 (46, 44 and 38 of 48 finishing in replay), and a rung cannot lose a lane that R0 itself does not hold. The cost: this drops the per-brain readout from the primary analysis, so the same list of names is read on every rung (section 5), and the readout was chosen after the pilots, whose rung comparisons used it. Riding predictions on R1 to R3 are therefore tested only on rewiring draws and CEM seeds the pilots did not use (for R3.5, R4 and R5 only the CEM seed is new; see the header). The list of 42 types, the search and the pipeline are unchanged from the pilots. This drops the k dimension and cuts the primary design from about 200 rides to 100.
 6. Prediction 3's first bound. On the real wiring the bypass pilot rides 13.9 s in generation 29 (job 38037),
    about where the better hand-picked search ended (13.7 s after 58 generations) and 6.7 s above R0's own top-8
    readout (7.2 s). "No better than the bypass" therefore holds for the real wiring too and cannot separate R4
@@ -359,15 +367,15 @@ These came out of the runs above. Decisions below are dated; points 2 to 4, 6 an
    leave it to the median and report the number of stalled searches; or define a stall criterion before the tag.
    The marker seen so far (lane-filter gain near zero) exists only for the hand-picked readout; the top-k readouts
    of the confirmatory runs have no lane-filter channel, so a criterion would have to be stated on something else.
-   **Decided 2026-11-09:** no stall criterion. The median limits a stalled search, and every seed's value is reported, so readers can see any.
+   **Decided 2026-11-09:** no stall criterion. The median limits a stalled search, and every seed's value is reported, so readers can see any. After point 5 the primary readout does have the lane filter; no stall criterion and no exclusion still stand, and the final lane-filter gain of every run is reported.
 9. Track C reference (decided 2026-11-09). Section 7 says N90 is 90% of "the R² that all descending neurons give together", at both sites.
    Read literally, the wing-motor site uses the descending R² as its target; the alternative is each site's own R². The pilot
    gives different wing-motor N90s under the two (section 9), so the wording needs settling before the tag. The pilot's random
    orders are drawn over all of a site's neurons, including those silent in that replay. **Decided 2026-11-09:** each site's own R² (section 7).
 10. Track B score (decided 2026-11-09). The pilot's real wiring gets 3 of 5 signed rows, so two rows cannot separate rungs as they stand, and a score of signs alone
    passes an R1 draw whose sugar response is about 700 times weaker than R0's, and the side driven matters (22.5 Hz from the right on R0, 0.13 Hz from the left), so which side to drive also has to be fixed. Either drop or re-specify those rows, and either add a magnitude criterion or keep signs only. **Decided 2026-11-09:** both rows dropped (the grooming row too, having no readout, and the JO-C/E to MDN control, which was the JO-F row's partner), taste drive on both sides, half-of-R0 criterion, four flybench-derived rows (section 6, `docs/track_b_predictions.csv`).
-11. Confirmatory matrix (decided 2026-11-08, Victor): keep the design of section 5 and run it on the GPU, not a reduced matrix on CPU. On CPU it
-   would take 30 to 45 days. CUDA on the node worked again on 2026-11-08 (`/dev/nvidia-uvm` present, a torch CUDA test passed); the matrix waits on the tag.
+11. Confirmatory matrix (decided 2026-11-08, Victor): keep the design of section 5 and run it on the GPU, not a reduced matrix on CPU. On CPU the design of about 200 rides
+   would take 30 to 45 days. CUDA on the node worked again on 2026-11-08 (`/dev/nvidia-uvm` present, a torch CUDA test passed); the matrix waits on the tag. The primary design is 100 rides, about 5 h each (about 5.2 h at 4.5 m/s on the gate's numbers): 20 to 22 days on one GPU, about 7 on three; another user held two of the node's three GPUs on 2026-11-09.
 
 ## 10. Deviations
 

@@ -36,8 +36,8 @@ predictions (Track B), and how many recorded neurons a decoder needs (Track C).
   set back to true for that one commit.
 - `tools/export_data.py` rebuilds `site/data.json` from a fly-brain checkout's `fly_brain/results/` (balance gate,
   rung rides, pre-test cells). Run it and commit the file whenever new runs land.
-- `docs/PREREGISTRATION.md` the preregistration draft, with what has already been run and the open points before
-  it is tagged.
+- `docs/PREREGISTRATION.md` the preregistration, fixed by the git tag `prereg-v1` (2026-11-09), with what had already
+  been run; later changes go in its Deviations section.
 
 ## Licence
 
