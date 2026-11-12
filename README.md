@@ -38,6 +38,7 @@ predictions (Track B), and how many recorded neurons a decoder needs (Track C).
   rung rides, pre-test cells). Run it and commit the file whenever new runs land.
 - `docs/PREREGISTRATION.md` the preregistration, fixed by the git tag `prereg-v1` (2026-11-09), with what had already
   been run; later changes go in its Deviations section.
+- `docs/REPORT_DRAFT.md` interim draft of the 4 December technical report (2026-11-12); confirmatory rides still running, pending numbers marked
 
 ## Licence
 
