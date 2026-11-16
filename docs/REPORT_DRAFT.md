@@ -79,7 +79,7 @@ As of 2026-11-16, these parts are done:
 - **Primary rides at 4.5 m/s, CEM seed 211:** R0 and the nine R1 to R3 draws (jobs 38263 to 38272).
 - **Primary rides at 4.0 m/s, CEM seed 211:** R0 and the nine R1 to R3 draws (jobs 38710, 38714, 38728, 38735, 38750, 38758, 38766, 38778, 38783, 38791).
 - **Primary rides at 4.5 m/s, CEM seed 212:** R0, R1 draws 3 to 5, R2 draws 3 to 5 and R3 draw 3 (jobs 38798, 38802, 38806, 38815, 38824, 38831, 38835, 38847).
-- **Held-out replays** of 27 of these 28 rides. Those of R3 draw 3, seed 212, are running (job 38895).
+- **Held-out replays** of all 28 of these rides.
 - **The single rides of R3.5, R4 and R5** (jobs 38371 to 38373, CPU).
 - **The Track B confirmatory runs** (jobs 38414 to 38429).
 
@@ -87,7 +87,7 @@ Track C has a pilot (job 38185, R0 to R3) and a confirmatory run on all 13 confi
 
 The rest of the queue runs one job at a time, as a relay. On 2026-11-11 the ledger estimated about four weeks left; the Track C links at the front of the queue added about half a day (CURRENT_NUMBERS.md, "The queue as one chain" and "Confirmatory Track C at the front of the queue").
 
-[pending: 72 primary rides: seed 212 on R3 draws 4 and 5 at 4.5 m/s, seed 212 at 4.0 m/s, and seeds 213 to 215 at both speeds; the held-out replays of R3 draw 3, seed 212; the secondary design (top-32, random-32, bypass, model-side variants); prediction 3's replays]
+[pending: 72 primary rides: seed 212 on R3 draws 4 and 5 at 4.5 m/s, seed 212 at 4.0 m/s, and seeds 213 to 215 at both speeds; the secondary design (top-32, random-32, bypass, model-side variants); prediction 3's replays]
 
 ## 2. Methods
 
@@ -227,7 +227,7 @@ These replays use `tools/heldout.py` and `heldout.sbatch`, with 48 riders and 15
 | 4.0 m/s, seed 211 | R0, R1 draws 3 to 5, R2 draws 3 to 5, R3 draws 3 to 5 | 38710, 38714, 38728, 38735, 38750, 38758, 38766, 38778, 38783, 38791 |
 | 4.5 m/s, seed 212 | R0, R1 draws 3 to 5, R2 draws 3 to 5, R3 draw 3 | 38798, 38802, 38806, 38815, 38824, 38831, 38835, 38847 |
 
-- 27 of these 28 rides also have their held-out replays. Those of R3 draw 3, seed 212, are running (job 38895).
+- All 28 of these rides also have their held-out replays (the last, R3 draw 3 seed 212, was job 38895).
 - The single rides of R3.5, R4 and R5 are done. They ran on the CPU (jobs 38371 to 38373) because the GPUs were taken.
 - [pending: seed 212 on R3 draws 4 and 5 at 4.5 m/s and on every primary cell at 4.0 m/s, and seeds 213 to 215 on every primary cell at both speeds (72 rides); these fill the medians, the seed-SD and the bootstrap CI.]
 - [pending: the secondary design.]
@@ -443,7 +443,7 @@ At 4.5 m/s with seed 211, the median over R1's three draws is 13.72 s.
 
 ### 3.4 Held-out replays
 
-Each finished primary run's final mean decoder is replayed with 48 riders for 15 s on the CPU. 27 of the 28 finished rides have their replays; those of R3 draw 3, seed 212, are running (job 38895). The replays used unseen gust seeds 301 and 302, and the training speed plus and minus 0.5 m/s. Section 5 makes these replays descriptive. No prediction uses them.
+Each finished primary run's final mean decoder is replayed with 48 riders for 15 s on the CPU. All 28 finished rides have their replays. The replays used unseen gust seeds 301 and 302, and the training speed plus and minus 0.5 m/s. Section 5 makes these replays descriptive. No prediction uses them.
 
 Riding time is in seconds, with riders finished out of 48 in brackets. For rides trained at 4.0 m/s, the "+0.5" column is 4.5 m/s and the "−0.5" column is 3.5 m/s.
 
@@ -478,16 +478,16 @@ Rows without a seed are seed 211.
 | R2 draw 3 seed 212, 4.5 m/s | 38829 | 13.64 (35) | 13.57 (39) | 10.60 (21) | 8.56 (2) |
 | R2 draw 4 seed 212, 4.5 m/s | 38833 | 14.92 (47) | 14.34 (43) | 14.91 (46) | 7.01 (1) |
 | R2 draw 5 seed 212, 4.5 m/s | 38845 | 14.50 (44) | 14.41 (41) | 12.77 (30) | 5.40 (0) |
-| R3 draw 3 seed 212, 4.5 m/s | 38895 | [pending: running] | | | |
+| R3 draw 3 seed 212, 4.5 m/s | 38895 | 13.58 (31) | 13.26 (34) | 12.35 (21) | 8.44 (2) |
 
 What the replays show:
-- **Unseen gusts cost little** for most decoders. With seed 212, 30 to 48 of 48 riders finish under new gusts (7 of 8 decoders replayed so far).
+- **Unseen gusts cost little** for most decoders. With seed 212, 30 to 48 of 48 riders finish under new gusts (all 8 decoders replayed so far).
 - **Slowing down costs the most.**
   - At 4.0 m/s, R0's seed-211 4.5 m/s decoder finishes no rider, and 35 of 48 fall.
   - At the same speed, the falls out of 48 for the seed-211 decoders are 26, 29 and 32 for R2's draws, 10, 12 and 23 for R3's, and 14, 1 and 15 for R1's.
   - R1 and R3 lose more riders off the road there (R1: 10, 37, 33; R3: 29, 36, 15) than R0 (13) and R2 (18, 1, 12).
-  - With seed 212, 0 to 2 riders finish at 4.0 m/s on every seed-212 decoder replayed so far (7 of 8). R0's seed-212 decoder has 27 riders fall and 21 leave the road. R1 draw 3's has 47 fall (5.17 s) and R2 draw 5's has 39 fall (5.40 s).
-- **Sped up to 5.0 m/s, R0's seed-212 decoder loses 35 riders off the road.** That is more than any of the six seed-212 rewired decoders replayed so far (2 to 27). With seed 211, R0's decoder lost 20 at 5.0 m/s, against 6 to 34 for the rewired ones, so this is one replay of one decoder, not a pattern.
+  - With seed 212, 0 to 2 riders finish at 4.0 m/s on every seed-212 decoder replayed so far (8 of 8). R3 draw 3's has 24 fall and 22 leave the road. R0's seed-212 decoder has 27 riders fall and 21 leave the road. R1 draw 3's has 47 fall (5.17 s) and R2 draw 5's has 39 fall (5.40 s).
+- **Sped up to 5.0 m/s, R0's seed-212 decoder loses 35 riders off the road.** That is more than any of the seven seed-212 rewired decoders replayed so far (2 to 27; R3 draw 3's loses 27). With seed 211, R0's decoder lost 20 at 5.0 m/s, against 6 to 34 for the rewired ones, so this is one replay of one decoder, not a pattern.
 - **Sped up to 4.5 m/s, several 4.0 m/s decoders lose the lane.** 41 to 45 of 48 riders leave the road for R1 draw 4 (job 38731), R1 draw 5 (job 38743), R2 draw 5 (job 38776) and R3 draw 3 (job 38780), 38 for R3 draw 4 (job 38789) and 33 for R2 draw 3 (job 38753). No 4.0 m/s decoder, R0's included, has a rider fall at 4.5 m/s.
 - **Some 4.0 m/s decoders also lose the lane under new gusts.** For R2 draws 3 and 5, 32 to 37 of 48 riders leave the road, and only 8 to 15 finish. R3 draw 4 has the fewest finishers under new gusts of any decoder so far: 47 and 44 leave the road, and only 0 and 2 finish. R3 draw 5 holds better (34 and 32 finish).
 - **R0's 4.0 m/s decoder** loses most riders to falls at 3.5 m/s (28 fall), as R0's 4.5 m/s decoder does at 4.0 m/s. At 3.5 m/s, R2 draw 5 is similar (32 fall), while R2 draw 3 (34 leave the road, 14 fall), R2 draw 4 (27 and 19), R3 draw 3 (28 and 20), R3 draw 4 (38 and 10) and R3 draw 5 (29 and 19) lose more riders off the road than to falls.
@@ -741,7 +741,7 @@ The interim figure has three rows:
 - Seed 211, 4.0 m/s: the same ten cells (jobs 38710, 38714, 38728, 38735, 38750, 38758, 38766, 38778, 38783, 38791). Seed 211 is therefore complete on all 20 primary cells.
 - Seed 212, 4.5 m/s: R0, R1 draws 3 to 5, R2 draws 3 to 5 and R3 draw 3 (jobs 38798, 38802, 38806, 38815, 38824, 38831, 38835, 38847).
 
-Held-out replays have finished for 27 of these rides. Those of R3 draw 3, seed 212, are running (job 38895).
+Held-out replays have finished for all 28 of these rides.
 
 Pending: 72 primary rides. They are seed 212 on R3 draws 4 and 5 at 4.5 m/s, seed 212 on all ten cells at 4.0 m/s, and seeds 213 to 215 on all 20 cells, each with its held-out replays.
 
@@ -782,7 +782,7 @@ The ledger estimated about four weeks at that point, at about 5 h per ride and 3
 
 On 2026-11-15 the confirmatory Track C links were put at the front of the relay (jobs 38854 to 38893). The ledger estimated that this moves the remaining rides back about half a day.
 
-On 2026-11-16 the relay is running the held-out replays of R3 draw 3, seed 212 (job 38895). What is left:
+On 2026-11-16 the relay is running seed 212 on R3 draw 4 at 4.5 m/s (job 38897). What is left:
 
 1. 72 primary rides, each followed by its held-out replays: seed 212 on R3 draws 4 and 5 at 4.5 m/s, seed 212 on all ten cells at 4.0 m/s, and seeds 213 to 215 on all 20 cells;
 2. the 38 secondary rides;
