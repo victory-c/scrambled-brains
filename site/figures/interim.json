@@ -244,6 +244,14 @@
   {
    "rung": "R3",
    "kind": "confirmatory",
+   "label": "draw 4, seed 212",
+   "riding_s": 11.283,
+   "generations": 60,
+   "source": "rungs/conf_r3_s4/v4.5_s212/cem.json"
+  },
+  {
+   "rung": "R3",
+   "kind": "confirmatory",
    "label": "draw 5, seed 211",
    "riding_s": 13.535,
    "generations": 60,
@@ -1980,5 +1988,5 @@
    "source": "track_c/confirmatory/r5_s1_w2_cpu_n90.json"
   }
  ],
- "data_date": "2026-11-15"
+ "data_date": "2026-11-16"
 }
