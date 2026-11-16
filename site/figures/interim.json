@@ -114,12 +114,28 @@
    "source": "rungs/conf_r0/v4.5_s211/cem.json"
   },
   {
+   "rung": "R0",
+   "kind": "confirmatory",
+   "label": "seed 212",
+   "riding_s": 12.453,
+   "generations": 60,
+   "source": "rungs/conf_r0/v4.5_s212/cem.json"
+  },
+  {
    "rung": "R1",
    "kind": "confirmatory",
    "label": "draw 3, seed 211",
    "riding_s": 14.652,
    "generations": 60,
    "source": "rungs/conf_r1_s3/v4.5_s211/cem.json"
+  },
+  {
+   "rung": "R1",
+   "kind": "confirmatory",
+   "label": "draw 3, seed 212",
+   "riding_s": 12.376,
+   "generations": 60,
+   "source": "rungs/conf_r1_s3/v4.5_s212/cem.json"
   },
   {
    "rung": "R1",
@@ -132,10 +148,26 @@
   {
    "rung": "R1",
    "kind": "confirmatory",
+   "label": "draw 4, seed 212",
+   "riding_s": 12.952,
+   "generations": 60,
+   "source": "rungs/conf_r1_s4/v4.5_s212/cem.json"
+  },
+  {
+   "rung": "R1",
+   "kind": "confirmatory",
    "label": "draw 5, seed 211",
    "riding_s": 10.473,
    "generations": 60,
    "source": "rungs/conf_r1_s5/v4.5_s211/cem.json"
+  },
+  {
+   "rung": "R1",
+   "kind": "confirmatory",
+   "label": "draw 5, seed 212",
+   "riding_s": 11.231,
+   "generations": 60,
+   "source": "rungs/conf_r1_s5/v4.5_s212/cem.json"
   },
   {
    "rung": "R2",
@@ -148,6 +180,14 @@
   {
    "rung": "R2",
    "kind": "confirmatory",
+   "label": "draw 3, seed 212",
+   "riding_s": 12.766,
+   "generations": 60,
+   "source": "rungs/conf_r2_s3/v4.5_s212/cem.json"
+  },
+  {
+   "rung": "R2",
+   "kind": "confirmatory",
    "label": "draw 4, seed 211",
    "riding_s": 13.048,
    "generations": 60,
@@ -156,10 +196,26 @@
   {
    "rung": "R2",
    "kind": "confirmatory",
+   "label": "draw 4, seed 212",
+   "riding_s": 12.474,
+   "generations": 60,
+   "source": "rungs/conf_r2_s4/v4.5_s212/cem.json"
+  },
+  {
+   "rung": "R2",
+   "kind": "confirmatory",
    "label": "draw 5, seed 211",
    "riding_s": 13.259,
    "generations": 60,
    "source": "rungs/conf_r2_s5/v4.5_s211/cem.json"
+  },
+  {
+   "rung": "R2",
+   "kind": "confirmatory",
+   "label": "draw 5, seed 212",
+   "riding_s": 11.015,
+   "generations": 60,
+   "source": "rungs/conf_r2_s5/v4.5_s212/cem.json"
   },
   {
    "rung": "R3",
@@ -1795,5 +1851,5 @@
    "source": "track_c/r3.json"
   }
  ],
- "data_date": "2026-11-11"
+ "data_date": "2026-11-15"
 }
