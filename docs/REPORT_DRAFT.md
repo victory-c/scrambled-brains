@@ -24,6 +24,8 @@ Outside the primary design, R3.5, R4 and R5 each get one ride (draw 1, CEM seed 
 
 The Track B confirmatory scores are finished: R1 scores 0.682, R2 0.993, R3 1.000, and every rung from R3.5 up scores 0.000 to 0.056.
 
+The confirmatory Track C run is finished on all 13 confirmatory brains (one replay each, seed 211, 4.5 m/s). At the descending-neuron site, 2 or 3 neurons in screen order reach 90% of the site's roll-rate R² on R0 to R3, and 14 to 19 on R3.5, R4 and R5. Simulated jGCaMP8m keeps 35 to 60% of the spike R² at the descending site on R0 to R3 at 30 Hz (20 to 40% at the wing-motor site). On R0 to R3, a 10 µm probe centred on DNp20_R keeps about two thirds of its on-target median R² at a 10 µm miss and almost none at 25 µm; on R3.5 to R5 it carries almost nothing even on target. Track C has no preregistered prediction.
+
 [pending: medians over five CEM seeds, bootstrap intervals and the tests of predictions 1 to 3 and 5, about four weeks of queue]
 
 ## 1. Introduction
@@ -66,9 +68,9 @@ The plan was tagged `prereg-v1` on 2026-11-09, before the first confirmatory Tra
 
 Pilot rides on draws 1 and 2 began on 2026-11-05. The riding predictions are therefore informed by pilot data, not blind. The confirmatory runs use rewiring draws 3 to 5 for R1 to R3 and CEM seeds 211 to 215, which no pilot used. R3.5, R4 and R5 ride draw 1, which the pilots used. So predictions 3 and 5, and the R3.5 clause of prediction 2, are not tested on a new draw.
 
-One pilot already went against a prediction. Prediction 4, that R5 fails the pre-test at every scale, was contradicted before the tag: R5 passed weakly at 2.0. The pass gave 7 and 8 lateralised outputs against a null maximum of 4. The prediction was left as written. No deviations have been recorded since the tag (preregistration section 10).
+One pilot already went against a prediction. Prediction 4, that R5 fails the pre-test at every scale, was contradicted before the tag: R5 passed weakly at 2.0. The pass gave 7 and 8 lateralised outputs against a null maximum of 4. The prediction was left as written. Since the tag, section 10 has one entry (2026-11-15), which fixed the open Track C points before any confirmatory Track C data was recorded; it changes no prediction.
 
-As of 2026-11-13, these parts are done:
+As of 2026-11-13 (Track C: 2026-11-16), these parts are done:
 
 - **Confirmatory pre-test** on draws 3 to 5 (job 38261). Eight draws pass. R2 draw 3 fails on the null only and is ridden anyway, as preregistered.
 - **Primary rides at 4.5 m/s** for CEM seed 211 only: R0 and the nine R1 to R3 draws (jobs 38263 to 38272).
@@ -76,11 +78,11 @@ As of 2026-11-13, these parts are done:
 - **The single rides of R3.5, R4 and R5** (jobs 38371 to 38373, CPU).
 - **The Track B confirmatory runs** (jobs 38414 to 38429).
 
-Track C has only a pilot (job 38185, R0 to R3).
+Track C has a pilot (job 38185, R0 to R3) and a confirmatory run on all 13 confirmatory brains (jobs 38854 to 38893, section 4.3).
 
 The rest of the queue runs one job at a time, as a relay, with about four weeks left (CURRENT_NUMBERS.md, "The queue as one chain").
 
-[pending: CEM seeds 212 to 215 on every primary rung, both speeds; the 4.0 m/s rides of R3 draws 4 and 5; the secondary design (top-32, random-32, bypass, model-side variants); prediction 3's replays; confirmatory Track C]
+[pending: CEM seeds 212 to 215 on every primary rung, both speeds; the 4.0 m/s rides of R3 draws 4 and 5; the secondary design (top-32, random-32, bypass, model-side variants); prediction 3's replays]
 
 ## 2. Methods
 
@@ -276,7 +278,7 @@ The preregistration also specifies:
 - It recorded 1,314 descending and 67 wing motor neurons, giving 7,200 samples per brain.
 - It used five folds over riders and 20 random orders.
 
-[pending: Track C on the confirmatory rides; the jGCaMP8 and probe-distance analyses; and R3.5 to R5, which had no decoder to replay when the pilot ran.]
+**Confirmatory run** (2026-11-15 and 16, after the tag). Preregistration section 10, entry 1 fixed the open points before the data existed: one replay per brain of the seed-211 decoder at 4.5 m/s on all 13 confirmatory brains, the off-road rule off, 10 ms counts summed to 100 ms, each brain's own screen order, the jGCaMP8 model (`tools/track_c_calcium.py`, kinetics and saturation fitted to Zhang et al. 2023, Extended Data Table 3) and the probe geometry (`tools/track_c_probe.py`, targets DNp20 and hg4 MN, left and right). Results are in section 4.3.
 
 ### 2.7 Preregistered predictions
 
@@ -469,7 +471,7 @@ The rides run one at a time as a relay queue (`tools/submit_serial.py --next`), 
 
 ## 4. Results: Tracks B and C
 
-This section reports the decoder-free predictions (Track B) and decodability (Track C). Track B has a confirmatory run, done after the `prereg-v1` tag of 9 November. Track C has only a pilot, run on 8 November, before the tag. Neither track carries a numbered prediction in preregistration section 8. Section 4.3 sets out which predictions these results touch.
+This section reports the decoder-free predictions (Track B) and decodability (Track C). Track B has a confirmatory run, done after the `prereg-v1` tag of 9 November. Track C has a pilot, run on 8 November before the tag, and a confirmatory run on 15 and 16 November. Neither track carries a numbered prediction in preregistration section 8. Section 4.4 sets out which predictions these results touch.
 
 ### 4.1 Track B: confirmatory scores
 
@@ -542,7 +544,7 @@ The closed-loop scales (R4 at 1.2, R5 at 2.0) do not bring the rows back. The si
 
 ### 4.2 Track C: pilot decodability (R0 to R3 only)
 
-**Status.** Everything in this subsection is a pilot from before the tag. No confirmatory Track C run exists.
+**Status.** Everything in this subsection is a pilot from before the tag. The confirmatory run is in section 4.3.
 
 **Data.**
 - One replay per brain of a final CEM mean decoder: hand-picked readout, draw 1, 48 riders × 15 s, seed 201, no off-road rule.
@@ -596,13 +598,67 @@ Each of these rungs now has one confirmatory ride. None finishes a rider in its 
 | R4 | 38372 | 1.2 | 2.96 |
 | R5 | 38373 | 2.0 | 4.34 |
 
-[pending: Track C on these rides, and confirmatory Track C on all rungs]
+Section 4.3 has Track C on these rides.
 
-[pending: the simulated jGCaMP8 dF/F (30 and 10 Hz) and probe-distance (10, 25, 50 µm) parts of preregistration section 7; neither has been run]
+### 4.3 Track C: confirmatory decodability (15 and 16 November)
 
-### 4.3 Which predictions these results bear on
+**Status.** Confirmatory, run after the tag to the specification fixed in preregistration section 10, entry 1, before any confirmatory Track C data existed. Section 8 has no Track C prediction, so nothing here tests one. Every number is from `fly-brain docs/CURRENT_NUMBERS.md` ("Confirmatory Track C at the front of the queue") and `fly_brain/results/track_c/confirmatory/`.
 
-**No prediction is tested by Track B or Track C.** The preregistration states no numerical Track B prediction. Section 4.1 is reported as the decoder-free result of section 6. Track C likewise has no numbered prediction, and its data so far are pilot only.
+**Data.**
+- One replay per brain of the final CEM mean decoder of seed 211 at 4.5 m/s: R0; R1, R2 and R3 draws 3 to 5; R3.5, R4 and R5 draw 1 at 0.47, 1.2 and 2.0 (jobs 38860 to 38885, CPU, 8 to 15 min each, all on the first try).
+- 48 riders, 15 s, replay seed 201, off-road rule off, so riders who leave the road keep riding. These finish fractions (96 to 100% on R0 to R3, 65% on R4, 2% on R5, 0% on R3.5) are recordings, not riding results.
+- A new recorder writes 10 ms counts; summed to 100 ms they reproduce the pilot's R0 counts exactly (job 38854, 1,984,385 spikes).
+- R3.5's riders had all fallen by 12 s, so its counts cover 12 s. On R5, 22 of 48 riders bailed out through the giant-fibre escape.
+- Analyses: N90 (job 38887), simulated jGCaMP8 (job 38889) and probe distance (job 38893).
+
+**N90 with spike counts, descending site (1,314 neurons), each site's own R² as the reference.** Samples are rider-bins of 100 ms with the rider up for the whole bin.
+
+| Brain | Samples | R² of the site | N90, screen order | N90, random: median (25–75%) | Random, active only: median |
+|---|---|---|---|---|---|
+| R0 | 7,123 | 0.97 | 3 | 171 (139–324) | 52 |
+| R1 draws 3 / 4 / 5 | 7,195–7,200 | 0.94 / 0.92 / 0.95 | 3 / 2 / 2 | 385 / 382 / 336 | 77 / 110 / 67 |
+| R2 draws 3 / 4 / 5 | 7,146–7,157 | 0.96 / 0.93 / 0.96 | 2 / 3 / 2 | 259 / 391 / 315 | 78 / 115 / 81 |
+| R3 draws 3 / 4 / 5 | 7,200 | 0.95 / 0.97 / 0.94 | 3 / 3 / 3 | 315 / 198 / 315 | 78 / 55 / 82 |
+| R3.5 at 0.47 | 2,190 | 0.87 | 14 | 585 (515–688) | 86 |
+| R4 at 1.2 | 5,890 | 0.89 | 14 | 567 (452–692) | 180 |
+| R5 at 2.0 | 3,960 | 0.92 | 19 | 361 (293–425) | 308 |
+
+At the wing-motor site (67 neurons), N90 in screen order is 2 to 5 on R0 to R3 against random medians of 29 to 39, and 7, 7 and 15 on R3.5, R4 and R5, where the site's R² falls to 0.45, 0.61 and 0.53. The secondary reference (the wing-motor site against 90% of the descending R²) is reached on 8 of 13 brains, at 5 to 9 neurons in screen order; not on R0, R3 draw 5, R3.5, R4 or R5.
+
+**Simulated jGCaMP8.** The primary rows are jGCaMP8m with saturation and 100 photons per neuron per 33.3 ms frame, at 30 Hz and at 10 Hz (own acquisition); spikes on the same frames are the baseline.
+- On R0 to R3, 8m at 30 Hz keeps 35 to 60% of the spike R² at the descending site (0.29 to 0.55 against 0.82 to 0.91) and 20 to 40% at the wing-motor site; at 10 Hz, 27 to 52% and 17 to 35%. N90 in screen order rises to 73 to 204 descending neurons at 30 Hz (53 to 257 at 10 Hz), against 2 to 6 with spikes, and screen order still beats random order (medians 699 to 876).
+- On R3.5, R4 and R5 the loss is smaller. At 30 Hz their 8m R² is 0.87 to 1.07 times the spike R² at the descending site and 1.20 to 1.83 times at the wing-motor site; at 10 Hz it is 0.68 to 0.94 and 0.70 to 1.12 times. Calcium beats spikes only against the noisy 33 ms spike baseline, and clearly only on R5. These brains' spike readout already needs 14 to 41 neurons. Why the indicator reads them comparatively well has not been looked into.
+- jGCaMP8f gives a higher R² than 8m at the descending site on every brain, and 8s a much lower one (its rows are the least reliable: about 29% of the start-up transient remains after the 1 s burn-in). The linear row differs from 8m in kinetics as well as saturation, so it only bounds what saturation costs. The photon budget (30 to 300) moves R² by at most 0.09.
+- N90 under calcium is fragile: screen-order curves have plateaus just under the target, and N90 for the same brain differs by a factor of up to about 3.5 between 10 Hz own acquisition and the averaged 30 Hz movie.
+- Culture kinetics at room temperature stand in for fly neurons in vivo.
+
+**Probe distance.** A ball of radius 10, 25 or 50 µm records every neuron whose soma lies inside it, site neuron or not; its centre misses a named target by 0 to 50 µm along 20 directions. Medians over directions:
+
+| Brains | DNp20_R, r 10: d 0 / 10 / 25 | r 25: d 0 / 25 / 50 | r 50: d 0 / 50 | hg4 MN_L, r 10: d 0 | r 25: d 0 | r 50: d 0 |
+|---|---|---|---|---|---|---|
+| R0 to R3 (range over 10 brains) | 0.63–0.78 / 0.42–0.54 / 0.00–0.01 | 0.71–0.86 / 0.62–0.77 / 0.05–0.17 | 0.81–0.89 / 0.75–0.86 | 0.06–0.44 | 0.18–0.54 | 0.25–0.65 |
+| R3.5 / R4 / R5 | 0.06 / 0.01 / 0.14 on target | 0.50 / 0.68 / 0.85 on target | 0.73 / 0.82 / 0.95 on target | 0.00 / 0.02 / 0.06 | 0.10 / 0.33 / 0.47 | 0.18 / 0.34 / 0.65 |
+
+- On R0 to R3, the 10 µm ball on DNp20_R gives 68 to 81% of the site's R². Off target the result depends strongly on the direction of the miss: at d = 10 the 25 to 75% range runs from 0.03–0.12 at its low end to 0.62–0.78 at its high end, and some of the zeros at larger d are balls that hold no neuron (for example 5 of 20 directions at d = 25 for the 10 µm ball on DNp20_R).
+- On R3.5, R4 and R5 the 10 µm balls on the primary targets carry almost nothing; the replicate DNp20_L keeps 0.17 on R4 and 0.46 on R5. Larger balls, which hold 301 to 1,784 neurons around DNp20_R, recover much of the site's R², and on R5 can exceed it, because a ball is not limited to the site.
+- The wing-motor target hg4 MN_L is weaker and varies more between brains; its replicate hg4 MN_R is weaker still at small radii on most brains.
+
+**What the confirmatory run shows.**
+- With spikes, screened neurons are far cheaper than random ones at the descending site on every brain. N90 at the descending site is 2 or 3 on R0 to R3 and 14 to 19 on R3.5 to R5, so it separates R0 to R3 from R3.5, R4 and R5 but not R0 to R3 from each other. The two groups also differ in decoder, riding and sample count, so this is not a clean measure of wiring alone.
+- The random-order contrast is partly a silent-neuron effect: 69 to 77% of the descending site is silent on R0 to R3, and random orders drawn only from active neurons need 52 to 115.
+- The simulated indicator (kinetics, saturation and photon noise together) costs R0 to R3 40 to 65% of the descending-site signal and most of the wing-motor signal, and makes N90 large and unstable.
+- On R0 to R3 a 10 µm probe on DNp20_R keeps about two thirds of its on-target median R² (about half the site's R²) at a 10 µm miss and close to none at 25 µm; the wing-motor target hg4 MN_L is weaker throughout. On R3.5 to R5 the 10 µm balls on the primary named somata carry almost nothing, and only larger balls find the signal.
+
+**Limits.**
+- One replay per brain, one CEM seed, riders kept on after leaving the road, so the states differ from training.
+- Closed loop: a neuron can predict roll rate because it follows the haltere input, or because the decoder reads it and steers.
+- R3.5, R4 and R5 have fewer samples (2,190 to 5,890 against about 7,200), because their riders fall or bail early.
+- Screen order comes from each brain's own passenger screen, made on the GPU for R1 to R3 draws 3 to 5 and on the CPU for the others.
+
+
+### 4.4 Which predictions these results bear on
+
+**No prediction is tested by Track B or Track C.** The preregistration states no numerical Track B prediction. Section 4.1 is reported as the decoder-free result of section 6. Track C likewise has no numbered prediction; its confirmatory run (section 4.3) is descriptive.
 
 **Prediction 2 (transition between R3 and R3.5).** Track B falls at the same place: R3 scores 1.000 and R3.5 scores 0.000. Prediction 2 is stated on riding time, though. Its R3.5 clause waits on R0's median over five seeds.
 
@@ -631,7 +687,7 @@ The interim figure has three rows:
 
 - **Row A:** the last-generation riding time of every finished hand-picked-readout search at 4.5 m/s. These are the 60-generation searches, plus R0's three gate pilots, which stopped at 58, 57 and 60 generations. Confirmatory rides are shown filled and pilots open.
 - **Row B:** the Track B confirmatory score for each draw.
-- **Row C:** the Track C pilot N90 at the descending site, for R0 to R3 only. R3.5 to R5 have not been measured, because the pilot ran before those rungs were ridden.
+- **Row C:** the confirmatory Track C N90 at the descending site on all 13 confirmatory brains: 2 or 3 in screen order on R0 to R3, 14 to 19 on R3.5, R4 and R5.
 
 ### 5.2 What is done and what is pending
 
@@ -656,7 +712,7 @@ The 9 confirmatory draws took the 30-brain pre-test at scale 0.47 (job 38261). R
 
 **Track B.** Done: R0's reference (job 38414), a one-draw test (job 38415) and the remaining runs, jobs 38416 to 38429 (218 brains, no failed draw). `results/track_b/confirmatory/scores.json` holds 219 brains: R0's reference and 218 rewired brains. The preregistration gives no numerical Track B prediction, so this result does not test anything.
 
-**Track C.** Only the pilot on R0 to R3 exists (`results/track_c/r0..r3.json`). [pending: confirmatory Track C decodability runs]
+**Track C.** Done: the pilot on R0 to R3 (`results/track_c/r0..r3.json`) and the confirmatory run on all 13 brains (`results/track_c/confirmatory/`).
 
 **Predictions.** None of the preregistered predictions has been tested yet:
 
@@ -679,7 +735,7 @@ The ledger estimated about four weeks at that point, at about 5 h per ride and 3
 
 ### 5.4 Deviations from the preregistration
 
-Section 10 of the preregistration lists no deviations ("(none yet)").
+Section 10 of the preregistration has one entry. Entry 1 (2026-11-15, before any confirmatory Track C data was recorded) fixes the Track C points section 7 left open: which decoders are replayed, the ride conditions (off-road rule off), 10 ms bins summed to 100 ms with an exact check against the pilot, screens, the N90 reference, the jGCaMP8 model and the probe geometry. Points (b), (c) and (e) depart from the pilot procedure; none changes a prediction.
 
 The move to one job at a time on 2026-11-11 is not a deviation. The cluster QoS sets one running job per user (`MaxJobsPU=1`). Slurm does not enforce that limit, but the queue had been holding 2 of the node's 3 GPUs while another user waited. The rides and their order did not change. The only effect is that the time left roughly doubled.
 
@@ -714,4 +770,4 @@ The preregistration left three details open. They were filled in as follows:
 
 The simulator implements the Shiu et al. 2024 leaky integrate-and-fire model and matches Brian2 spike for spike (`tests/test_brian2.py`). It runs on the male CNS v1.0 connectome (Janelia FlyEM, Cambridge, Google; CC BY 4.0).
 
-Each Track A search writes its results to `results/rungs/<tag>/v<speed>_s<seed>/cem.json`, and its held-out replays go under `heldout/`. Track B results are in `results/track_b/confirmatory/` and the Track C pilot in `results/track_c/`.
+Each Track A search writes its results to `results/rungs/<tag>/v<speed>_s<seed>/cem.json`, and its held-out replays go under `heldout/`. Track B results are in `results/track_b/confirmatory/`, the Track C pilot in `results/track_c/`, and the confirmatory Track C in `results/track_c/confirmatory/`.

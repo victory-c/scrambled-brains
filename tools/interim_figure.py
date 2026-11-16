@@ -15,9 +15,9 @@ the tag) are open. Searches of 60 generations only, except R0's three gate pilot
 Row B, decoder-free: Track B confirmatory score (fraction of the six scored predictions a brain passes), each draw a dot,
 the line is the mean over draws (R1 and R2 100 draws, R3-R5 3 draws), at scale 0.47 and, for R4 and R5, at their
 closed-loop scale.
-Row C, decodability: Track C pilot, descending-neuron site, number of neurons needed for 90% of the site's R^2 in screen
-order and in random order (median, 25-75% over 20 orders, all 1,314 descending neurons), one replay per brain (draw 1).
-Not measured past R3.
+Row C, decodability: Track C confirmatory (preregistration section 10, entry 1), descending-neuron site, number of neurons
+needed for 90% of the site's R^2 in screen order and in random order (median, 25-75% over 20 orders, all 1,314 descending
+neurons), one replay per brain of the CEM seed 211 decoder at 4.5 m/s: R0, R1-R3 draws 3-5, R3.5, R4 and R5 draw 1.
 """
 import argparse
 import json
@@ -85,14 +85,21 @@ def decoder_free(res):
     return out
 
 
+CONF_TC = {"R0": ["r0"], "R1": ["r1_s3", "r1_s4", "r1_s5"], "R2": ["r2_s3", "r2_s4", "r2_s5"], "R3": ["r3_s3", "r3_s4", "r3_s5"],
+           "R3.5": ["r35_s1_w0.47_cpu"], "R4": ["r4_s1_w1.2_cpu"], "R5": ["r5_s1_w2_cpu"]}
+
+
 def decodability(res):
+    """Track C confirmatory N90 (job 38887), descending site, each brain's own R^2 as the reference."""
     out = []
-    for i, rung in enumerate(RUNGS[:4]):
-        src = res / "track_c" / f"r{i}.json"
-        ref = json.loads(src.read_text())["sites"]["descending"]["references"]["site"]
-        rnd = ref["n90_random_all_site_neurons"]
-        out.append({"rung": rung, "n90_screen": ref["n90_screen"], "n90_random_median": rnd["median"], "n90_random_q25_q75": rnd["q25_q75"],
-                    "random_orders_reached": rnd["reached"], "target_r2": ref["target_r2"], "source": f"track_c/r{i}.json"})
+    for rung in RUNGS:
+        for short in CONF_TC[rung]:
+            src = f"track_c/confirmatory/{short}_n90.json"
+            ref = json.loads((res / src).read_text())["sites"]["descending"]["references"]["site"]
+            rnd = ref["n90_random_all_site_neurons"]
+            out.append({"rung": rung, "brain": short, "n90_screen": ref["n90_screen"], "n90_random_median": rnd["median"],
+                        "n90_random_q25_q75": rnd["q25_q75"], "random_orders_reached": rnd["reached"],
+                        "target_r2": ref["target_r2"], "source": src})
     return out
 
 
@@ -168,14 +175,14 @@ def draw(data, out_svg, out_png):
     # C: decodability
     ax = axes[2]
     ax.set_yscale("log")
-    for r in data["decodability"]:
-        x = X[r["rung"]]
-        lo, hi = r["n90_random_q25_q75"]
-        ax.plot([x + 0.12, x + 0.12], [lo, hi], color=MUTE, lw=2, zorder=3, solid_capstyle="round")
-        ax.scatter(x + 0.12, r["n90_random_median"], s=34, color=MUTE, edgecolor="white", linewidth=1.2, zorder=4)
-        ax.scatter(x - 0.12, r["n90_screen"], s=40, color=INK, edgecolor="white", linewidth=1.2, zorder=4)
-    for rung in RUNGS[4:]:
-        ax.text(X[rung], 4, "not yet\nmeasured", ha="center", va="center", fontsize=8, color=MUTE)
+    for rung in RUNGS:
+        rows = [r for r in data["decodability"] if r["rung"] == rung]
+        for i, r in enumerate(rows):
+            x = X[rung] + jitter(i, len(rows), 0.3)
+            lo, hi = r["n90_random_q25_q75"]
+            ax.plot([x + 0.08, x + 0.08], [lo, hi], color=MUTE, lw=1.6, zorder=3, solid_capstyle="round")
+            ax.scatter(x + 0.08, r["n90_random_median"], s=26, color=MUTE, edgecolor="white", linewidth=1.0, zorder=4)
+            ax.scatter(x - 0.08, r["n90_screen"], s=30, color=INK, edgecolor="white", linewidth=1.0, zorder=4)
     ax.axhline(1314, color=MUTE, lw=0.8, ls=":")
     ax.text(-0.4, 1314 * 1.12, "all 1,314 descending neurons", fontsize=7.5, color=MUTE, va="bottom")
     ax.set_ylim(1, 3000)
@@ -184,8 +191,8 @@ def draw(data, out_svg, out_png):
     ax.set_ylabel("Neurons for 90% of\nthe roll-rate R²")
     ax.scatter([], [], s=40, color=INK, label="best neurons first (screen order)")
     ax.plot([], [], color=MUTE, lw=2, marker="o", markersize=5, label="random neurons (median, 25–75%)")
-    ax.legend(loc="upper right", bbox_to_anchor=(1.0, 0.86), frameon=False, fontsize=8, handletextpad=0.3)
-    ax.set_title("C   Decodability: recording descending neurons (pilot)", loc="left", fontsize=10, fontweight="bold")
+    ax.legend(loc="center left", bbox_to_anchor=(0.0, 0.42), frameon=False, fontsize=8, handletextpad=0.3)
+    ax.set_title("C   Decodability: recording descending neurons", loc="left", fontsize=10, fontweight="bold")
 
     ax.set_xlim(-0.5, 6.5)
     ax.set_xticks(range(len(RUNGS)))
