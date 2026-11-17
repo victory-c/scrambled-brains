@@ -14,12 +14,12 @@ We ask how much of the measured wiring a fixed-weight spiking model of the whole
 
 The plan was fixed by the tag `prereg-v1` on 2026-11-09.
 
-So far, 29 of the 100 primary rides are done. CEM seed 211 is complete on all 20 primary cells (R0 and nine rewired draws at each speed). CEM seed 212 has 9 rides so far, all at 4.5 m/s:
+So far, 30 of the 100 primary rides are done. CEM seed 211 is complete on all 20 primary cells (R0 and nine rewired draws at each speed). CEM seed 212 is complete on all ten primary cells at 4.5 m/s:
 
 - **4.5 m/s, seed 211, R0:** 12.79 s in the last generation (job 38263).
-- **4.5 m/s, seed 211, R1 to R3:** draws 3 to 5 ride between 10.47 and 14.65 s.
+- **4.5 m/s, seed 211, R1 to R3:** draws 3 to 5 ride between 10.47 and 14.65 s. 7 of the 9 rewired draws ride above R0's 12.79 s.
 - **4.0 m/s, seed 211:** R0 rides 12.74 s. The medians over three draws are R1 11.11 s, R2 8.16 s and R3 10.08 s. 1 of the 9 rewired draws rides above R0.
-- **4.5 m/s, seed 212:** R0 rides 12.45 s (job 38798). R1 draws 3 to 5, R2 draws 3 to 5 and R3 draws 3 and 4 ride between 11.02 and 12.95 s.
+- **4.5 m/s, seed 212:** R0 rides 12.45 s (job 38798). R1 to R3 draws 3 to 5 ride between 11.02 and 12.95 s. The medians over three draws are R1 12.38 s, R2 12.47 s and R3 11.28 s (seed 211: 13.72, 13.05 and 13.37 s against R0's 12.79 s). 3 of the 9 rewired draws ride above R0. Single-seed medians; they test nothing.
 
 R0 now has two of its five seeds at 4.5 m/s and one at 4.0 m/s. This tests nothing yet.
 
@@ -29,7 +29,7 @@ The Track B confirmatory scores are finished: R1 scores 0.682, R2 0.993, R3 1.00
 
 The confirmatory Track C run is finished on all 13 confirmatory brains (one replay each, seed 211, 4.5 m/s). At the descending-neuron site, 2 or 3 neurons in screen order reach 90% of the site's roll-rate R² on R0 to R3, and 14 to 19 on R3.5, R4 and R5. Simulated jGCaMP8m keeps 35 to 60% of the spike R² at the descending site on R0 to R3 at 30 Hz (20 to 40% at the wing-motor site). On R0 to R3, a 10 µm probe centred on DNp20_R keeps about two thirds of its on-target median R² at a 10 µm miss and almost none at 25 µm; on R3.5 to R5 it carries almost nothing even on target. Track C has no preregistered prediction.
 
-[pending: medians over five CEM seeds, bootstrap intervals and the tests of predictions 1 to 3 and 5, 71 primary rides left on 2026-11-16, then the secondary design (section 5.3)]
+[pending: medians over five CEM seeds, bootstrap intervals and the tests of predictions 1 to 3 and 5, 70 primary rides left on 2026-11-16, then the secondary design (section 5.3)]
 
 ## 1. Introduction
 
@@ -78,8 +78,8 @@ As of 2026-11-16, these parts are done:
 - **Confirmatory pre-test** on draws 3 to 5 (job 38261). Eight draws pass. R2 draw 3 fails on the null only and is ridden anyway, as preregistered.
 - **Primary rides at 4.5 m/s, CEM seed 211:** R0 and the nine R1 to R3 draws (jobs 38263 to 38272).
 - **Primary rides at 4.0 m/s, CEM seed 211:** R0 and the nine R1 to R3 draws (jobs 38710, 38714, 38728, 38735, 38750, 38758, 38766, 38778, 38783, 38791).
-- **Primary rides at 4.5 m/s, CEM seed 212:** R0, R1 draws 3 to 5, R2 draws 3 to 5 and R3 draws 3 and 4 (jobs 38798, 38802, 38806, 38815, 38824, 38831, 38835, 38847, 38897).
-- **Held-out replays** of all 29 of these rides.
+- **Primary rides at 4.5 m/s, CEM seed 212:** R0 and the nine R1 to R3 draws (jobs 38798, 38802, 38806, 38815, 38824, 38831, 38835, 38847, 38897, 38902).
+- **Held-out replays** of 29 of these 30 rides. Those of R3 draw 5 seed 212 are running (job 38907).
 - **The single rides of R3.5, R4 and R5** (jobs 38371 to 38373, CPU).
 - **The Track B confirmatory runs** (jobs 38414 to 38429).
 
@@ -87,7 +87,7 @@ Track C has a pilot (job 38185, R0 to R3) and a confirmatory run on all 13 confi
 
 The rest of the queue runs one job at a time, as a relay. On 2026-11-11 the ledger estimated about four weeks left; the Track C links at the front of the queue added about half a day (CURRENT_NUMBERS.md, "The queue as one chain" and "Confirmatory Track C at the front of the queue").
 
-[pending: 71 primary rides: seed 212 on R3 draw 5 at 4.5 m/s, seed 212 at 4.0 m/s, and seeds 213 to 215 at both speeds; the secondary design (top-32, random-32, bypass, model-side variants); prediction 3's replays]
+[pending: 70 primary rides: seed 212 at 4.0 m/s, and seeds 213 to 215 at both speeds; the secondary design (top-32, random-32, bypass, model-side variants); prediction 3's replays]
 
 ## 2. Methods
 
@@ -219,17 +219,17 @@ The pre-test is fly-brain `runs/pretest.py`.
 
 These replays use `tools/heldout.py` and `heldout.sbatch`, with 48 riders and 15 s. The speed conditions reuse replay seed 301.
 
-**Status on 2026-11-16.** Primary rides done so far: 29 of 100, all on the GPU.
+**Status on 2026-11-16.** Primary rides done so far: 30 of 100, all on the GPU.
 
 | Speed | Rides done | Jobs |
 |---|---|---|
 | 4.5 m/s, seed 211 | R0, R1 draws 3 to 5, R2 draws 3 to 5, R3 draws 3 to 5 | 38263 to 38272 |
 | 4.0 m/s, seed 211 | R0, R1 draws 3 to 5, R2 draws 3 to 5, R3 draws 3 to 5 | 38710, 38714, 38728, 38735, 38750, 38758, 38766, 38778, 38783, 38791 |
-| 4.5 m/s, seed 212 | R0, R1 draws 3 to 5, R2 draws 3 to 5, R3 draws 3 and 4 | 38798, 38802, 38806, 38815, 38824, 38831, 38835, 38847, 38897 |
+| 4.5 m/s, seed 212 | R0, R1 draws 3 to 5, R2 draws 3 to 5, R3 draws 3 to 5 | 38798, 38802, 38806, 38815, 38824, 38831, 38835, 38847, 38897, 38902 |
 
-- All 29 of these rides also have their held-out replays (the last, R3 draw 4 seed 212, was job 38899).
+- 29 of these 30 rides also have their held-out replays. Those of R3 draw 5 seed 212 are running (job 38907).
 - The single rides of R3.5, R4 and R5 are done. They ran on the CPU (jobs 38371 to 38373) because the GPUs were taken.
-- [pending: seed 212 on R3 draw 5 at 4.5 m/s and on every primary cell at 4.0 m/s, and seeds 213 to 215 on every primary cell at both speeds (71 rides); these fill the medians, the seed-SD and the bootstrap CI.]
+- [pending: seed 212 on every primary cell at 4.0 m/s, and seeds 213 to 215 on every primary cell at both speeds (70 rides); these fill the medians, the seed-SD and the bootstrap CI.]
 - [pending: the secondary design.]
 
 ### 2.5 Track B: decoder-free predictions
@@ -409,6 +409,7 @@ The confirmatory rides run 60 generations each. So far they use CEM seeds 211 an
 | R2 | 5 | 212 | 4.5 | 38835 | GPU | 11.02 | 48% |
 | R3 | 3 | 212 | 4.5 | 38847 | GPU | 11.66 | 40% |
 | R3 | 4 | 212 | 4.5 | 38897 | GPU | 11.28 | 35% |
+| R3 | 5 | 212 | 4.5 | 38902 | GPU | 11.25 | 38% |
 | R3.5 | 1, scale 0.47 | 211 | 4.5 | 38371 | CPU | 2.71 | 0% |
 | R4 | 1, scale 1.2 | 211 | 4.5 | 38372 | CPU | 2.96 | 0% |
 | R5 | 1, scale 2.0 | 211 | 4.5 | 38373 | CPU | 4.34 | 0% |
@@ -431,21 +432,23 @@ At 4.5 m/s with seed 211, the median over R1's three draws is 13.72 s.
 - R3 draw 4 rides 8.77 s, with 1 of 48 riders finishing (13.37 s at 4.5 m/s). Its last generation is its highest (last five generations 8.34 s). Its lane weight, +0.10, is the only clearly positive one among the 4.0 m/s rides.
 - R3 draw 5 rides 10.37 s (13.54 s at 4.5 m/s). It reached 11.45 s at generation 56 and ended lower (last five generations 10.74 s). Lane weight −0.10.
 - R3's three draws at 4.0 m/s ride 10.08, 8.77 and 10.37 s (median 10.08 s).
-- So at 4.0 m/s 1 of 9 rewired draws rides above R0's single seed (R1 draw 3), while at 4.5 m/s 7 of 9 do with seed 211 and 3 of 8 so far with seed 212 (one of those, R2 draw 4, by 0.02 s). Every rewired median at 4.0 m/s is below R0's single ride. R0's 4.0 m/s value is itself its last-generation high (last five generations 11.77 s). One R0 seed at this speed cannot say whether these gaps are larger than R0's own seed-to-seed spread.
+- So at 4.0 m/s 1 of 9 rewired draws rides above R0's single seed (R1 draw 3), while at 4.5 m/s 7 of 9 do with seed 211 and 3 of 9 with seed 212 (one of those, R2 draw 4, by 0.02 s). Every rewired median at 4.0 m/s is below R0's single ride. R0's 4.0 m/s value is itself its last-generation high (last five generations 11.77 s). One R0 seed at this speed cannot say whether these gaps are larger than R0's own seed-to-seed spread.
 
-**CEM seed 212 at 4.5 m/s.** With seed 211 done on all 20 primary cells, the queue moved to seed 212 on 2026-11-14.
+**CEM seed 212 at 4.5 m/s.** With seed 211 done on all 20 primary cells, the queue moved to seed 212 on 2026-11-14. Seed 212 is now done on all ten primary cells at 4.5 m/s.
 - R0 seed 212 rides 12.45 s, 52% finishing (last five generations 11.36 s), against 12.79 s for seed 211. R0 now has two of its five seeds at 4.5 m/s.
-- On the same draws, seed 212 and seed 211 (in brackets) ride: R1 draw 3 12.38 (14.65), draw 4 12.95 (13.72), draw 5 11.23 (10.47); R2 draw 3 12.77 (12.02), draw 4 12.47 (13.05), draw 5 11.02 (13.26); R3 draw 3 11.66 (13.19), draw 4 11.28 (13.37).
-- So the same draw can move by more than 2 s between two seeds (R1 draw 3 by 2.28 s, R2 draw 5 by 2.24 s, R3 draw 4 by 2.09 s), in either direction. R0 moved by 0.34 s. One pair of seeds per cell says nothing about seed-to-seed spread; R0's pilot three-seed SD was 1.42 s.
-- Seed 212 lane weights run from −0.06 (R2 draw 5) to −0.18 (R1 draw 3, R2 draw 4); R0's is −0.10 and R3 draw 4's −0.11. None is as close to zero as the two stalled pilots (+0.011, +0.003), though R2 draw 5's −0.06 is below the range of the non-stalled pilots.
+- On the same draws, seed 212 and seed 211 (in brackets) ride: R1 draw 3 12.38 (14.65), draw 4 12.95 (13.72), draw 5 11.23 (10.47); R2 draw 3 12.77 (12.02), draw 4 12.47 (13.05), draw 5 11.02 (13.26); R3 draw 3 11.66 (13.19), draw 4 11.28 (13.37), draw 5 11.25 (13.54).
+- The medians over three draws with seed 212 are R1 12.38 s, R2 12.47 s and R3 11.28 s, against R0's 12.45 s. With seed 211 they were R1 13.72 s, R2 13.05 s and R3 13.37 s, against R0's 12.79 s. These are single-seed medians and test nothing.
+- So the same draw can move by more than 2 s between two seeds (R3 draw 5 by 2.28 s, just ahead of R1 draw 3's 2.28 s unrounded, 2.282 against 2.276; R2 draw 5 by 2.24 s; R3 draw 4 by 2.09 s), in either direction. R0 moved by 0.34 s. One pair of seeds per cell says nothing about seed-to-seed spread; R0's pilot three-seed SD was 1.42 s.
+- Seed 212 lane weights run from −0.06 (R2 draw 5) to −0.18 (R1 draw 3, R2 draw 4); R0's is −0.10, R3 draw 4's −0.11 and R3 draw 5's −0.15. None is as close to zero as the two stalled pilots (+0.011, +0.003), though R2 draw 5's −0.06 is below the range of the non-stalled pilots.
 - R3 draw 4 seed 212 (job 38897, 289 min) rides 11.28 s, with 17 of 48 riders finishing (last five generations 10.50 s). It was at 7.13 s at generation 10 (8.07 s at generation 9) and 8.64 s at generation 20 (9.19 s at generation 16), then moved between 8.45 and 10.89 s from generation 25 to 58. Its last generation, 11.28 s, is its highest.
-- Seven of the nine seed-212 searches reached their best generation before the last one; only R2 draw 3 and R3 draw 4 end at their best. Five end below the mean of their last five generations: R1 draw 3 (13.62 s against 12.38 s), R1 draw 5 (11.26 against 11.23), R2 draw 4 (12.96 against 12.47), R2 draw 5 (11.28 against 11.02) and R3 draw 3 (12.36 against 11.66).
-- 3 of the 8 rewired seed-212 rides end above R0's seed-212 ride (R1 draw 4, R2 draws 3 and 4). The other five end 0.07 to 1.43 s below it; the lowest is R2 draw 5 (11.02 s).
+- R3 draw 5 seed 212 (job 38902, 287 min) rides 11.25 s, with 18 of 48 riders finishing (last five generations 11.63 s), against 13.54 s with seed 211. It rode 9.91 s at generation 20 and reached its best, 12.86 s, at generation 44. From generation 25 to 58 it moved between 10.35 and 12.86 s, so its last generation is below its last-five mean. Its lane-filter weight is −0.15. Its held-out replays are running (job 38907).
+- Eight of the ten seed-212 searches reached their best generation before the last one; only R2 draw 3 and R3 draw 4 end at their best. Six end below the mean of their last five generations: R1 draw 3 (13.62 s against 12.38 s), R1 draw 5 (11.26 against 11.23), R2 draw 4 (12.96 against 12.47), R2 draw 5 (11.28 against 11.02), R3 draw 3 (12.36 against 11.66) and R3 draw 5 (11.63 against 11.25).
+- 3 of the 9 rewired seed-212 rides end above R0's seed-212 ride (R1 draw 4, R2 draws 3 and 4). The other six end 0.07 to 1.43 s below it; the lowest is R2 draw 5 (11.02 s).
 - Two R0 seeds at one speed still cannot give the seed-SD that the predictions use.
 
 ### 3.4 Held-out replays
 
-Each finished primary run's final mean decoder is replayed with 48 riders for 15 s on the CPU. All 29 finished rides have their replays. The replays used unseen gust seeds 301 and 302, and the training speed plus and minus 0.5 m/s. Section 5 makes these replays descriptive. No prediction uses them.
+Each finished primary run's final mean decoder is replayed with 48 riders for 15 s on the CPU. 29 of the 30 finished rides have their replays; those of R3 draw 5 seed 212 are running (job 38907). The replays used unseen gust seeds 301 and 302, and the training speed plus and minus 0.5 m/s. Section 5 makes these replays descriptive. No prediction uses them.
 
 Riding time is in seconds, with riders finished out of 48 in brackets. For rides trained at 4.0 m/s, the "+0.5" column is 4.5 m/s and the "−0.5" column is 3.5 m/s.
 
@@ -482,6 +485,7 @@ Rows without a seed are seed 211.
 | R2 draw 5 seed 212, 4.5 m/s | 38845 | 14.50 (44) | 14.41 (41) | 12.77 (30) | 5.40 (0) |
 | R3 draw 3 seed 212, 4.5 m/s | 38895 | 13.58 (31) | 13.26 (34) | 12.35 (21) | 8.44 (2) |
 | R3 draw 4 seed 212, 4.5 m/s | 38899 | 13.77 (36) | 13.48 (36) | 12.71 (26) | 5.20 (0) |
+| R3 draw 5 seed 212, 4.5 m/s | 38907 | [pending] | [pending] | [pending] | [pending] |
 
 What the replays show:
 - **Unseen gusts cost little** for most decoders. With seed 212, 30 to 48 of 48 riders finish under new gusts (all 9 decoders replayed so far).
@@ -499,22 +503,22 @@ Section 5 gives held-out tests to the primary runs only. R3.5, R4 and R5 therefo
 
 ### 3.5 What can and cannot be concluded yet
 
-**No preregistered Track A prediction has been tested.** No prediction is tested until R0 has five seeds at a speed. CEM seed 211 is done on every primary cell at both speeds. Seed 212 is done at 4.5 m/s on R0, R1 and R2 draws 3 to 5, and R3 draws 3 and 4. So R0 has two seeds at 4.5 m/s (12.79 and 12.45 s) and one at 4.0 m/s (12.74 s). R3.5, R4 and R5 have their single 4.5 m/s ride.
+**No preregistered Track A prediction has been tested.** No prediction is tested until R0 has five seeds at a speed. CEM seed 211 is done on every primary cell at both speeds. Seed 212 is done on all ten primary cells at 4.5 m/s. So R0 has two seeds at 4.5 m/s (12.79 and 12.45 s) and one at 4.0 m/s (12.74 s). R3.5, R4 and R5 have their single 4.5 m/s ride.
 
 - **Prediction 1 (R1 and R2 within one seed-SD of R0).** This needs the SD of R0's five last-generation means at each speed. R0 has two confirmatory seeds at 4.5 m/s and one at 4.0 m/s, so the SD does not exist yet.
-  - At 4.5 m/s, R1's draws ride 14.65, 13.72 and 10.47 s with seed 211 and 12.38, 12.95 and 11.23 s with seed 212. R2's ride 12.02, 13.05 and 13.26 s, and 12.77, 12.47 and 11.02 s. R0 rides 12.79 and 12.45 s.
+  - At 4.5 m/s, R1's draws ride 14.65, 13.72 and 10.47 s with seed 211 and 12.38, 12.95 and 11.23 s with seed 212. R2's ride 12.02, 13.05 and 13.26 s, and 12.77, 12.47 and 11.02 s. R0 rides 12.79 and 12.45 s. Per seed, the medians are R1 13.72 and 12.38 s and R2 13.05 and 12.47 s.
   - At 4.0 m/s, with seed 211 only, the medians are R1 11.11 s and R2 8.16 s, against R0's 12.74 s.
   - These are facts about single seeds. They say nothing yet about prediction 1.
   - The pilots' three-seed R0 SD (1.42 s) does not substitute for the confirmatory SD.
   - [pending: R0 CEM seeds 213–215 at 4.5 m/s and 212–215 at 4.0 m/s; R1 and R2 seeds 213–215 at 4.5 m/s and 212–215 at 4.0 m/s, draws 3–5]
-- **Prediction 2, R3 clause (R3 loses under 30% of R0's riding time at each speed).** With seed 211, R3's three draws at 4.5 m/s (13.19, 13.37 and 13.54 s) all ride above R0's first seed. With seed 212, R3 draws 3 and 4 ride 11.66 and 11.28 s, both below both R0 seeds. At 4.0 m/s, R3's three draws ride 10.08, 8.77 and 10.37 s (median 10.08 s), 21% below R0's single 4.0 m/s ride. This tests nothing until R0 has five seeds. [pending: R0's five seeds at each speed; R3 seed 212 on draw 5 at 4.5 m/s and on draws 3–5 at 4.0 m/s; R3 seeds 213–215]
+- **Prediction 2, R3 clause (R3 loses under 30% of R0's riding time at each speed).** With seed 211, R3's three draws at 4.5 m/s (13.19, 13.37 and 13.54 s) all ride above R0's first seed; their median (13.37 s) is 5% above R0's seed-211 ride. With seed 212, R3's three draws ride 11.66, 11.28 and 11.25 s (median 11.28 s), all below both R0 seeds; the median is 9% below R0's seed-212 ride. At 4.0 m/s, R3's three draws ride 10.08, 8.77 and 10.37 s (median 10.08 s), 21% below R0's single 4.0 m/s ride. This tests nothing until R0 has five seeds. [pending: R0's five seeds at each speed; R3 seed 212 on draws 3–5 at 4.0 m/s; R3 seeds 213–215]
 - **Prediction 2, transition clause (R3.5's one ride below 70% of R0's primary outcome at 4.5 m/s).** R3.5's ride (2.71 s) is 21% of R0's seed-211 ride and 22% of its seed-212 ride. The test compares it with R0's median over five seeds, which does not exist yet. [pending: R0 seeds 213–215 at 4.5 m/s]
 - **Prediction 5 (does R4 at its own calibration ride as well as R0?).** R4's single ride is 2.96 s (2.49 s over its last five generations). That is 23% of R0's seed-211 ride and 24% of its seed-212 ride. The ledger states the condition's status as follows: unless R0's five seeds come out very differently, R4 does not ride as well as R0, and prediction 5's condition is not met. The formal decision uses R0's primary outcome minus one seed-SD. [pending: R0 seeds 213–215 at 4.5 m/s; R4's top-32 plus lane ride, reported next to it]
 - **Below the hands-off floor.** R3.5 (2.71 s), R4 (2.96 s) and R5 (4.34 s) all ride below the 5.7 s floor at 4.5 m/s. With the hand-picked readout, a searched decoder on these brains does worse than no steering. The list of cells this readout reads was chosen on R0. So on its own, this result does not show that these rungs carry no usable signal (section 5). The secondary readout is there for that question. [pending: secondary design, after the primary design]
 - **Prediction 3 (R4 against random-32 on R0).** This uses the secondary readout. None of its rides has run yet. [pending: R4 top-32 plus lane, and R0 random-32 plus lane with `READOUT_SEED` 0–2]
 - **Bootstrap CIs and generations-to-half-of-R0.** These need the full set of seeds. [pending: primary design complete]
 
-The rides run one at a time as a relay queue (`tools/submit_serial.py --next`). 71 primary rides are left on 2026-11-16 (section 5.3). Section 10 of the preregistration has one entry (2026-11-15); it concerns Track C only and changes nothing in Track A.
+The rides run one at a time as a relay queue (`tools/submit_serial.py --next`). 70 primary rides are left on 2026-11-16 (section 5.3). Section 10 of the preregistration has one entry (2026-11-15); it concerns Track C only and changes nothing in Track A.
 
 ## 4. Results: Tracks B and C
 
@@ -726,9 +730,9 @@ So unless R0's five seeds come out very differently, the condition is not met. T
 | Milestone | Date | Status on 2026-11-16 |
 |---|---|---|
 | M2: interim three-row figure (riding, decoder-free predictions, decodability; R0 to R5 on a shared axis) | 13 Nov 2026 | Done. First version 2026-11-11, after three independent reviews. It is built by `tools/interim_figure.py` and written to `site/figures/interim.{svg,png,json}`, with data up to 2026-11-11. |
-| All runs done (semester plan) | 20 Nov 2026 | Will not be met: 29 of 100 primary rides done on 2026-11-16, 71 left, then the secondary design. |
+| All runs done (semester plan) | 20 Nov 2026 | Will not be met: 30 of 100 primary rides done on 2026-11-16, 70 left, then the secondary design. |
 | M3: semester report (figure, methods, a ledger of every job, all code and decoders released) | 4 Dec 2026 | [pending: the rides will not all be finished by this date if the queue runs at its estimated length] |
-| Confirmatory and secondary rides | Jun 2027 | In progress: 29 of 100 primary rides done on 2026-11-16; about four weeks of queue left on 2026-11-11 (section 5.3). |
+| Confirmatory and secondary rides | Jun 2027 | In progress: 30 of 100 primary rides done on 2026-11-16; about four weeks of queue left on 2026-11-11 (section 5.3). |
 
 The interim figure has three rows:
 
@@ -738,15 +742,15 @@ The interim figure has three rows:
 
 ### 5.2 What is done and what is pending
 
-**Track A, primary design (100 rides).** 29 of the 100 rides are done (`results/rungs/conf_*/v*_s21*/cem.json`):
+**Track A, primary design (100 rides).** 30 of the 100 rides are done (`results/rungs/conf_*/v*_s21*/cem.json`):
 
 - Seed 211, 4.5 m/s: R0, plus draws 3, 4 and 5 of each of R1, R2 and R3 (jobs 38263 to 38272).
 - Seed 211, 4.0 m/s: the same ten cells (jobs 38710, 38714, 38728, 38735, 38750, 38758, 38766, 38778, 38783, 38791). Seed 211 is therefore complete on all 20 primary cells.
-- Seed 212, 4.5 m/s: R0, R1 draws 3 to 5, R2 draws 3 to 5 and R3 draws 3 and 4 (jobs 38798, 38802, 38806, 38815, 38824, 38831, 38835, 38847, 38897).
+- Seed 212, 4.5 m/s: the same ten cells (jobs 38798, 38802, 38806, 38815, 38824, 38831, 38835, 38847, 38897, 38902). Seed 212 is therefore complete at 4.5 m/s.
 
-Held-out replays have finished for all 29 of these rides.
+Held-out replays have finished for 29 of these 30 rides. Those of R3 draw 5 seed 212 are running (job 38907).
 
-Pending: 71 primary rides. They are seed 212 on R3 draw 5 at 4.5 m/s, seed 212 on all ten cells at 4.0 m/s, and seeds 213 to 215 on all 20 cells, each with its held-out replays.
+Pending: 70 primary rides. They are seed 212 on all ten cells at 4.0 m/s, and seeds 213 to 215 on all 20 cells, each with its held-out replays.
 
 The 9 confirmatory draws took the 30-brain pre-test at scale 0.47 (job 38261). R2 draw 3 fails it, on the null only. As section 5 of the preregistration requires, it was ridden anyway, it is reported, and it enters the medians.
 
@@ -766,7 +770,7 @@ The 9 confirmatory draws took the 30-brain pre-test at scale 0.47 (job 38261). R
 
 **Predictions.** None of the preregistered predictions has been tested yet:
 
-- **Prediction 1** compares R1's and R2's medians (15 runs each: 3 draws x 5 CEM seeds) with R0's median over five seeds, against the SD of R0's five seed means. **Prediction 2** asks whether 1 - median(R3)/median(R0) < 0.30. At 4.5 m/s R0 has seeds 211 and 212, R1 and R2 have both seeds on every draw, and R3 has seed 212 on draws 3 and 4. At 4.0 m/s every cell has seed 211 only. Both predictions wait for R0's five seeds at each speed and for the rewired rides of the same seeds.
+- **Prediction 1** compares R1's and R2's medians (15 runs each: 3 draws x 5 CEM seeds) with R0's median over five seeds, against the SD of R0's five seed means. **Prediction 2** asks whether 1 - median(R3)/median(R0) < 0.30. At 4.5 m/s every cell has seeds 211 and 212. At 4.0 m/s every cell has seed 211 only. Both predictions wait for R0's five seeds at each speed and for the rewired rides of the same seeds.
 - **Prediction 2, transition clause:** R3.5's single ride is 21% of R0's seed-211 ride and 22% of its seed-212 ride. The test waits for R0's median over five seeds.
 - **Prediction 5:** R4's single ride is 23% of R0's seed-211 ride and 24% of its seed-212 ride. The ledger says that unless R0's five seeds come out very differently, prediction 5's condition is not met. That is not final until R0 has all five seeds.
 - **Prediction 3** waits for the secondary design.
@@ -785,9 +789,9 @@ The ledger estimated about four weeks at that point, at about 5 h per ride and 3
 
 On 2026-11-15 the confirmatory Track C links were put at the front of the relay (jobs 38854 to 38893). The ledger estimated that this moves the remaining rides back about half a day.
 
-On 2026-11-16 the relay is running seed 212 on R3 draw 5 at 4.5 m/s (job 38902). What is left:
+On 2026-11-16 the relay is running the held-out replays of R3 draw 5 seed 212 at 4.5 m/s (job 38907), after its ride (job 38902). The next link is seed 212 at 4.0 m/s, starting with R0; it is not yet submitted. What is left:
 
-1. 71 primary rides, each followed by its held-out replays: seed 212 on R3 draw 5 at 4.5 m/s, seed 212 on all ten cells at 4.0 m/s, and seeds 213 to 215 on all 20 cells;
+1. 70 primary rides, each followed by its held-out replays: seed 212 on all ten cells at 4.0 m/s, and seeds 213 to 215 on all 20 cells;
 2. the 38 secondary rides;
 3. prediction 3's four replays.
 
@@ -805,7 +809,7 @@ The preregistration left three details open. They were filled in as follows:
 
 ### 5.5 Limitations
 
-- **Few CEM seeds so far.** Seed 211 is done on every primary cell. Seed 212 is done on 9 cells at 4.5 m/s. Seeds 213 to 215 have not run, and at 4.0 m/s every cell has one seed. Single-seed numbers vary a lot: on R2 at 4.0 m/s, draw 5 rode 7.92 s and draw 4 rode 11.57 s; on R1, draw 4 rode 9.35 s and draw 3 rode 13.23 s. The same draw can also move by about 2 s between seeds: R1 draw 3 at 4.5 m/s rode 14.65 s with seed 211 and 12.38 s with seed 212. In the pilots, 2 of 13 searches stalled.
+- **Few CEM seeds so far.** Seed 211 is done on every primary cell. Seed 212 is done on all ten cells at 4.5 m/s. Seeds 213 to 215 have not run, and at 4.0 m/s every cell has one seed. Single-seed numbers vary a lot: on R2 at 4.0 m/s, draw 5 rode 7.92 s and draw 4 rode 11.57 s; on R1, draw 4 rode 9.35 s and draw 3 rode 13.23 s. The same draw can also move by about 2 s between seeds: R1 draw 3 at 4.5 m/s rode 14.65 s with seed 211 and 12.38 s with seed 212. In the pilots, 2 of 13 searches stalled.
 - **GPU nondeterminism.** The engine adds synaptic input with `index_add_` (`brain/engine.py:134`). On a GPU these additions happen in no fixed order, so two runs with the same seed drift apart. Jobs 36543 and 36555 ran the same search with the same seed. Both ended with 35 of 48 riders finishing, but with 885 and 836 finished attempts overall. A CPU run does not reproduce a GPU run either, because the random streams differ by device. The R3.5, R4 and R5 single rides ran on the CPU, the primary rides on the GPU. Each run is one sample and is quoted with its job id.
 - **Pilot and confirmatory.** Runs before the `prereg-v1` tag (2026-11-09) are pilots. They used rewiring draws 1 and 2 and CEM seeds 201 to 203 (203 on R0 only), mostly on the CPU. Confirmatory rides use draws 3 to 5 and seeds 211 to 215.
   - The riding predictions were informed by the pilots, so they are not blind.
